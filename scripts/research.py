@@ -6,16 +6,12 @@ import urllib.parse
 from datetime import datetime
 import sys
 
-# Removed google-generativeai import to keep it lean and avoid confusion
-# with the REST API approach.
-
 def call_inception_api(inception_key, prompt):
     """
     Fallback function to call Inception API (OpenAI-compatible).
     """
     try:
-        # NOTE: Using a hypothetical common endpoint if the original failed.
-        # Most "Prestige" AI providers use OpenAI-compatible routing.
+        # NOTE: Ensure this URL is correct for your Inception provider.
         url = "https://api.inception.ai/v1/chat/completions" 
         headers = {
             "Authorization": f"Bearer {inception_key}",
@@ -100,24 +96,29 @@ def main():
 
     # Try Gemini first via direct REST API
     if gemini_key:
-        try:
-            print("Attempting Gemini API (REST v1)...")
-            # Changed version to v1 (from v1beta) to resolve the 404
-            url = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={gemini_key}"
-            headers = {"Content-Type": "application/json"}
-            payload = {
-                "contents": [{"parts": [{"text": prompt}]}]
-            }
-            res = requests.post(url, headers=headers, json=payload, timeout=30)
-            if res.status_code == 200:
-                res_json = res.json()
-                text = res_json['candidates'][0]['content']['parts'][0]['text']
-                text = text.replace("```json", "").replace("```", "").strip()
-                engine_used = "Gemini (REST v1)"
-            else:
-                print(f"Gemini REST API error: {res.status_code} - {res.text}")
-        except Exception as e:
-            print(f"Gemini REST API exception: {e}")
+        # We try both v1 and v1beta models names since 'models/gemini-1.5-flash' failed on both
+        # Maybe 'gemini-pro' or just 'gemini-1.5-flash' (no models/ prefix)
+        model_names = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"]
+        
+        for m_name in model_names:
+            try:
+                print(f"Attempting Gemini API (REST v1, Model: {m_name})...")
+                url = f"https://generativelanguage.googleapis.com/v1/models/{m_name}:generateContent?key={gemini_key}"
+                headers = {"Content-Type": "application/json"}
+                payload = {
+                    "contents": [{"parts": [{"text": prompt}]}]
+                }
+                res = requests.post(url, headers=headers, json=payload, timeout=30)
+                if res.status_code == 200:
+                    res_json = res.json()
+                    text = res_json['candidates'][0]['content']['parts'][0]['text']
+                    text = text.replace("```json", "").replace("```", "").strip()
+                    engine_used = f"Gemini (REST, {m_name})"
+                    break
+                else:
+                    print(f"Gemini REST API ({m_name}) error: {res.status_code}")
+            except Exception as e:
+                print(f"Gemini REST API ({m_name}) exception: {e}")
 
     # Fallback to Inception
     if not text and inception_key:
@@ -126,7 +127,7 @@ def main():
         engine_used = "Inception"
 
     if not text:
-        print("All AI engines failed. Please verify API keys and network connectivity.")
+        print("All AI engines failed. Check API keys and network connectivity.")
         sys.exit(1)
     
     try:
