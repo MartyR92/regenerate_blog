@@ -39,25 +39,26 @@ def main():
         with open("context/research-queue.json", "r", encoding="utf-8") as f:
             try:
                 queue = json.load(f)
-                # Sort by relevance score descending
                 queue.sort(key=lambda x: x.get("relevance_score", 0), reverse=True)
                 research_data = queue[:3]
             except:
                 pass
 
-    # 3. Dynamic Model Discovery
-    print("Discovering available Pro models...")
-    target_model = "models/gemini-1.5-pro" # Default
+    # 3. Dynamic Model Discovery (Prioritizing 2.5)
+    print("Discovering available models (Prioritizing Gemini 2.5)...")
+    target_model = "models/gemini-2.5-flash" # Default based on last successful run
     try:
         diag = requests.get(f"https://generativelanguage.googleapis.com/v1beta/models?key={gemini_key}")
         if diag.status_code == 200:
             model_list = [m['name'] for m in diag.json().get('models', [])]
-            pro_models = [m for m in model_list if "pro" in m and "1.5" in m]
-            if pro_models:
-                target_model = pro_models[0]
-                print(f"Using discovered Pro model: {target_model}")
+            # Try to find exactly 2.5 models
+            gemini_25_models = [m for m in model_list if "2.5" in m]
+            if gemini_25_models:
+                target_model = gemini_25_models[0]
+                print(f"Using discovered Gemini 2.5 model: {target_model}")
             else:
-                print(f"No specific 1.5 Pro found, using first available: {model_list[0]}")
+                print(f"No Gemini 2.5 found, available: {model_list[:3]}")
+                # Fallback to the first one in the list if no 2.5 found
                 target_model = model_list[0]
     except Exception as e:
         print(f"Discovery failed, falling back to default: {e}")
@@ -97,25 +98,34 @@ def main():
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
             "temperature": 0.7,
-            "maxOutputTokens": 8192 # Sufficient for long-form content
+            "maxOutputTokens": 8192
         }
     }
     
     try:
-        res = requests.post(url, json=payload, timeout=120)
+        res = requests.post(url, json=payload, timeout=180) # Increased timeout for Gemini 2.5
         if res.status_code == 200:
             content = res.json()['candidates'][0]['content']['parts'][0]['text']
             
             # 6. Save to _drafts
-            title_match = re.search(r'^title:\s*"(.*)"', content, re.MULTILINE)
-            title = title_match.group(1) if title_match else "generated-post"
+            # Try to extract title from Front Matter
+            title_match = re.search(r'title:\s*"(.*)"', content)
+            if not title_match:
+                title_match = re.search(r'title:\s*(.*)', content)
+                
+            title = title_match.group(1).strip() if title_match else "generated-post"
+            title = title.replace('"', '')
+            
             date_str = datetime.now().strftime("%Y-%m-%d")
             filename = f"_drafts/{date_str}-{slugify(title)}.md"
+            
+            # Ensure _drafts exists
+            os.makedirs("_drafts", exist_ok=True)
             
             with open(filename, "w", encoding="utf-8") as f:
                 f.write(content)
             
-            print(f"Successfully generated post: {filename}")
+            print(f"Successfully generated post using {target_model}: {filename}")
         else:
             print(f"Gemini API error: {res.status_code} - {res.text}")
             sys.exit(1)
