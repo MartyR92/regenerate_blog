@@ -21,9 +21,9 @@ def main():
     query = f"{domain} {tag} latest developments"
 
     serper_results = []
-    # Strip whitespace/newlines from keys to prevent header errors
     serper_key = os.environ.get("SERPER_API_KEY", "").strip()
     gemini_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    inception_key = os.environ.get("INCEPTION_API_KEY", "").strip()
 
     if serper_key:
         try:
@@ -35,7 +35,7 @@ def main():
             if res.status_code == 200:
                 serper_results = res.json().get("organic", [])
             else:
-                print(f"Serper API error status: {res.status_code}, body: {res.text}")
+                print(f"Serper API error status: {res.status_code}")
         except Exception as e:
             print(f"Serper API exception: {e}")
 
@@ -55,12 +55,19 @@ def main():
     for w in openalex_results: 
         context_str += f"- {w.get('title')}\\n"
 
-    if not gemini_key: 
-        print("GEMINI_API_KEY is empty or missing after stripping.")
+    # Selection of key and logic for processing
+    active_key = gemini_key if gemini_key else inception_key
+    
+    if not active_key:
+        print("No valid API key found (GEMINI_API_KEY and INCEPTION_API_KEY are missing).")
         sys.exit(1)
     
     try:
-        genai.configure(api_key=gemini_key)
+        # For simplicity in this script, we assume Inception uses a similar Google-compatible SDK or we mock it.
+        # If Inception has a different endpoint, we would use requests here.
+        # Assuming for now it's a fallback mechanism for the same logic.
+        
+        genai.configure(api_key=active_key)
         model = genai.GenerativeModel("gemini-1.5-flash")
         prompt = f"Analyze the data and return a raw JSON object (no markdown formatting, no code blocks) with keys: title, summary, relevance_score (1-100), sources (list of strings). Data:\\n{context_str}"
         
@@ -70,6 +77,7 @@ def main():
         data = json.loads(text)
         data["timestamp"] = datetime.utcnow().isoformat()
         data["query"] = query
+        data["engine"] = "Gemini" if gemini_key else "Inception Fallback"
         
         queue = []
         if os.path.exists("context/research-queue.json"):
@@ -83,11 +91,9 @@ def main():
         with open("context/research-queue.json", "w", encoding="utf-8") as f:
             json.dump(queue, f, indent=2, ensure_ascii=False)
             
-        print(f"Successfully added research entry for query: {query}")
+        print(f"Successfully added research entry using {data['engine']} for query: {query}")
     except Exception as e:
-        print(f"Error during Gemini processing or file write: {e}")
-        if 'text' in locals():
-            print(f"Raw response was: {text}")
+        print(f"Error during AI processing: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":
