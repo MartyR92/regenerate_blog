@@ -43,19 +43,12 @@ def main():
     except Exception as e:
         print(f"OpenAlex API error: {e}")
 
-    context_str = f"Query: {query}
-
-Web:
-"
+    context_str = f"Query: {query}\\n\\nWeb:\\n"
     for r in serper_results: 
-        context_str += f"- {r.get('title')}: {r.get('snippet')}
-"
-    context_str += "
-Academic:
-"
+        context_str += f"- {r.get('title')}: {r.get('snippet')}\\n"
+    context_str += "\\nAcademic:\\n"
     for w in openalex_results: 
-        context_str += f"- {w.get('title')}
-"
+        context_str += f"- {w.get('title')}\\n"
 
     gemini_key = os.environ.get("GEMINI_API_KEY")
     if not gemini_key: 
@@ -64,8 +57,7 @@ Academic:
     
     genai.configure(api_key=gemini_key)
     model = genai.GenerativeModel("gemini-1.5-flash")
-    prompt = f"Analyze the data and return a raw JSON object (no markdown formatting, no code blocks) with keys: title, summary, relevance_score (1-100), sources (list of strings). Data:
-{context_str}"
+    prompt = f"Analyze the data and return a raw JSON object (no markdown formatting, no code blocks) with keys: title, summary, relevance_score (1-100), sources (list of strings). Data:\\n{context_str}"
     
     response = model.generate_content(prompt)
     text = response.text.replace("```json", "").replace("```", "").strip()
@@ -75,8 +67,7 @@ Academic:
         data["timestamp"] = datetime.utcnow().isoformat()
         data["query"] = query
     except Exception as e:
-        print(f"JSON Parse Error: {e}
-Response was: {text}")
+        print(f"JSON Parse Error: {e}\\nResponse was: {text}")
         sys.exit(1)
 
     queue = []
