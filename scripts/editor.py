@@ -21,14 +21,13 @@ def main():
         sys.exit(1)
 
     # 1. Identify file to review
-    # We look for the newest file in _drafts/
     drafts = glob.glob("_drafts/*.md")
     if not drafts:
         print("No drafts found to review.")
         sys.exit(0)
     
     # Sort by modification time to get the latest
-    latest_draft = max(drafts, key=os.path.getmtime)
+    latest_draft = max(drafts, key=os.path.getctime)
     print(f"Reviewing latest draft: {latest_draft}")
     
     with open(latest_draft, "r", encoding="utf-8") as f:
@@ -53,24 +52,7 @@ def main():
         pass
 
     # 4. Construct Final Prompt
-    prompt = f"""
-    {editor_prompt_template}
-
-    --- CONTEXT DATA ---
-    SYSTEM IDENTITY:
-    {identity}
-
-    BLOG MEMORY:
-    {memory}
-
-    ONTOLOGY (Tags/Categories):
-    {ontology}
-
-    --- ARTICLE TO REVIEW ---
-    FILE: {latest_draft}
-    CONTENT:
-    {article_content}
-    """
+    prompt = f"TEMPLATE:\n{editor_prompt_template}\n\nSYSTEM IDENTITY:\n{identity}\n\nMEMORY:\n{memory}\n\nONTOLOGY:\n{ontology}\n\nARTICLE:\n{article_content}"
 
     # 5. Call Gemini REST API
     url = f"https://generativelanguage.googleapis.com/v1beta/{target_model}:generateContent?key={gemini_key}"
@@ -84,13 +66,11 @@ def main():
             review_output = res.json()['candidates'][0]['content']['parts'][0]['text']
             
             # 6. Output handling
-            # In a real GH Action, we write to GITHUB_STEP_SUMMARY
             summary_file = os.environ.get("GITHUB_STEP_SUMMARY")
             if summary_file:
                 with open(summary_file, "a", encoding="utf-8") as f:
-                    f.write(f"
-## Editor Review for `{os.path.basename(latest_draft)}`
-")
+                    # Avoid multi-line f-strings which caused the SyntaxError
+                    f.write("\n## Editor Review for " + os.path.basename(latest_draft) + "\n")
                     f.write(review_output)
             
             print("Successfully generated editor review.")
