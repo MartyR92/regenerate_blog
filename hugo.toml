@@ -1,0 +1,45 @@
+baseURL = "https://martyr92.github.io/regenerate_blog/"
+title = "Rə:Generate"
+theme = "blowfish"
+defaultContentLanguage = "de"
+
+[languages]
+  [languages.de]
+    languageName = "Deutsch"
+    contentDir = "content/de"
+    weight = 1
+    [languages.de.params]
+      displayName = "Deutsch"
+      isoCode = "de"
+  
+  [languages.en]
+    languageName = "English"
+    contentDir = "content/en"
+    weight = 2
+    [languages.en.params]
+      displayName = "English"
+      isoCode = "en"
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  series = "series"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+
+[params]
+  description = "Regenerative Wirtschaft und Ökosysteme - Natural Solarpunk x Avantgarde Prestige"
+  [params.author]
+    name = "Martin Reiter"
+
+[build]
+  [build.buildStats]
+    enable = true
+
+[themes]
+  theme = "blowfish"
