@@ -1,0 +1,70 @@
+{
+  "domains": {
+    "Biological Foundations": {
+      "description": "Deep dive into the living bedrock: exploring soil microbiology, mycological networks, and biological intelligence as the primary blueprint for systemic resilience.",
+      "tags": [
+        "Soil Science",
+        "Mycology",
+        "Carbon Sequestration",
+        "Carbon Farming",
+        "Soil Microbiome",
+        "Biodiversity"
+      ]
+    },
+    "Regenerative Finance": {
+      "description": "Architecting capital flows that serve life: integrating natural capital into market mechanisms and developing financial models based on net-positive returns.",
+      "tags": [
+        "ReFi",
+        "Natural Capital",
+        "Circular Economy",
+        "Impact Investing",
+        "Green Finance",
+        "Tokenomics"
+      ]
+    },
+    "Symbiotic Technology": {
+      "description": "Leveraging open source, decentralized technologies, and biomimetic engineering to monitor, protect, and augment the biosphere's capacity.",
+      "tags": [
+        "AgTech",
+        "Precision Agriculture",
+        "Biomimicry",
+        "DeSci",
+        "Open Source Hardware",
+        "Digital Twins"
+      ]
+    },
+    "Applied Ecosystem Design": {
+      "description": "The practice of regeneration at scale: implementing landscape-level interventions from agroforestry to rewilding through avantgarde management techniques.",
+      "tags": [
+        "Agroforestry",
+        "Permaculture",
+        "Syntropic Farming",
+        "Holistic Management",
+        "Rewilding",
+        "Watershed Management"
+      ]
+    },
+    "Strategic Systems Thinking": {
+      "description": "Mastering the complexity of transitions: applying system dynamics, complexity science, and interdisciplinary synthesis to manage the shift toward a regenerative era.",
+      "tags": [
+        "Systems Thinking",
+        "Complexity Science",
+        "Climate Resilience",
+        "System Dynamics",
+        "Strategic Foresight",
+        "Adaptive Governance"
+      ]
+    }
+  },
+  "cross-domain-tags": [
+    "Regenerative Economy",
+    "Solarpunk",
+    "Climate Positive",
+    "Symbiosis",
+    "Bioregionalism",
+    "Nature-based Solutions",
+    "Decentralization"
+  ],
+  "version": "1.2.0",
+  "last_updated": "2026-02-25"
+}

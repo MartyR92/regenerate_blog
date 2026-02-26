@@ -1,0 +1,127 @@
+name: Research Agent
+
+on:
+  schedule:
+    - cron: '0 6 * * 1,4'
+  workflow_dispatch:
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests google-generativeai
+
+      - name: Run Research Script with Retry
+        id: research_step
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          retry_wait_seconds: 60
+          command: |
+            python -c '
+            import os, json, random, requests, urllib.parse
+            import google.generativeai as genai
+            from datetime import datetime
+
+            try:
+                with open("context/ontology.json", "r", encoding="utf-8") as f:
+                    ontology = json.load(f)
+            except Exception as e:
+                print(f"Error loading ontology: {e}"); exit(1)
+
+            domain = random.choice(list(ontology.get("domains", {}).keys()))
+            tags = ontology["domains"][domain].get("tags", [])
+            tag = random.choice(tags) if tags else domain
+            query = f"{domain} {tag} latest developments"
+
+            serper_results = []
+            serper_key = os.environ.get("SERPER_API_KEY")
+            if serper_key:
+                res = requests.post("https://google.serper.dev/search", 
+                                    headers={"X-API-KEY": serper_key, "Content-Type": "application/json"},
+                                    json={"q": query, "num": 5})
+                if res.status_code == 200:
+                    serper_results = res.json().get("organic", [])
+
+            openalex_results = []
+            try:
+                url = f"https://api.openalex.org/works?search={urllib.parse.quote(query)}&per-page=5&sort=publication_date:desc"
+                res = requests.get(url)
+                if res.status_code == 200:
+                    openalex_results = res.json().get("results", [])
+            except: pass
+
+            context = f"Query: {query}
+
+Web:
+"
+            for r in serper_results: context += f"- {r.get("title")}: {r.get("snippet")}
+"
+            context += "
+Academic:
+"
+            for w in openalex_results: context += f"- {w.get("title")}
+"
+
+            gemini_key = os.environ.get("GEMINI_API_KEY")
+            if not gemini_key: print("GEMINI_API_KEY missing"); exit(1)
+            
+            genai.configure(api_key=gemini_key)
+            model = genai.GenerativeModel("gemini-1.5-flash")
+            prompt = f"Analyze the data and return a raw JSON object (no markdown formatting, no code blocks) with keys: title, summary, relevance_score (1-100), sources (list of strings). Data:
+{context}"
+            
+            response = model.generate_content(prompt)
+            text = response.text.replace("```json", "").replace("```", "").strip()
+            
+            try:
+                data = json.loads(text)
+                data["timestamp"] = datetime.utcnow().isoformat()
+                data["query"] = query
+            except Exception as e:
+                print(f"JSON Parse Error: {e}
+Response was: {text}"); exit(1)
+
+            queue = []
+            if os.path.exists("context/research-queue.json"):
+                with open("context/research-queue.json", "r", encoding="utf-8") as f:
+                    try: queue = json.load(f)
+                    except: pass
+            queue.append(data)
+            
+            with open("context/research-queue.json", "w", encoding="utf-8") as f:
+                json.dump(queue, f, indent=2, ensure_ascii=False)
+            '
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SERPER_API_KEY: ${{ secrets.SERPER_API_KEY }}
+
+      - name: Write Step Summary on Failure
+        if: failure()
+        run: |
+          echo "### ❌ Research Agent Failed" >> $GITHUB_STEP_SUMMARY
+          echo "The Python script encountered an error after 3 attempts." >> $GITHUB_STEP_SUMMARY
+
+      - name: Commit and Push
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add context/research-queue.json
+          git commit -m "Auto-update research queue" || exit 0
+          git push

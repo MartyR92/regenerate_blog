@@ -38,6 +38,15 @@ Unsere Leserschaft besteht aus den Gestaltern, Architekten und Financiers des ne
 
 Sie alle suchen keine Bestätigung für das, was sie schon wissen, sondern intellektuelle Herausforderung, interdisziplinäre Synthese und den "Edge" in der neuen Wirtschaft.
 
+## Content-Formate & SEO-Strategie
+
+Um unsere Nische zu dominieren, setzen wir auf Formate, die in die Tiefe gehen und gleichzeitig organisch von Suchmaschinen gefunden werden:
+
+*   **Deep Dives & Whitepapers:** Lange, umfassende Analysen (2000+ Wörter), die ein spezifisches Konzept (z.B. "Tokenomics in der regenerativen Landwirtschaft") erschöpfend behandeln. Hoher Wert für Long-Tail-Keywords.
+*   **Case Studies:** Praxisbeispiele, die zeigen, wie "Natural Capital Accounting" oder "Syntropic Farming" wirtschaftlich erfolgreich skaliert werden.
+*   **Essays & Manifeste:** Meinungsstarke, visionäre Texte, die den Vibe und die Philosophie ("Natural Solarpunk") etablieren und zum Teilen anregen (Backlink-Generatoren).
+*   **SEO-Grundsatz:** Wir nutzen **echte, etablierte Suchbegriffe** (z.B. *Carbon Farming*, *Circular Economy*, *AgTech*, *Biomimicry*), weben diese aber natürlich in unsere hochwertige, avantgardistische Prosa ein. Wir verzichten auf "Keyword-Stuffing" zugunsten semantischer Relevanz (LSI-Keywords) und einer klaren H-Tag-Struktur (H1 bis H3).
+
 ## Beispielsätze (Ton und Vibe)
 
 *   *"Während die extraktive Ökonomie den Boden als austauschbare, tote Ressource berechnete, verstehen wir ihn als die hochkomplexe, lebendige Basisinfrastruktur unseres zukünftigen Wohlstands."*
