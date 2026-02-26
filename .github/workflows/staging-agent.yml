@@ -1,0 +1,171 @@
+name: Staging Agent
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+  schedule:
+    - cron: '0 * * * *' # Hourly check for auto-approval
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  build-preview:
+    if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'editor-review')
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: "0.128.0"
+      PREVIEW_URL: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/pr-${{ github.event.number }}/"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+
+      - name: Install Hugo
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb 
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+
+      - name: Build Hugo
+        run: hugo --gc --minify --baseURL "${PREVIEW_URL}"
+
+      - name: Build Pagefind Index
+        run: npx --yes pagefind --site public
+
+      - name: Check Broken Links (Lychee)
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: "--offline --no-progress './public/**/*.html'"
+          fail: false
+
+      - name: Run Lighthouse CI
+        id: lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          staticDistDir: ./public
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      - name: Deploy PR Preview to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          destination_dir: pr-preview/pr-${{ github.event.number }}
+          keep_files: true
+
+      - name: Post PR Comment
+        uses: actions/github-script@v7
+        env:
+          LH_LINKS: ${{ steps.lighthouse.outputs.links }}
+          LH_MANIFEST: ${{ steps.lighthouse.outputs.manifest }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const previewUrl = process.env.PREVIEW_URL;
+            let lhLinks = {};
+            let lhManifest = [];
+            try {
+              lhLinks = JSON.parse(process.env.LH_LINKS || '{}');
+              lhManifest = JSON.parse(process.env.LH_MANIFEST || '[]');
+            } catch (e) {
+              console.log('Error parsing Lighthouse outputs', e);
+            }
+            
+            let commentBody = `### 🚀 Staging Agent Report
+
+`;
+            commentBody += `**🔍 Preview URL:** [View Preview](${previewUrl})
+
+`;
+            
+            commentBody += `#### 🔗 Link Checker (Lychee)
+`;
+            commentBody += `Check the action logs for detailed broken link reports.
+
+`;
+            
+            commentBody += `#### ⚡ Lighthouse Scores
+`;
+            if (lhManifest && lhManifest.length > 0) {
+              const res = lhManifest[0].summary;
+              commentBody += `| Category | Score |
+| --- | --- |
+`;
+              commentBody += `| Performance | ${Math.round(res.performance * 100)} |
+`;
+              commentBody += `| Accessibility | ${Math.round(res.accessibility * 100)} |
+`;
+              commentBody += `| Best Practices | ${Math.round(res['best-practices'] * 100)} |
+`;
+              commentBody += `| SEO | ${Math.round(res.seo * 100)} |
+
+`;
+              
+              if (lhLinks && lhLinks[lhManifest[0].url]) {
+                 commentBody += `[Detailed Lighthouse Report](${lhLinks[lhManifest[0].url]})
+`;
+              }
+            } else {
+              commentBody += `Lighthouse results not available.
+`;
+            }
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: commentBody
+            });
+
+  auto-approve:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-Approve 48h Old PRs
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: pullRequests } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open'
+            });
+            
+            const now = new Date();
+            for (const pr of pullRequests) {
+              const hasEditorReview = pr.labels.some(l => l.name === 'editor-review');
+              const hasVeto = pr.labels.some(l => l.name === 'veto');
+              
+              if (hasEditorReview && !hasVeto) {
+                const createdAt = new Date(pr.created_at);
+                const hoursOld = (now - createdAt) / (1000 * 60 * 60);
+                
+                if (hoursOld >= 48) {
+                  console.log(`Approving PR #${pr.number} (older than 48h and no veto)`);
+                  await github.rest.pulls.createReview({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: pr.number,
+                    event: 'APPROVE',
+                    body: '🤖 Auto-approved by Staging Agent (48h passed without veto).'
+                  });
+                }
+              }
+            }
