@@ -21,7 +21,10 @@ def main():
     query = f"{domain} {tag} latest developments"
 
     serper_results = []
-    serper_key = os.environ.get("SERPER_API_KEY")
+    # Strip whitespace/newlines from keys to prevent header errors
+    serper_key = os.environ.get("SERPER_API_KEY", "").strip()
+    gemini_key = os.environ.get("GEMINI_API_KEY", "").strip()
+
     if serper_key:
         try:
             res = requests.post(
@@ -31,8 +34,10 @@ def main():
             )
             if res.status_code == 200:
                 serper_results = res.json().get("organic", [])
+            else:
+                print(f"Serper API error status: {res.status_code}, body: {res.text}")
         except Exception as e:
-            print(f"Serper API error: {e}")
+            print(f"Serper API exception: {e}")
 
     openalex_results = []
     try:
@@ -50,39 +55,40 @@ def main():
     for w in openalex_results: 
         context_str += f"- {w.get('title')}\\n"
 
-    gemini_key = os.environ.get("GEMINI_API_KEY")
     if not gemini_key: 
-        print("GEMINI_API_KEY missing")
+        print("GEMINI_API_KEY is empty or missing after stripping.")
         sys.exit(1)
     
-    genai.configure(api_key=gemini_key)
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    prompt = f"Analyze the data and return a raw JSON object (no markdown formatting, no code blocks) with keys: title, summary, relevance_score (1-100), sources (list of strings). Data:\\n{context_str}"
-    
-    response = model.generate_content(prompt)
-    text = response.text.replace("```json", "").replace("```", "").strip()
-    
     try:
+        genai.configure(api_key=gemini_key)
+        model = genai.GenerativeModel("gemini-1.5-flash")
+        prompt = f"Analyze the data and return a raw JSON object (no markdown formatting, no code blocks) with keys: title, summary, relevance_score (1-100), sources (list of strings). Data:\\n{context_str}"
+        
+        response = model.generate_content(prompt)
+        text = response.text.replace("```json", "").replace("```", "").strip()
+        
         data = json.loads(text)
         data["timestamp"] = datetime.utcnow().isoformat()
         data["query"] = query
-    except Exception as e:
-        print(f"JSON Parse Error: {e}\\nResponse was: {text}")
-        sys.exit(1)
-
-    queue = []
-    if os.path.exists("context/research-queue.json"):
-        with open("context/research-queue.json", "r", encoding="utf-8") as f:
-            try: 
-                queue = json.load(f)
-            except: 
-                pass
-    queue.append(data)
-    
-    with open("context/research-queue.json", "w", encoding="utf-8") as f:
-        json.dump(queue, f, indent=2, ensure_ascii=False)
         
-    print(f"Successfully added research entry for query: {query}")
+        queue = []
+        if os.path.exists("context/research-queue.json"):
+            with open("context/research-queue.json", "r", encoding="utf-8") as f:
+                try: 
+                    queue = json.load(f)
+                except: 
+                    pass
+        queue.append(data)
+        
+        with open("context/research-queue.json", "w", encoding="utf-8") as f:
+            json.dump(queue, f, indent=2, ensure_ascii=False)
+            
+        print(f"Successfully added research entry for query: {query}")
+    except Exception as e:
+        print(f"Error during Gemini processing or file write: {e}")
+        if 'text' in locals():
+            print(f"Raw response was: {text}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
