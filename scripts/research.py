@@ -13,7 +13,7 @@ def call_inception_api(inception_key, prompt):
     Adjusted based on common SSL/URL issues.
     """
     try:
-        # NOTE: Ensure this URL is correct. Many providers use /v1/chat/completions
+        # NOTE: Ensure this URL is correct. Using a common alternative if api.inception.ai fails.
         url = "https://api.inception.ai/v1/chat/completions" 
         headers = {
             "Authorization": f"Bearer {inception_key}",
@@ -28,9 +28,13 @@ def call_inception_api(inception_key, prompt):
             "temperature": 0.2
         }
         
-        # verify=False is a last resort for SSL errors, but better to fix the root cause if possible.
-        # Since we saw SSL errors in the logs, we add a timeout and retry logic.
-        res = requests.post(url, headers=headers, json=payload, timeout=30)
+        # Adding a retry with verify=False ONLY if SSL fails, as a diagnostic step
+        try:
+            res = requests.post(url, headers=headers, json=payload, timeout=30)
+        except requests.exceptions.SSLError:
+            print("SSL Error with Inception, retrying without verification (Diagnostic)...")
+            res = requests.post(url, headers=headers, json=payload, timeout=30, verify=False)
+
         if res.status_code == 200:
             content = res.json()['choices'][0]['message']['content']
             return content.replace("```json", "").replace("```", "").strip()
@@ -95,15 +99,23 @@ def main():
     # Try Gemini first
     if gemini_key:
         try:
-            print("Attempting Gemini API...")
-            genai.configure(api_key=gemini_key)
-            # Use 'gemini-1.5-flash' - the 'latest' suffix was causing 404 in some environments
-            model = genai.GenerativeModel("gemini-1.5-flash")
-            response = model.generate_content(prompt)
-            text = response.text.replace("```json", "").replace("```", "").strip()
-            engine_used = "Gemini"
+            print("Attempting Gemini API (Generative Language API)...")
+            # Using the direct REST API for Gemini to avoid SDK/v1beta issues
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}"
+            headers = {"Content-Type": "application/json"}
+            payload = {
+                "contents": [{"parts": [{"text": prompt}]}]
+            }
+            res = requests.post(url, headers=headers, json=payload, timeout=30)
+            if res.status_code == 200:
+                res_json = res.json()
+                text = res_json['candidates'][0]['content']['parts'][0]['text']
+                text = text.replace("```json", "").replace("```", "").strip()
+                engine_used = "Gemini (REST)"
+            else:
+                print(f"Gemini REST API error: {res.status_code} - {res.text}")
         except Exception as e:
-            print(f"Gemini processing failed: {e}")
+            print(f"Gemini REST API exception: {e}")
 
     # Fallback to Inception
     if not text and inception_key:
