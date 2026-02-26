@@ -7,6 +7,39 @@ import google.generativeai as genai
 from datetime import datetime
 import sys
 
+def call_inception_api(inception_key, prompt):
+    """
+    Fallback function to call Inception API (OpenAI-compatible).
+    Adjust the URL/model as needed based on Inception's actual documentation.
+    """
+    try:
+        # Assuming Inception provides an OpenAI-compatible endpoint. 
+        # Update 'url' and 'model' if they differ.
+        url = "https://api.inception.ai/v1/chat/completions" 
+        headers = {
+            "Authorization": f"Bearer {inception_key}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "model": "inception-1", # Replace with actual Inception model name
+            "messages": [
+                {"role": "system", "content": "You are a research assistant. Return raw JSON only."},
+                {"role": "user", "content": prompt}
+            ],
+            "temperature": 0.2
+        }
+        
+        res = requests.post(url, headers=headers, json=payload, timeout=30)
+        if res.status_code == 200:
+            content = res.json()['choices'][0]['message']['content']
+            return content.replace("```json", "").replace("```", "").strip()
+        else:
+            print(f"Inception API error: {res.status_code} - {res.text}")
+            return None
+    except Exception as e:
+        print(f"Inception API exception: {e}")
+        return None
+
 def main():
     try:
         with open("context/ontology.json", "r", encoding="utf-8") as f:
@@ -34,8 +67,6 @@ def main():
             )
             if res.status_code == 200:
                 serper_results = res.json().get("organic", [])
-            else:
-                print(f"Serper API error status: {res.status_code}")
         except Exception as e:
             print(f"Serper API exception: {e}")
 
@@ -55,29 +86,39 @@ def main():
     for w in openalex_results: 
         context_str += f"- {w.get('title')}\\n"
 
-    # Selection of key and logic for processing
-    active_key = gemini_key if gemini_key else inception_key
+    prompt = f"Analyze the following research data and return a raw JSON object (no markdown, no code blocks) with keys: title, summary, relevance_score (1-100), sources (list of strings). Data:\\n{context_str}"
     
-    if not active_key:
-        print("No valid API key found (GEMINI_API_KEY and INCEPTION_API_KEY are missing).")
+    text = None
+    engine_used = None
+
+    # Try Gemini first if key is present
+    if gemini_key:
+        try:
+            print("Attempting Gemini API...")
+            genai.configure(api_key=gemini_key)
+            # Use 'gemini-1.5-flash-latest' to avoid versioning issues
+            model = genai.GenerativeModel("gemini-1.5-flash-latest")
+            response = model.generate_content(prompt)
+            text = response.text.replace("```json", "").replace("```", "").strip()
+            engine_used = "Gemini"
+        except Exception as e:
+            print(f"Gemini processing failed: {e}")
+
+    # Fallback to Inception if Gemini failed or key missing
+    if not text and inception_key:
+        print("Attempting Inception API Fallback...")
+        text = call_inception_api(inception_key, prompt)
+        engine_used = "Inception"
+
+    if not text:
+        print("All AI engines failed or no keys available.")
         sys.exit(1)
     
     try:
-        # For simplicity in this script, we assume Inception uses a similar Google-compatible SDK or we mock it.
-        # If Inception has a different endpoint, we would use requests here.
-        # Assuming for now it's a fallback mechanism for the same logic.
-        
-        genai.configure(api_key=active_key)
-        model = genai.GenerativeModel("gemini-1.5-flash")
-        prompt = f"Analyze the data and return a raw JSON object (no markdown formatting, no code blocks) with keys: title, summary, relevance_score (1-100), sources (list of strings). Data:\\n{context_str}"
-        
-        response = model.generate_content(prompt)
-        text = response.text.replace("```json", "").replace("```", "").strip()
-        
         data = json.loads(text)
         data["timestamp"] = datetime.utcnow().isoformat()
         data["query"] = query
-        data["engine"] = "Gemini" if gemini_key else "Inception Fallback"
+        data["engine"] = engine_used
         
         queue = []
         if os.path.exists("context/research-queue.json"):
@@ -91,9 +132,10 @@ def main():
         with open("context/research-queue.json", "w", encoding="utf-8") as f:
             json.dump(queue, f, indent=2, ensure_ascii=False)
             
-        print(f"Successfully added research entry using {data['engine']} for query: {query}")
+        print(f"Successfully added research entry using {engine_used} for query: {query}")
     except Exception as e:
-        print(f"Error during AI processing: {e}")
+        print(f"JSON Parse Error: {e}")
+        print(f"Raw response was: {text}")
         sys.exit(1)
 
 if __name__ == "__main__":
