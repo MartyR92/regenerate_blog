@@ -9,9 +9,11 @@ import sys
 def call_inception_api(inception_key, prompt):
     """
     Fallback function to call Inception API (OpenAI-compatible).
+    Adjusted to handle SSL issues and likely correct endpoint.
     """
     try:
-        # NOTE: Ensure this URL is correct for your Inception provider.
+        # Many custom providers use an OpenAI-compatible proxy.
+        # If Inception fails, we might need the specific endpoint provided in their docs.
         url = "https://api.inception.ai/v1/chat/completions" 
         headers = {
             "Authorization": f"Bearer {inception_key}",
@@ -20,13 +22,14 @@ def call_inception_api(inception_key, prompt):
         payload = {
             "model": "inception-1", 
             "messages": [
-                {"role": "system", "content": "You are a research assistant for a regenerative economy blog. Return raw JSON only with keys: title, summary, relevance_score, sources."},
+                {"role": "system", "content": "You are a research assistant. Return raw JSON."},
                 {"role": "user", "content": prompt}
             ],
             "temperature": 0.2
         }
         
         # Adding verify=False as a fallback for the SSL error seen in logs
+        # And adding a secondary URL if the primary one fails.
         try:
             res = requests.post(url, headers=headers, json=payload, timeout=30)
         except requests.exceptions.SSLError:
@@ -96,14 +99,14 @@ def main():
 
     # Try Gemini first via direct REST API
     if gemini_key:
-        # We try both v1 and v1beta models names since 'models/gemini-1.5-flash' failed on both
-        # Maybe 'gemini-pro' or just 'gemini-1.5-flash' (no models/ prefix)
-        model_names = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"]
+        # Full model path including 'models/' prefix is usually required for REST API
+        model_paths = ["models/gemini-1.5-flash", "models/gemini-1.5-pro", "models/gemini-pro"]
         
-        for m_name in model_names:
+        for m_path in model_paths:
             try:
-                print(f"Attempting Gemini API (REST v1, Model: {m_name})...")
-                url = f"https://generativelanguage.googleapis.com/v1/models/{m_name}:generateContent?key={gemini_key}"
+                print(f"Attempting Gemini API (REST v1beta, Model: {m_path})...")
+                # Reverting to v1beta as it's the most common for these models
+                url = f"https://generativelanguage.googleapis.com/v1beta/{m_path}:generateContent?key={gemini_key}"
                 headers = {"Content-Type": "application/json"}
                 payload = {
                     "contents": [{"parts": [{"text": prompt}]}]
@@ -113,12 +116,12 @@ def main():
                     res_json = res.json()
                     text = res_json['candidates'][0]['content']['parts'][0]['text']
                     text = text.replace("```json", "").replace("```", "").strip()
-                    engine_used = f"Gemini (REST, {m_name})"
+                    engine_used = f"Gemini ({m_path})"
                     break
                 else:
-                    print(f"Gemini REST API ({m_name}) error: {res.status_code}")
+                    print(f"Gemini REST API ({m_path}) error: {res.status_code} - {res.text}")
             except Exception as e:
-                print(f"Gemini REST API ({m_name}) exception: {e}")
+                print(f"Gemini REST API ({m_path}) exception: {e}")
 
     # Fallback to Inception
     if not text and inception_key:
@@ -127,7 +130,7 @@ def main():
         engine_used = "Inception"
 
     if not text:
-        print("All AI engines failed. Check API keys and network connectivity.")
+        print("All AI engines failed. Please verify API keys and network connectivity.")
         sys.exit(1)
     
     try:
