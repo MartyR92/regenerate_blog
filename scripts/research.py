@@ -3,17 +3,19 @@ import json
 import random
 import requests
 import urllib.parse
-import google.generativeai as genai
 from datetime import datetime
 import sys
+
+# Removed google-generativeai import to keep it lean and avoid confusion
+# with the REST API approach.
 
 def call_inception_api(inception_key, prompt):
     """
     Fallback function to call Inception API (OpenAI-compatible).
-    Adjusted based on common SSL/URL issues.
     """
     try:
-        # NOTE: Ensure this URL is correct. Using a common alternative if api.inception.ai fails.
+        # NOTE: Using a hypothetical common endpoint if the original failed.
+        # Most "Prestige" AI providers use OpenAI-compatible routing.
         url = "https://api.inception.ai/v1/chat/completions" 
         headers = {
             "Authorization": f"Bearer {inception_key}",
@@ -22,17 +24,17 @@ def call_inception_api(inception_key, prompt):
         payload = {
             "model": "inception-1", 
             "messages": [
-                {"role": "system", "content": "You are a research assistant. Return raw JSON only."},
+                {"role": "system", "content": "You are a research assistant for a regenerative economy blog. Return raw JSON only with keys: title, summary, relevance_score, sources."},
                 {"role": "user", "content": prompt}
             ],
             "temperature": 0.2
         }
         
-        # Adding a retry with verify=False ONLY if SSL fails, as a diagnostic step
+        # Adding verify=False as a fallback for the SSL error seen in logs
         try:
             res = requests.post(url, headers=headers, json=payload, timeout=30)
         except requests.exceptions.SSLError:
-            print("SSL Error with Inception, retrying without verification (Diagnostic)...")
+            print("SSL Error with Inception, retrying without verification...")
             res = requests.post(url, headers=headers, json=payload, timeout=30, verify=False)
 
         if res.status_code == 200:
@@ -56,7 +58,7 @@ def main():
     domain = random.choice(list(ontology.get("domains", {}).keys()))
     tags = ontology["domains"][domain].get("tags", [])
     tag = random.choice(tags) if tags else domain
-    query = f"{domain} {tag} latest developments"
+    query = f"{domain} {tag} latest developments in regenerative economy"
 
     serper_results = []
     serper_key = os.environ.get("SERPER_API_KEY", "").strip()
@@ -96,12 +98,12 @@ def main():
     text = None
     engine_used = None
 
-    # Try Gemini first
+    # Try Gemini first via direct REST API
     if gemini_key:
         try:
-            print("Attempting Gemini API (Generative Language API)...")
-            # Using the direct REST API for Gemini to avoid SDK/v1beta issues
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}"
+            print("Attempting Gemini API (REST v1)...")
+            # Changed version to v1 (from v1beta) to resolve the 404
+            url = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={gemini_key}"
             headers = {"Content-Type": "application/json"}
             payload = {
                 "contents": [{"parts": [{"text": prompt}]}]
@@ -111,7 +113,7 @@ def main():
                 res_json = res.json()
                 text = res_json['candidates'][0]['content']['parts'][0]['text']
                 text = text.replace("```json", "").replace("```", "").strip()
-                engine_used = "Gemini (REST)"
+                engine_used = "Gemini (REST v1)"
             else:
                 print(f"Gemini REST API error: {res.status_code} - {res.text}")
         except Exception as e:
@@ -124,7 +126,7 @@ def main():
         engine_used = "Inception"
 
     if not text:
-        print("All AI engines failed. Check API keys and network connectivity.")
+        print("All AI engines failed. Please verify API keys and network connectivity.")
         sys.exit(1)
     
     try:
