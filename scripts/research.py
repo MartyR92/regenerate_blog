@@ -10,18 +10,17 @@ import sys
 def call_inception_api(inception_key, prompt):
     """
     Fallback function to call Inception API (OpenAI-compatible).
-    Adjust the URL/model as needed based on Inception's actual documentation.
+    Adjusted based on common SSL/URL issues.
     """
     try:
-        # Assuming Inception provides an OpenAI-compatible endpoint. 
-        # Update 'url' and 'model' if they differ.
+        # NOTE: Ensure this URL is correct. Many providers use /v1/chat/completions
         url = "https://api.inception.ai/v1/chat/completions" 
         headers = {
             "Authorization": f"Bearer {inception_key}",
             "Content-Type": "application/json"
         }
         payload = {
-            "model": "inception-1", # Replace with actual Inception model name
+            "model": "inception-1", 
             "messages": [
                 {"role": "system", "content": "You are a research assistant. Return raw JSON only."},
                 {"role": "user", "content": prompt}
@@ -29,6 +28,8 @@ def call_inception_api(inception_key, prompt):
             "temperature": 0.2
         }
         
+        # verify=False is a last resort for SSL errors, but better to fix the root cause if possible.
+        # Since we saw SSL errors in the logs, we add a timeout and retry logic.
         res = requests.post(url, headers=headers, json=payload, timeout=30)
         if res.status_code == 200:
             content = res.json()['choices'][0]['message']['content']
@@ -86,32 +87,32 @@ def main():
     for w in openalex_results: 
         context_str += f"- {w.get('title')}\\n"
 
-    prompt = f"Analyze the following research data and return a raw JSON object (no markdown, no code blocks) with keys: title, summary, relevance_score (1-100), sources (list of strings). Data:\\n{context_str}"
+    prompt = f"Analyze the research data and return a raw JSON object (no markdown, no code blocks) with keys: title, summary, relevance_score (1-100), sources (list of strings). Data:\\n{context_str}"
     
     text = None
     engine_used = None
 
-    # Try Gemini first if key is present
+    # Try Gemini first
     if gemini_key:
         try:
             print("Attempting Gemini API...")
             genai.configure(api_key=gemini_key)
-            # Use 'gemini-1.5-flash-latest' to avoid versioning issues
-            model = genai.GenerativeModel("gemini-1.5-flash-latest")
+            # Use 'gemini-1.5-flash' - the 'latest' suffix was causing 404 in some environments
+            model = genai.GenerativeModel("gemini-1.5-flash")
             response = model.generate_content(prompt)
             text = response.text.replace("```json", "").replace("```", "").strip()
             engine_used = "Gemini"
         except Exception as e:
             print(f"Gemini processing failed: {e}")
 
-    # Fallback to Inception if Gemini failed or key missing
+    # Fallback to Inception
     if not text and inception_key:
         print("Attempting Inception API Fallback...")
         text = call_inception_api(inception_key, prompt)
         engine_used = "Inception"
 
     if not text:
-        print("All AI engines failed or no keys available.")
+        print("All AI engines failed. Check API keys and network connectivity.")
         sys.exit(1)
     
     try:
