@@ -53,11 +53,21 @@ jobs:
           args: "--offline --no-progress './public/**/*.html'"
           fail: false
 
+      - name: Create Lighthouse Config
+        run: |
+          echo '{
+            "ci": {
+              "collect": {
+                "staticDistDir": "./public"
+              }
+            }
+          }' > lighthouserc.json
+
       - name: Run Lighthouse CI
         id: lighthouse
         uses: treosh/lighthouse-ci-action@v12
         with:
-          staticDistDir: ./public
+          configPath: ./lighthouserc.json
           uploadArtifacts: true
           temporaryPublicStorage: true
 
