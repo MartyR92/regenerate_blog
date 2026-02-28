@@ -109,7 +109,7 @@ jobs:
         run: |
           if [ -f public/sitemap.xml ]; then
             echo "Sitemap gefunden. Validierung..."
-            grep -q "<urlset" public/sitemap.xml || (echo "Ungültige Sitemap Struktur!" && exit 1)
+            grep -E -q "<urlset|<sitemapindex" public/sitemap.xml || (echo "Ungültige Sitemap Struktur!" && exit 1)
           else
             echo "Kritischer Fehler: sitemap.xml fehlt im Build-Output!" && exit 1
           fi
