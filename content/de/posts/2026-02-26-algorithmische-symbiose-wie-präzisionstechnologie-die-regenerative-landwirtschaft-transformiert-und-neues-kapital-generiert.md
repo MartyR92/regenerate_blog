@@ -1,4 +1,4 @@
-﻿```markdown
+```markdown
 ---
 title: "Algorithmische Symbiose: Wie PrÃ¤zisionstechnologie die regenerative Landwirtschaft transformiert und neues Kapital generiert"
 date: 2026-02-26T14:17:30.342881
