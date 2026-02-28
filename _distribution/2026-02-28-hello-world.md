@@ -1,1 +1,3 @@
-# Distribution Content for hello-world\n\nPlease provide the "POST CONTENT" of the blog post. Once you provide the content, I will generate the Facebook, LinkedIn, and Newsletter Teaser as requested.
+# Distribution Content for hello-world\n\nI apologize, but the "POST CONTENT" section is empty. To generate the distribution content, I need the actual blog post content.
+
+Please provide the blog post content so I can complete your request.
