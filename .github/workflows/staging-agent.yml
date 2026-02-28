@@ -17,7 +17,7 @@ jobs:
     if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'editor-review')
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: "0.128.0"
+      HUGO_VERSION: "0.143.1"
       PREVIEW_URL: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/pr-${{ github.event.number }}/"
 
     steps:
