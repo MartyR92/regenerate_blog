@@ -1,0 +1,53 @@
+User-agent: *
+Allow: /
+
+# -------------------------------------------------------------
+# AI Training Opt-Out (Best Practices 2026)
+# Blockiert Crawler, die Inhalte für LLM-Training scrapen
+# -------------------------------------------------------------
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: Omgili
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+# -------------------------------------------------------------
+# Sitemap
+# -------------------------------------------------------------
+Sitemap: https://yourdomain.com/sitemap.xml
