@@ -40,6 +40,23 @@ jobs:
       - name: Install Dart Sass
         run: sudo snap install dart-sass
 
+      - name: Prepare Drafts for Preview
+        run: |
+          python -c '
+          import os, glob, yaml, shutil
+          drafts = glob.glob("_drafts/*.md")
+          for draft in drafts:
+              with open(draft, "r", encoding="utf-8") as f:
+                  content = f.read()
+              fm_str = content.split("---")[1] if "---" in content else ""
+              try: fm = yaml.safe_load(fm_str) or {}
+              except: fm = {}
+              lang = fm.get("language", "de")
+              dest_dir = f"content/{lang}/posts"
+              os.makedirs(dest_dir, exist_ok=True)
+              shutil.copy(draft, os.path.join(dest_dir, os.path.basename(draft)))
+          '
+
       - name: Build Hugo
         run: hugo --gc --minify --baseURL "${PREVIEW_URL}"
 

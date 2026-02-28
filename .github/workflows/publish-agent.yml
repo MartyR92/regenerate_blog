@@ -97,6 +97,30 @@ jobs:
       - name: Install Dart Sass
         run: sudo snap install dart-sass
 
+      - name: Move Drafts to Content
+        run: |
+          python -c '
+          import os, glob, yaml, shutil
+          drafts = glob.glob("_drafts/*.md")
+          for draft in drafts:
+              with open(draft, "r", encoding="utf-8") as f:
+                  content = f.read()
+              fm_str = content.split("---")[1] if "---" in content else ""
+              try: fm = yaml.safe_load(fm_str) or {}
+              except: fm = {}
+              lang = fm.get("language", "de")
+              dest_dir = f"content/{lang}/posts"
+              os.makedirs(dest_dir, exist_ok=True)
+              dest_path = os.path.join(dest_dir, os.path.basename(draft))
+              shutil.move(draft, dest_path)
+              print(f"Moved {draft} to {dest_path}")
+          '
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/ _drafts/
+          git commit -m "chore: move published drafts to content directories" || echo "No drafts to move"
+          git push
+
       - name: Build Hugo (Production)
         run: hugo --gc --minify
         env:
