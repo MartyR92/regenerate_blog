@@ -159,12 +159,13 @@ jobs:
                   except:
                       queue = {"items": []}
                       
-                                          # Mark all used items. Alternatively just mark everything older or top ones.
-                                          items = queue.get("items", []) if isinstance(queue, dict) else queue
-                                          for item in items:
-                                              if isinstance(item, dict) and not item.get("used"):
-                                                  item["used"] = True              with open(queue_file, "w", encoding="utf-8") as f:
-                  json.dump(queue, f, indent=2, ensure_ascii=False)
+                                                        # Mark all used items. Alternatively just mark everything older or top ones.
+                                                        items = queue.get("items", []) if isinstance(queue, dict) else queue
+                                                        for item in items:
+                                                            if isinstance(item, dict) and not item.get("used"):
+                                                                item["used"] = True
+                                                            
+                                                        with open(queue_file, "w", encoding="utf-8") as f:                  json.dump(queue, f, indent=2, ensure_ascii=False)
                   
           print("Memory and Context updated successfully.")
 
