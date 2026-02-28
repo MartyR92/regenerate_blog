@@ -95,18 +95,11 @@ def main():
     alt_text = alt_res.json()['candidates'][0]['content']['parts'][0]['text'].strip().replace('"', "'")
     
     # 5. Update front matter
-    new_fm = f'featureImage: "/images/{year}/{slug}/cover.jpg"
-featureImageAlt: "{alt_text}"
-'
-    content = content.replace("---
-", f"---
-{new_fm}", 1)
+    new_fm = f'featureImage: "/images/{year}/{slug}/cover.jpg"\\nfeatureImageAlt: "{alt_text}"\\n'
+    content = content.replace("---\\n", f"---\\n{new_fm}", 1)
     
     # Append attribution at the end
-    attribution = f'
-
-*Cover image by {author_name} on Unsplash*
-'
+    attribution = f'\\n\\n*Cover image by {author_name} on Unsplash*\\n'
     content += attribution
     
     with open(target_file, "w", encoding="utf-8") as f:
