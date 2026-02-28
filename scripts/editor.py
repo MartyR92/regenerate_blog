@@ -118,14 +118,9 @@ def main():
     # Check if branch exists
     subprocess.run(['git', 'checkout', '-b', branch_name])
     subprocess.run(['git', 'add', target_file])
-    # Only commit if there are changes (like the ai_assisted flag)
-    diff_check = subprocess.run(['git', 'diff', '--staged', '--quiet'])
-    if diff_check.returncode != 0:
-        subprocess.run(['git', 'commit', '-m', f"Editor: Auto-fix and review for {slug}"])
-        subprocess.run(['git', 'push', 'origin', branch_name, '--force'])
-    else:
-        # Push anyway to ensure branch exists for PR
-        subprocess.run(['git', 'push', 'origin', branch_name, '--force'])
+    # Always create a commit so the PR can be opened (differs from base)
+    subprocess.run(['git', 'commit', '--allow-empty', '-m', f"Editor: Review for {slug}"])
+    subprocess.run(['git', 'push', 'origin', branch_name, '--force'])
 
     # 5. Create PR via API
     pr_headers = {"Authorization": f"token {github_token}", "Accept": "application/vnd.github.v3+json"}
