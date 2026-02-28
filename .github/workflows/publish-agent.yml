@@ -182,9 +182,6 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: targetNumber,
-                body: `❌ **Publish Agent fehlgeschlagen!**
-
-Produktions-Build oder Deployment war nicht erfolgreich.
-Logs: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+                body: "❌ **Publish Agent fehlgeschlagen!**\\n\\nProduktions-Build oder Deployment war nicht erfolgreich.\\nLogs: https://github.com/" + context.repo.owner + "/" + context.repo.repo + "/actions/runs/" + context.runId
               });
             }
