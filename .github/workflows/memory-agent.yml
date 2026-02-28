@@ -1,0 +1,179 @@
+name: Memory Agent
+
+on:
+  workflow_dispatch:
+    inputs:
+      post_slug:
+        description: 'The slug of the published post'
+        required: true
+        type: string
+
+jobs:
+  update-memory:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml requests
+
+      - name: Update Context Files
+        env:
+          POST_SLUG: ${{ inputs.post_slug }}
+        shell: python
+        run: |
+          import os
+          import json
+          import yaml
+          import glob
+          from datetime import datetime
+          
+          post_slug = os.environ.get("POST_SLUG")
+          
+          if not post_slug:
+              print("Missing POST_SLUG")
+              import sys
+              sys.exit(1)
+              
+          # Find the post file
+          post_files = glob.glob(f"content/*/posts/{post_slug}.md")
+          if not post_files:
+              post_files = glob.glob(f"content/*/posts/*{post_slug}*.md")
+              
+          if not post_files:
+              print(f"Could not find post for slug: {post_slug}")
+              import sys
+              sys.exit(1)
+              
+          post_file = post_files[0]
+          print(f"Processing post: {post_file}")
+          
+          # 1. Parse Front Matter
+          with open(post_file, "r", encoding="utf-8") as f:
+              content = f.read()
+              
+          front_matter_str = content.split("---")[1] if "---" in content else ""
+          try:
+              front_matter = yaml.safe_load(front_matter_str) or {}
+          except:
+              front_matter = {}
+              
+          post_title = front_matter.get("title", post_slug)
+          post_tags = front_matter.get("tags", [])
+          post_series = front_matter.get("series", "")
+          post_date = front_matter.get("date", datetime.now().isoformat())
+          
+          # 2. Update blog-memory.json
+          memory_file = "context/blog-memory.json"
+          if os.path.exists(memory_file):
+              with open(memory_file, "r", encoding="utf-8") as f:
+                  try:
+                      memory = json.load(f)
+                  except:
+                      memory = {"version": "1.0", "posts": []}
+              
+              posts = memory.get("posts", [])
+              # Prepend new post
+              posts.insert(0, {
+                  "slug": post_slug,
+                  "title": post_title,
+                  "date": str(post_date),
+                  "tags": post_tags
+              })
+              # Keep max 20, remove oldest
+              memory["posts"] = posts[:20]
+              memory["last_updated"] = datetime.now().strftime("%Y-%m-%d")
+              memory["total_posts"] = memory.get("total_posts", 0) + 1
+              
+              with open(memory_file, "w", encoding="utf-8") as f:
+                  json.dump(memory, f, indent=2, ensure_ascii=False)
+                  
+          # 3. Update series-registry.json
+          if post_series:
+              series_file = "context/series-registry.json"
+              if os.path.exists(series_file):
+                  with open(series_file, "r", encoding="utf-8") as f:
+                      try:
+                          series_data = json.load(f)
+                      except:
+                          series_data = {"series": []}
+                  
+                  series_list = series_data.get("series", [])
+                  for s in series_list:
+                      if s.get("title_de") == post_series or s.get("title_en") == post_series or s.get("id") == post_series:
+                          published = s.get("published", [])
+                          if not any(p.get("slug") == post_slug for p in published):
+                              published.append({
+                                  "slug": post_slug,
+                                  "date": str(post_date)
+                              })
+                              s["published"] = published
+                  
+                  with open(series_file, "w", encoding="utf-8") as f:
+                      json.dump(series_data, f, indent=2, ensure_ascii=False)
+                      
+          # 4. Update ontology.json (add missing tags as proposed)
+          if post_tags:
+              ontology_file = "context/ontology.json"
+              if os.path.exists(ontology_file):
+                  with open(ontology_file, "r", encoding="utf-8") as f:
+                      try:
+                          ontology = json.load(f)
+                      except:
+                          ontology = {"domains": {}, "cross-domain-tags": []}
+                          
+                  existing_tags = []
+                  for domain in ontology.get("domains", {}).values():
+                      existing_tags.extend(domain.get("tags", []))
+                  existing_tags.extend(ontology.get("cross-domain-tags", []))
+                  existing_tags.extend(ontology.get("proposed_tags", []))
+                  
+                  new_tags = [t for t in post_tags if t not in existing_tags]
+                  if new_tags:
+                      proposed = ontology.get("proposed_tags", [])
+                      for tag in new_tags:
+                          if tag not in proposed:
+                              proposed.append(tag)
+                      ontology["proposed_tags"] = proposed
+                      
+                  with open(ontology_file, "w", encoding="utf-8") as f:
+                      json.dump(ontology, f, indent=2, ensure_ascii=False)
+                      
+          # 5. Cleanup research-queue.json
+          queue_file = "context/research-queue.json"
+          if os.path.exists(queue_file):
+              with open(queue_file, "r", encoding="utf-8") as f:
+                  try:
+                      queue = json.load(f)
+                  except:
+                      queue = {"items": []}
+                      
+              # Mark all used items. Alternatively just mark everything older or top ones.
+              items = queue.get("items", [])
+              for item in items:
+                  if not item.get("used"):
+                      item["used"] = True
+                  
+              with open(queue_file, "w", encoding="utf-8") as f:
+                  json.dump(queue, f, indent=2, ensure_ascii=False)
+                  
+          print("Memory and Context updated successfully.")
+
+      - name: Commit and Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add context/*.json
+          git commit -m "chore: update memory context for ${{ inputs.post_slug }}" || echo "No changes to commit"
+          git push

@@ -1,0 +1,45 @@
+name: Rollback Post
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  rollback:
+    if: startsWith(github.event.label.name, 'rollback:')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract post slug
+        run: |
+          LABEL="${{ github.event.label.name }}"
+          SLUG="${LABEL#rollback:}"
+          echo "SLUG=$SLUG" >> $GITHUB_ENV
+          echo "Post slug for rollback: $SLUG"
+
+      - name: Revert post commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # Find commit that published the slug
+          # Using git log with grep to search commit messages for the slug
+          COMMIT_HASH=$(git log --grep="$SLUG" --format="%H" | head -1)
+          
+          if [ -z "$COMMIT_HASH" ]; then
+            echo "Error: Could not find any commit containing slug '$SLUG'"
+            exit 1
+          fi
+          
+          echo "Found commit $COMMIT_HASH. Reverting..."
+          
+          git revert --no-commit $COMMIT_HASH
+          git commit -m "Rollback: $SLUG"
+          git push

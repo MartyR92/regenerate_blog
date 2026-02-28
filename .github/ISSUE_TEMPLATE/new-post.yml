@@ -1,0 +1,61 @@
+name: Neuer Post
+description: Post für die Agenten-Pipeline einreichen
+title: "[POST] "
+labels: ["write:"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Titel
+      placeholder: "Mykorrhiza als Finanzinfrastruktur"
+    validations:
+      required: true
+      
+  - type: input
+    id: series
+    attributes:
+      label: Serie (optional)
+      placeholder: "Mykorrhiza & DAOs"
+      
+  - type: input
+    id: series_order
+    attributes:
+      label: Episode-Nummer (optional)
+      placeholder: "2"
+      
+  - type: textarea
+    id: angle
+    attributes:
+      label: Angle / Hauptthese
+      placeholder: "Hauptargument des Posts"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: language
+    attributes:
+      label: Sprache
+      options:
+        - de
+        - en
+        - de+en
+    validations:
+      required: true
+      
+  - type: textarea
+    id: sources
+    attributes:
+      label: Quellen (optional)
+      placeholder: "arXiv-Links, DOIs, URLs"
+      
+  - type: input
+    id: target_publish
+    attributes:
+      label: Ziel-Veröffentlichungsdatum (optional)
+      placeholder: "YYYY-MM-DD"
+      
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: Sonstige Hinweise (optional)
+      placeholder: "Weitere Anmerkungen..."

@@ -1,0 +1,12 @@
+{{ if .Params.ai_assisted }}
+{{ if eq .Params.ai_assisted "true" }}
+<div class="ai-disclosure" style="font-size:0.85em; opacity:0.75; margin-top:2rem; padding:0.5rem; border-left:2px solid currentColor;">
+  ✦ Dieser Artikel wurde mit KI-Unterstützung ({{ .Params.ai_model }}) erstellt und redaktionell geprüft. 
+  <a href="/de/datenschutz/#ki-einsatz">Mehr erfahren</a>
+</div>
+{{ else if eq .Params.ai_assisted "partial" }}
+<div class="ai-disclosure" style="font-size:0.85em; opacity:0.75; margin-top:2rem; padding:0.5rem; border-left:2px solid currentColor;">
+  ✦ Teile dieses Artikels entstanden mit KI-Unterstützung.
+</div>
+{{ end }}
+{{ end }}

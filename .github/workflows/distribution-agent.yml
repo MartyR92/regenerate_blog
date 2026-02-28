@@ -1,0 +1,124 @@
+name: Distribution Agent
+
+on:
+  workflow_dispatch:
+    inputs:
+      post_slug:
+        description: 'The slug of the published post'
+        required: true
+        type: string
+
+jobs:
+  distribute:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Generate Distribution Content
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          POST_SLUG: ${{ inputs.post_slug }}
+        shell: python
+        run: |
+          import os
+          import json
+          import requests
+          from datetime import datetime
+          import sys
+          import glob
+          import urllib3
+          
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+          gemini_key = os.environ.get("GEMINI_API_KEY")
+          post_slug = os.environ.get("POST_SLUG")
+          
+          if not gemini_key or not post_slug:
+              print("Missing GEMINI_API_KEY or POST_SLUG")
+              sys.exit(1)
+              
+          # Find the post file
+          post_files = glob.glob(f"content/*/posts/{post_slug}.md")
+          if not post_files:
+              post_files = glob.glob(f"content/*/posts/*{post_slug}*.md")
+              
+          if not post_files:
+              print(f"Could not find post for slug: {post_slug}")
+              sys.exit(1)
+              
+          post_file = post_files[0]
+          print(f"Found post: {post_file}")
+          
+          with open(post_file, "r", encoding="utf-8") as f:
+              content = f.read()
+              
+          prompt = f"""
+          Based on the following blog post, generate distribution content.
+          
+          Task 1: Facebook Post
+          - Maximum 500 characters
+          - Language: German (DE)
+          - Exactly 3 hashtags
+          
+          Task 2: LinkedIn Post
+          - Around 300 words
+          - Professional tone
+          - Language: Same as the post or German
+          
+          Task 3: Newsletter Teaser
+          - Around 150 words
+          - Engaging, makes readers want to click the link
+          - Language: Same as the post or German
+          
+          Format the output strictly as Markdown with clear headings (## Facebook, ## LinkedIn, ## Newsletter).
+          
+          --- POST CONTENT ---
+          {content}
+          """
+          
+          target_model = "models/gemini-2.5-flash"
+          url = f"https://generativelanguage.googleapis.com/v1beta/{target_model}:generateContent?key={gemini_key}"
+          
+          print(f"Calling {target_model}...")
+          payload = {"contents": [{"parts": [{"text": prompt}]}]}
+          res = requests.post(url, json=payload, timeout=120)
+          
+          if res.status_code != 200:
+              print(f"Gemini API Error: {res.text}")
+              sys.exit(1)
+              
+          generated_content = res.json()['candidates'][0]['content']['parts'][0]['text']
+          
+          date_str = datetime.now().strftime("%Y-%m-%d")
+          safe_slug = post_slug.replace(".md", "")
+          out_filename = f"_distribution/{date_str}-{safe_slug}.md"
+          
+          os.makedirs("_distribution", exist_ok=True)
+          
+          with open(out_filename, "w", encoding="utf-8") as f:
+              f.write(f"# Distribution Content for {safe_slug}\\n\\n")
+              f.write(generated_content)
+              
+          print(f"Successfully generated distribution file: {out_filename}")
+
+      - name: Commit and Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _distribution/*.md
+          git commit -m "chore: generate distribution content for ${{ inputs.post_slug }}" || echo "No changes to commit"
+          git push

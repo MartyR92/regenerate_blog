@@ -1,0 +1,27 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ .Description | default .Summary | jsonify }},
+  "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ .Site.Params.author | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ .Site.Title | jsonify }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ printf "%slogo.png" .Site.BaseURL | jsonify }}
+    }
+  }{{ if .Params.ai_assisted }},
+  "additionalProperty": {
+    "@type": "PropertyValue",
+    "name": "ai_assisted",
+    "value": {{ .Params.ai_assisted | jsonify }}
+  }{{ end }}
+}
+</script>

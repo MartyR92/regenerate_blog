@@ -87,43 +87,26 @@ jobs:
               console.log('Error parsing Lighthouse outputs', e);
             }
             
-            let commentBody = `### 🚀 Staging Agent Report
-
-`;
-            commentBody += `**🔍 Preview URL:** [View Preview](${previewUrl})
-
-`;
+            let commentBody = `### 🚀 Staging Agent Report\n\n`;
+            commentBody += `**🔍 Preview URL:** [View Preview](${previewUrl})\n\n`;
             
-            commentBody += `#### 🔗 Link Checker (Lychee)
-`;
-            commentBody += `Check the action logs for detailed broken link reports.
-
-`;
+            commentBody += `#### 🔗 Link Checker (Lychee)\n`;
+            commentBody += `Check the action logs for detailed broken link reports.\n\n`;
             
-            commentBody += `#### ⚡ Lighthouse Scores
-`;
+            commentBody += `#### ⚡ Lighthouse Scores\n`;
             if (lhManifest && lhManifest.length > 0) {
               const res = lhManifest[0].summary;
-              commentBody += `| Category | Score |
-| --- | --- |
-`;
-              commentBody += `| Performance | ${Math.round(res.performance * 100)} |
-`;
-              commentBody += `| Accessibility | ${Math.round(res.accessibility * 100)} |
-`;
-              commentBody += `| Best Practices | ${Math.round(res['best-practices'] * 100)} |
-`;
-              commentBody += `| SEO | ${Math.round(res.seo * 100)} |
-
-`;
+              commentBody += `| Category | Score |\n| --- | --- |\n`;
+              commentBody += `| Performance | ${Math.round(res.performance * 100)} |\n`;
+              commentBody += `| Accessibility | ${Math.round(res.accessibility * 100)} |\n`;
+              commentBody += `| Best Practices | ${Math.round(res['best-practices'] * 100)} |\n`;
+              commentBody += `| SEO | ${Math.round(res.seo * 100)} |\n\n`;
               
               if (lhLinks && lhLinks[lhManifest[0].url]) {
-                 commentBody += `[Detailed Lighthouse Report](${lhLinks[lhManifest[0].url]})
-`;
+                 commentBody += `[Detailed Lighthouse Report](${lhLinks[lhManifest[0].url]})\n`;
               }
             } else {
-              commentBody += `Lighthouse results not available.
-`;
+              commentBody += `Lighthouse results not available.\n`;
             }
             
             github.rest.issues.createComment({

@@ -1,0 +1,190 @@
+name: Publish Agent
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *' # Täglich um Mitternacht
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  pages: write
+  id-token: write
+  issues: write
+  actions: write
+
+jobs:
+  auto-merge:
+    name: 🤖 Auto-Merge (48h Check)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Auto-Merge 48h Old PRs
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: pullRequests } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open'
+            });
+            
+            const now = new Date();
+            for (const pr of pullRequests) {
+              const hasEditorReview = pr.labels.some(l => l.name === 'editor-review');
+              const hasVeto = pr.labels.some(l => l.name === 'veto');
+              const isFromEditor = pr.head.ref.startsWith('editor/');
+              
+              if (hasEditorReview && !hasVeto && isFromEditor) {
+                const createdAt = new Date(pr.created_at);
+                const hoursOld = (now - createdAt) / (1000 * 60 * 60);
+                
+                if (hoursOld >= 48) {
+                  console.log(`Auto-merging PR #${pr.number} (Alter: ${Math.round(hoursOld)}h)`);
+                  try {
+                    await github.rest.pulls.merge({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      pull_number: pr.number,
+                      merge_method: 'merge'
+                    });
+                  } catch (e) {
+                    console.error(`Failed to merge PR #${pr.number}: ${e.message}`);
+                  }
+                }
+              }
+            }
+
+  publish:
+    name: 🚀 Production Publish
+    if: |
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'editor/')) ||
+      github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Hugo
+        run: |
+          HUGO_VERSION="0.128.0"
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb 
+          sudo dpkg -i ${{ runner.temp }}/hugo.deb
+
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+
+      - name: Build Hugo (Production)
+        run: hugo --gc --minify
+        env:
+          HUGO_ENV: production
+
+      - name: Build Pagefind Index
+        run: npx --yes pagefind --site public
+
+      - name: Validate sitemap.xml
+        run: |
+          if [ -f public/sitemap.xml ]; then
+            echo "Sitemap gefunden. Validierung..."
+            grep -q "<urlset" public/sitemap.xml || (echo "Ungültige Sitemap Struktur!" && exit 1)
+          else
+            echo "Kritischer Fehler: sitemap.xml fehlt im Build-Output!" && exit 1
+          fi
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Identify Post Slug
+        id: post_info
+        run: |
+          LATEST_POST=$(ls -t content/*/posts/*.md | head -1)
+          SLUG=$(basename "$LATEST_POST" .md)
+          echo "slug=$SLUG" >> $GITHUB_OUTPUT
+          echo "Published slug: $SLUG"
+
+      - name: Trigger Downstream Agents
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const postSlug = '${{ steps.post_info.outputs.slug }}';
+            console.log(`Triggere Distribution & Memory Agent für: ${postSlug}`);
+            
+            // Distribution Agent
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'distribution-agent.yml',
+              ref: 'main',
+              inputs: { post_slug: postSlug }
+            });
+            
+            // Memory Agent
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'memory-agent.yml',
+              ref: 'main',
+              inputs: { post_slug: postSlug }
+            });
+
+      - name: Notify Original Issue/PR on Failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            let targetNumber = context.issue.number;
+            
+            // Wenn durch PR-Merge getriggert, nutze PR Nummer
+            if (!targetNumber && context.payload.pull_request) {
+              targetNumber = context.payload.pull_request.number;
+            }
+            
+            // Versuche das ursprüngliche Issue zu finden (z.B. via PR Body "Closes #...")
+            if (context.payload.pull_request && context.payload.pull_request.body) {
+              const issueMatch = context.payload.pull_request.body.match(/#(\d+)/);
+              if (issueMatch) targetNumber = parseInt(issueMatch[1]);
+            }
+            
+            if (targetNumber) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: targetNumber,
+                body: `❌ **Publish Agent fehlgeschlagen!**
+
+Produktions-Build oder Deployment war nicht erfolgreich.
+Logs: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+              });
+            }
