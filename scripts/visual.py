@@ -44,11 +44,11 @@ def main():
     {content[:2000]}
     """
     
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={gemini_key}"
     res = requests.post(url, json={"contents": [{"parts": [{"text": prompt}]}]}, timeout=60)
     
     if res.status_code != 200:
-        print("Failed to get search query from Gemini")
+        print(f"Failed to get search query from Gemini: {res.status_code} - {res.text}")
         sys.exit(1)
         
     search_query = res.json()['candidates'][0]['content']['parts'][0]['text'].strip()
