@@ -1,8 +1,7 @@
 name: Publish Agent
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
       - main
   schedule:
@@ -66,7 +65,7 @@ jobs:
   publish:
     name: 🚀 Production Publish
     if: |
-      (github.event_name == 'pull_request' && github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'editor/')) ||
+      github.event_name == 'push' ||
       github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     concurrency:
@@ -201,12 +200,6 @@ jobs:
             // Wenn durch PR-Merge getriggert, nutze PR Nummer
             if (!targetNumber && context.payload.pull_request) {
               targetNumber = context.payload.pull_request.number;
-            }
-            
-            // Versuche das ursprüngliche Issue zu finden (z.B. via PR Body "Closes #...")
-            if (context.payload.pull_request && context.payload.pull_request.body) {
-              const issueMatch = context.payload.pull_request.body.match(/#(\d+)/);
-              if (issueMatch) targetNumber = parseInt(issueMatch[1]);
             }
             
             if (targetNumber) {
