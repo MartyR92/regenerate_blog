@@ -68,7 +68,7 @@ def main():
     SYSTEM IDENTITY:
     {identity}
 
-    BLOG MEMORY (Established Theses):
+    BLOG MEMORY (Previously published titles and concepts):
     {memory}
 
     SERIES REGISTRY:
@@ -80,6 +80,12 @@ def main():
     TASK:
     Write a 1.500 - 3.000 word deep-dive blog post based on the research input. 
     Follow the 'Natural Solarpunk x Avantgarde Prestige' style guide.
+    
+    IMPORTANT: 
+    - Ensure the TITLE and CONTENT are unique compared to the BLOG MEMORY.
+    - DO NOT use overused keywords like 'Algorithmic', 'Symbiosis', or 'Precision' in the title unless strictly necessary for the technical context.
+    - Prefer evocative, biological, or architectural metaphors.
+    
     Use [VERIFY] tags for any factual claims not backed by the research input.
     Provide the output in Markdown format with Hugo Front Matter.
     The Front Matter MUST include:
@@ -97,8 +103,9 @@ def main():
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
-            "temperature": 0.7,
-            "maxOutputTokens": 8192
+            "temperature": 0.9,
+            "maxOutputTokens": 8192,
+            "topP": 0.95
         }
     }
     

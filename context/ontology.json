@@ -8,7 +8,10 @@
         "Carbon Sequestration",
         "Carbon Farming",
         "Soil Microbiome",
-        "Biodiversity"
+        "Biodiversity",
+        "Humus-Spherics",
+        "Microbial Inoculation",
+        "Rhizosphere Dynamics"
       ]
     },
     "Regenerative Finance": {
@@ -19,7 +22,10 @@
         "Circular Economy",
         "Impact Investing",
         "Green Finance",
-        "Tokenomics"
+        "Tokenomics",
+        "Liquidity Ecology",
+        "Bioregional Currencies",
+        "Proof of Regeneration"
       ]
     },
     "Symbiotic Technology": {
@@ -30,7 +36,10 @@
         "Biomimicry",
         "DeSci",
         "Open Source Hardware",
-        "Digital Twins"
+        "Digital Twins",
+        "Biosensors",
+        "Autonomous Restoration",
+        "Eco-Cybernetics"
       ]
     },
     "Applied Ecosystem Design": {
@@ -41,7 +50,10 @@
         "Syntropic Farming",
         "Holistic Management",
         "Rewilding",
-        "Watershed Management"
+        "Watershed Management",
+        "Keyline Design",
+        "Mycelial Infrastructure",
+        "Succesional Planting"
       ]
     },
     "Strategic Systems Thinking": {
@@ -52,7 +64,10 @@
         "Climate Resilience",
         "System Dynamics",
         "Strategic Foresight",
-        "Adaptive Governance"
+        "Adaptive Governance",
+        "Antifragility",
+        "Emergence Theory",
+        "Panarchy"
       ]
     }
   },
@@ -63,8 +78,11 @@
     "Symbiosis",
     "Bioregionalism",
     "Nature-based Solutions",
-    "Decentralization"
+    "Decentralization",
+    "Post-Extractivism",
+    "Living Systems",
+    "Metabolic Rift"
   ],
-  "version": "1.2.0",
-  "last_updated": "2026-02-25"
+  "version": "1.3.0",
+  "last_updated": "2026-03-01"
 }

@@ -28,6 +28,7 @@ Dein Output **muss** mit einem vollständigen, korrekten Hugo Front Matter (in Y
 
 Erforderliche Felder:
 *   `title`: Ein starker, intelligenter Titel (nicht nach Clickbait klingend, eher nach einer wissenschaftlichen / avantgardistischen Publikation).
+    *   **Wichtig:** Vermeide abgedroschene KI-Keywords wie "Algorithmisch", "Symbiose", "Präzisionstechnik", "Revolutionär", "Zukunft" oder "Katalysator" im Titel, es sei denn, sie sind absolut unverzichtbar. Nutze stattdessen evokative, metaphorische oder hochspezifische Begriffe aus der Biologie, Architektur oder Philosophie (z.B. "Myzeliale Arbitrage", "Kybernetische Photosynthese", "Das Protokoll der Erde").
 *   `date`: Das aktuelle Datum im Format `YYYY-MM-DDThh:mm:ss+01:00`.
 *   `draft`: `false`
 *   `description`: Ein 1-2 Sätze langes, präzises Abstract für SEO und Social Media.
