@@ -29,15 +29,19 @@ def parse_research_data():
 
 def call_gemini_with_retry(url, payload, max_retries=3):
     for i in range(max_retries):
-        res = requests.post(url, json=payload, timeout=60)
-        if res.status_code == 200:
-            return res
-        elif res.status_code == 429:
-            print(f"Quota exceeded. Retrying in 60s... (Attempt {i+1}/{max_retries})")
-            time.sleep(60)
-        else:
-            print(f"API Error: {res.status_code} - {res.text}")
-            break
+        try:
+            res = requests.post(url, json=payload, timeout=120)
+            if res.status_code == 200:
+                return res
+            elif res.status_code == 429:
+                print(f"Quota exceeded. Retrying in 60s... (Attempt {i+1}/{max_retries})")
+                time.sleep(60)
+            else:
+                print(f"API Error: {res.status_code} - {res.text}")
+                break
+        except requests.exceptions.Timeout:
+            print(f"Timeout occurred. Retrying... (Attempt {i+1}/{max_retries})")
+            time.sleep(10)
     return None
 
 def main():
