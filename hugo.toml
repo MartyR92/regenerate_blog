@@ -34,6 +34,12 @@ defaultContentLanguage = "de"
 
 [params]
   showLanguageSwitcher = true
+  [params.homepage]
+    layout = "background"
+    showRecent = true
+    showRecentItems = 5
+    showMoreLink = true
+    cardView = true
   description = "Regenerative Wirtschaft und Ökosysteme - Natural Solarpunk x Avantgarde Prestige"
   [params.author]
     name = "Martin Reiter"
