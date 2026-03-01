@@ -6,6 +6,7 @@ import json
 import re
 from datetime import datetime
 import urllib3
+import time
 
 # Disable SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -25,6 +26,19 @@ def parse_research_data():
             return json.load(f)
         except:
             return []
+
+def call_gemini_with_retry(url, payload, max_retries=3):
+    for i in range(max_retries):
+        res = requests.post(url, json=payload, timeout=60)
+        if res.status_code == 200:
+            return res
+        elif res.status_code == 429:
+            print(f"Quota exceeded. Retrying in 60s... (Attempt {i+1}/{max_retries})")
+            time.sleep(60)
+        else:
+            print(f"API Error: {res.status_code} - {res.text}")
+            break
+    return None
 
 def main():
     gemini_key = os.environ.get("GEMINI_API_KEY")
@@ -47,102 +61,65 @@ def main():
         print("No research data found to visualize.")
         sys.exit(0)
 
-    # 1. Extract context for the prompt
     top_research = research_data[0]
     metrics = top_research.get("summary", "")
     
-    # 2. Construct Diagram Prompt
-    # Style: Organic Precision (Micro) or Terrain Depth (Macro)
-    # We default to Organic Precision for technical data-viz.
-    style_guide = """
-    AESTHETIC: 'Organic Precision'.
-    PALETTE: The Void (#0F1A15), Volcanic Slate (#2C3330), Brushed Brass (#C5B388).
-    ELEMENTS: Botanical radial grids, 1-2px border radius, JetBrains Mono for text.
-    DIAGRAM TYPE: High-precision technical infographic.
-    """
-    
+    # Construction of SVG Prompt
     prompt = f"""
-    Create a 4K technical diagram or infographic based on the following data:
+    Based on the following data, generate a clean, modern SVG code for a technical diagram.
     
-    DATA SUMMARY:
-    {metrics}
+    DATA: {metrics}
     
+    AESTHETIC: 'Organic Precision'.
+    COLORS: Primary #0F1A15, Secondary #C5B388, Accent #2C3330.
     REQUIREMENTS:
-    - Use the {style_guide}
-    - Include clear text labels for key metrics (e.g., 'Crop Yield +20-30%', 'Input Waste -40-60%').
-    - Visual representation should feel like a 'Digital Twin' or 'Precision Agriculture' dashboard.
-    - High-precision text rendering is mandatory.
-    - Clean vector-style aesthetic.
-    
-    Output a high-resolution technical image.
+    - Return ONLY the raw <svg>...</svg> code.
+    - No markdown formatting, no explanation.
+    - Include text labels for key data points.
+    - Use a width of 800 and dynamic height.
     """
 
-    # 3. Call Gemini 3.1 Flash Image REST API
-    # Note: Using v1beta for early access models like 3.1
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent?key={gemini_key}"
-    
-    # Gemini 3.1 Image Generation uses response_modalities: ["IMAGE"]
-    # and thinking_config for high-precision layouts.
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}"
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {
-            "response_modalities": ["IMAGE"],
-            "thinking_config": {
-                "thinking_level": "HIGH",
-                "include_thoughts": True
-            }
-        }
+        "generationConfig": {"temperature": 0.2}
     }
 
-    print("Calling Gemini 3.1 Flash Image API...")
+    print("Calling Gemini 1.5 Flash for SVG generation...")
+    res = call_gemini_with_retry(url, payload)
+    
+    if not res:
+        print("Failed to get SVG from Gemini.")
+        sys.exit(1)
+        
+    res_json = res.json()
     try:
-        res = requests.post(url, json=payload, timeout=300)
-        if res.status_code != 200:
-            print(f"API Error: {res.status_code} - {res.text}")
-            sys.exit(1)
-            
-        res_json = res.json()
+        svg_text = res_json['candidates'][0]['content']['parts'][0]['text']
+        # Clean up if AI added markdown code blocks
+        svg_text = re.sub(r'```svg\n?', '', svg_text)
+        svg_text = re.sub(r'```\n?', '', svg_text).strip()
         
-        # Check for image data in the response
-        # The structure for image generation responses can vary, but typically it returns a base64 string or a list of image parts.
-        candidates = res_json.get('candidates', [])
-        if not candidates:
-            print("No candidates returned from API.")
-            sys.exit(1)
-            
-        image_part = None
-        for part in candidates[0].get('content', {}).get('parts', []):
-            if 'inlineData' in part and part['inlineData'].get('mimeType', '').startswith('image/'):
-                image_part = part['inlineData']
-                break
-        
-        if not image_part:
-            print("No image data found in response parts.")
-            # Fallback check if it's in a different field
+        if not svg_text.startswith("<svg"):
+            print("Invalid SVG output.")
             sys.exit(1)
 
-        import base64
-        image_bytes = base64.b64decode(image_part['data'])
-        
-        # 4. Save Image
+        # 4. Save SVG
         slug = os.path.basename(target_file).replace('.md', '')
         year = datetime.now().strftime("%Y")
         img_dir = f"assets/images/{year}/{slug}"
         os.makedirs(img_dir, exist_ok=True)
-        img_filename = "technical_diagram_1.webp"
+        img_filename = "technical_diagram_1.svg"
         img_path = f"{img_dir}/{img_filename}"
         
-        with open(img_path, "wb") as f:
-            f.write(image_bytes)
+        with open(img_path, "w", encoding="utf-8") as f:
+            f.write(svg_text)
             
-        print(f"Saved diagram to: {img_path}")
+        print(f"Saved SVG diagram to: {img_path}")
 
         # 5. Update Markdown
-        # Insert before the last section or at the end
-        markdown_ref = f"\n\n![Technical Infographic: {top_research['title']}](/images/{year}/{slug}/{img_filename})\n*Figure 1: Technical visualization of regenerative agriculture metrics generated by image-agent.*\n"
+        markdown_ref = f"\n\n![Technical Diagram: {top_research['title']}](/images/{year}/{slug}/{img_filename})\n*Figure 1: Technical visualization generated by image-agent.*\n"
         
         if "##" in content:
-            # Try to insert after the first H2
             parts = content.split("##", 2)
             if len(parts) > 2:
                 new_content = parts[0] + "##" + parts[1] + markdown_ref + "##" + parts[2]
@@ -154,10 +131,10 @@ def main():
         with open(target_file, "w", encoding="utf-8") as f:
             f.write(new_content)
             
-        print("Successfully integrated technical visual into post.")
+        print("Successfully integrated technical SVG into post.")
 
     except Exception as e:
-        print(f"Execution failed: {e}")
+        print(f"Processing failed: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":
