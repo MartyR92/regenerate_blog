@@ -1,7 +1,7 @@
 ---
 title: "Die Algorithmen der Fülle: Wie Präzisionslandwirtschaft die Regenerative Wirtschaft Architekturiert"
 date: 2026-03-01T18:03:27.269284
-draft: true
+draft: false
 ai_assisted: true
 ai_model: models/gemini-2.5-flash
 author: "Martin Reiter"
