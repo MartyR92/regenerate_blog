@@ -46,7 +46,11 @@ Im Zentrum dieser Entwicklung stehen fortschrittliche Technologien, die eine nie
 *   **GPS und Automatisierung:** Hochpräzises GPS steuert landwirtschaftliche Maschinen mit einer Genauigkeit von wenigen Zentimetern. Dies ermöglicht nicht nur eine effizientere Bearbeitung, sondern ist entscheidend für die Implementierung diverser Fruchtfolgen und Zwischenfrüchte – Schlüsselpraktiken der regenerativen Landwirtschaft. Automatisierte Pflanz- und Erntesysteme können die spezifischen Anforderungen unterschiedlicher Pflanzenarten innerhalb desselben Feldes berücksichtigen, was die Komplexität des Intercroppings erheblich reduziert und den Arbeitsaufwand minimiert.
 *   **Künstliche Intelligenz (KI) und Maschinelles Lernen:** Die wahre Intelligenz entsteht aus der Verknüpfung und Analyse dieser gigantischen Datenmengen. KI-Algorithmen verarbeiten Satellitendaten, Sensormessungen und historische Wetterdaten, um präzise Vorhersagen und Handlungsempfehlungen zu generieren. Sie identifizieren Muster, die für das menschliche Auge unsichtbar bleiben, optimieren Bewässerungspläne, dosieren Düngemittel – idealerweise biologischer Herkunft – und Pestizide nur dort und in der Menge, wo sie absolut notwendig sind, oder schlagen pflanzenbasierte Alternativen vor. Diese "algorithmische Symbiose" ermöglicht eine dynamische Anpassung an die sich ständig ändernden Bedingungen des Feldes und des Klimas.
 
-Diese Technologien sind nicht isoliert zu betrachten, sondern als ein Myzel-Netzwerk von Kapital und Wissen, das sich gegenseitig verstärkt. Sie ermöglichen es, die mikroskopische Komplexität der Bodenkunde bis zur makroökonomischen Architektur globaler Lieferketten zu überbrücken und eine ganzheitliche Sicht auf das Agrarökosystem zu gewinnen.
+Diese Technologien sind nicht isoliert zu betrachten, sondern als ein Myzel-Netzwerk von Kapital und Wissen, das sich gegenseitig verstärkt. 
+
+[DIAGRAM: Myzel-Netzwerk von Kapital und Wissen — Technologischer Fluss von Sensoren zu Investitionsentscheidungen]
+
+Sie ermöglichen es, die mikroskopische Komplexität der Bodenkunde bis zur makroökonomischen Architektur globaler Lieferketten zu überbrücken und eine ganzheitliche Sicht auf das Agrarökosystem zu gewinnen.
 
 ### Jenseits der Effizienz: Kultivierung von Wert und Resilienz
 

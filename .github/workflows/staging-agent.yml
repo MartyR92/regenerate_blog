@@ -57,6 +57,9 @@ jobs:
               shutil.copy(draft, os.path.join(dest_dir, os.path.basename(draft)))
           '
 
+      - name: Run Designer Agent Audit
+        run: python scripts/designer.py
+
       - name: Build Hugo
         run: hugo --gc --minify --baseURL "${PREVIEW_URL}"
 
@@ -104,6 +107,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const fs = require('fs');
             const previewUrl = process.env.PREVIEW_URL;
             let lhLinks = {};
             let lhManifest = [];
@@ -114,9 +118,22 @@ jobs:
               console.log('Error parsing Lighthouse outputs', e);
             }
             
+            let designReport = "";
+            try {
+              if (fs.existsSync('design_report.md')) {
+                designReport = fs.readFileSync('design_report.md', 'utf8');
+              }
+            } catch (e) {
+              console.log('Error reading design_report.md', e);
+            }
+
             let commentBody = `### 🚀 Staging Agent Report\n\n`;
             commentBody += `**🔍 Preview URL:** [View Preview](${previewUrl})\n\n`;
             
+            if (designReport) {
+              commentBody += `#### 🎨 Designer Agent Audit\n${designReport}\n\n`;
+            }
+
             commentBody += `#### 🔗 Link Checker (Lychee)\n`;
             commentBody += `Check the action logs for detailed broken link reports.\n\n`;
             

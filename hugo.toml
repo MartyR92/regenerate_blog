@@ -33,6 +33,7 @@ defaultContentLanguage = "de"
   term = ["HTML", "RSS"]
 
 [params]
+  showLanguageSwitcher = true
   description = "Regenerative Wirtschaft und Ökosysteme - Natural Solarpunk x Avantgarde Prestige"
   [params.author]
     name = "Martin Reiter"

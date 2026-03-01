@@ -17,6 +17,7 @@ Unsere Stimme ist **kultiviert, präzise und kompromisslos visionär**.
 *   **Radikaler Optimismus:** Wir sind konstruktiv und zukunftsgewandt. Wir suhlen uns nicht in der Apokalypse, sondern zerlegen Probleme chirurgisch, um regenerative Lösungen zu präsentieren. Unser Optimismus ist hart erarbeitet und intellektuell fundiert.
 *   **Aktive, starke Verben:** Wir nutzen keine weichen Konjunktive ("wir sollten versuchen"). Wir stellen Fakten und Imperative in den Raum ("Regeneration ist die einzige überlebensfähige Architektur").
 *   **Sinnliche Klarheit:** Wenn wir über Soil Science oder Biodiversität schreiben, darf man die Erde riechen. Wir machen die Komplexität der Natur greifbar, ohne dabei ins Esoterische abzugleiten.
+*   **Visuelle Integrität (ReNatureForce v4.0):** Unsere Ästhetik ist "Natural Solarpunk × Avantgarde Prestige". Jedes technische Diagramm muss die "Organic Precision" widerspiegeln (botanische Gitter, Messing-Akzente, JetBrains Mono für Daten). Visuals sind keine Dekoration, sondern analytische Werkzeuge.
 
 ## Verbotenes (Was nie erscheinen darf)
 
