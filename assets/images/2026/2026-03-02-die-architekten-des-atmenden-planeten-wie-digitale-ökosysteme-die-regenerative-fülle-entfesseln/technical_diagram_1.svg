@@ -1,0 +1,108 @@
+<svg width="800" viewBox="0 0 800 700" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+    <defs>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#2C3330" />
+        </marker>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="800" height="700" fill="#0F1A15"/>
+
+    <!-- Central Concept: Precision Agriculture for Regenerative Economy -->
+    <rect x="250" y="250" width="300" height="100" rx="20" ry="20" fill="#C5B388" stroke="#2C3330" stroke-width="2" filter="url(#shadow)"/>
+    <text x="400" y="290" font-size="20" font-weight="bold" fill="#0F1A15" text-anchor="middle">Precision Agriculture</text>
+    <text x="400" y="315" font-size="18" fill="#0F1A15" text-anchor="middle">for Regenerative Economy</text>
+
+    <!-- Technologies (Top-Left Cluster) -->
+    <g transform="translate(50, 50)">
+        <rect x="20" y="0" width="120" height="40" rx="10" ry="10" fill="#2C3330" filter="url(#shadow)"/>
+        <text x="80" y="25" font-size="14" fill="#C5B388" text-anchor="middle">Satellite Data</text>
+
+        <rect x="160" y="20" width="100" height="40" rx="10" ry="10" fill="#2C3330" filter="url(#shadow)"/>
+        <text x="210" y="45" font-size="14" fill="#C5B388" text-anchor="middle">Sensors</text>
+
+        <rect x="0" y="60" width="80" height="40" rx="10" ry="10" fill="#2C3330" filter="url(#shadow)"/>
+        <text x="40" y="85" font-size="14" fill="#C5B388" text-anchor="middle">GPS</text>
+
+        <rect x="100" y="80" width="90" height="40" rx="10" ry="10" fill="#2C3330" filter="url(#shadow)"/>
+        <text x="145" y="105" font-size="14" fill="#C5B388" text-anchor="middle">Drones</text>
+
+        <rect x="210" y="100" width="80" height="40" rx="10" ry="10" fill="#2C3330" filter="url(#shadow)"/>
+        <text x="250" y="125" font-size="14" fill="#C5B388" text-anchor="middle">IoT</text>
+
+        <rect x="40" y="140" width="80" height="40" rx="10" ry="10" fill="#2C3330" filter="url(#shadow)"/>
+        <text x="80" y="165" font-size="14" fill="#C5B388" text-anchor="middle">AI</text>
+
+        <rect x="140" y="160" width="160" height="40" rx="10" ry="10" fill="#2C3330" filter="url(#shadow)"/>
+        <text x="220" y="185" font-size="14" fill="#C5B388" text-anchor="middle">Adv. Monitoring</text>
+    </g>
+
+    <!-- Arrows from Technologies to Central Concept -->
+    <path d="M130 70 Q200 180, 260 250" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M260 90 Q280 180, 300 250" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M90 110 Q180 200, 280 250" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M200 150 Q250 200, 300 250" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M290 170 Q300 200, 320 250" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M120 200 Q200 220, 300 250" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M300 200 Q320 220, 340 250" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+    <!-- Regenerative Practices (Bottom-Left) -->
+    <g transform="translate(100, 450)">
+        <rect x="0" y="0" width="180" height="50" rx="15" ry="15" fill="#2C3330" filter="url(#shadow)"/>
+        <text x="90" y="25" font-size="14" fill="#C5B388" text-anchor="middle">Diverse Crop Rotations</text>
+        <text x="90" y="40" font-size="12" fill="#C5B388" text-anchor="middle">(Key Regenerative Practice)</text>
+
+        <rect x="0" y="80" width="180" height="50" rx="15" ry="15" fill="#2C3330" filter="url(#shadow)"/>
+        <text x="90" y="105" font-size="14" fill="#C5B388" text-anchor="middle">Intercropping</text>
+        <text x="90" y="120" font-size="12" fill="#C5B388" text-anchor="middle">(Key Regenerative Practice)</text>
+    </g>
+
+    <!-- Emerging Systems (Bottom-Middle) -->
+    <g transform="translate(300, 450)">
+        <rect x="0" y="0" width="180" height="40" rx="10" ry="10" fill="#2C3330" filter="url(#shadow)"/>
+        <text x="90" y="25" font-size="14" fill="#C5B388" text-anchor="middle">Automated Planting</text>
+
+        <rect x="0" y="60" width="180" height="40" rx="10" ry="10" fill="#2C3330" filter="url(#shadow)"/>
+        <text x="90" y="85" font-size="14" fill="#C5B388" text-anchor="middle">Automated Harvesting</text>
+    </g>
+
+    <!-- Arrows from Central Concept to Practices/Systems -->
+    <path d="M350 350 Q250 400, 190 450" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M450 350 Q400 400, 390 450" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+    <!-- Benefits/Outcomes (Right Side) -->
+    <g transform="translate(550, 100)">
+        <rect x="0" y="0" width="200" height="60" rx="15" ry="15" fill="#C5B388" stroke="#2C3330" stroke-width="1" filter="url(#shadow)"/>
+        <text x="100" y="25" font-size="14" fill="#0F1A15" text-anchor="middle">Enhance Crop Yields</text>
+        <text x="100" y="45" font-size="16" font-weight="bold" fill="#0F1A15" text-anchor="middle">20-30%</text>
+
+        <rect x="0" y="80" width="200" height="60" rx="15" ry="15" fill="#C5B388" stroke="#2C3330" stroke-width="1" filter="url(#shadow)"/>
+        <text x="100" y="105" font-size="14" fill="#0F1A15" text-anchor="middle">Reduce Input Waste</text>
+        <text x="100" y="125" font-size="16" font-weight="bold" fill="#0F1A15" text-anchor="middle">40-60%</text>
+
+        <rect x="0" y="160" width="200" height="40" rx="15" ry="15" fill="#C5B388" stroke="#2C3330" stroke-width="1" filter="url(#shadow)"/>
+        <text x="100" y="185" font-size="14" fill="#0F1A15" text-anchor="middle">Reduce Labor Demands</text>
+
+        <rect x="0" y="220" width="200" height="40" rx="15" ry="15" fill="#C5B388" stroke="#2C3330" stroke-width="1" filter="url(#shadow)"/>
+        <text x="100" y="245" font-size="14" fill="#0F1A15" text-anchor="middle">Track Improvements</text>
+
+        <rect x="0" y="280" width="200" height="60" rx="15" ry="15" fill="#C5B388" stroke="#2C3330" stroke-width="1" filter="url(#shadow)"/>
+        <text x="100" y="305" font-size="14" fill="#0F1A15" text-anchor="middle">Sustainable &amp; Economically</text>
+        <text x="100" y="325" font-size="14" fill="#0F1A15" text-anchor="middle">Viable Future</text>
+
+        <rect x="0" y="360" width="200" height="60" rx="15" ry="15" fill="#C5B388" stroke="#2C3330" stroke-width="1" filter="url(#shadow)"/>
+        <text x="100" y="385" font-size="14" fill="#0F1A15" text-anchor="middle">Significant Investment</text>
+        <text x="100" y="405" font-size="14" fill="#0F1A15" text-anchor="middle">Potential</text>
+    </g>
+
+    <!-- Arrows from Central Concept to Benefits -->
+    <path d="M550 270 Q580 200, 550 130" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M550 285 Q580 230, 550 210" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M550 300 Q580 260, 550 280" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M550 315 Q580 300, 550 340" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M550 330 Q580 340, 550 410" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M550 345 Q580 380, 550 490" stroke="#2C3330" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+</svg>
