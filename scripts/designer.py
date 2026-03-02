@@ -5,11 +5,8 @@ import re
 import yaml
 import json
 
-def get_latest_draft():
-    drafts = glob.glob("_drafts/*.md")
-    if not drafts:
-        return None
-    return max(drafts, key=os.path.getctime)
+def get_drafts():
+    return glob.glob("_drafts/*.md")
 
 class BrandValidator:
     def __init__(self, guidelines_path):
@@ -33,33 +30,22 @@ class BrandValidator:
             }
         }
 
-    def validate_front_matter(self, fm):
-        issues = []
-        lang = fm.get("language", "de")
-        # Blowfish theme parameters check
-        # We check if certain brand tokens are used if defined
-        
-        # Example check: font-family overrides or specific class tags
-        # (This depends on how Hugo templates are set up, but we'll check common ones)
-        return issues
-
-    def validate_content(self, content):
+    def validate_content(self, content, lang):
         issues = []
         # Check for forbidden words (Solarpunk in external copy)
-        forbidden_external = ["Solarpunk", "Natural Solarpunk"]
         # Note: Guidelines say don't use in client-facing. 
         # Posts are client-facing.
+        forbidden_external = ["Solarpunk", "Natural Solarpunk"]
         for word in forbidden_external:
             if word in content:
-                issues.append(f"FORBIDDEN WORD: '{word}' found in post content. (Guideline 08: Use 'Organic Precision' instead).")
+                issues.append(f"FORBIDDEN WORD: '{word}' found in {lang.upper()} content. (Guideline 08: Use 'Regenerative Avantgarde' instead).")
 
-        # Check for common layout shortcodes (assumed patterns)
-        # e.g. [space: 20] -> should be Fibonacci
+        # Check for common layout shortcodes
         space_matches = re.findall(r'\{\{< space\s+(\d+)\s+>\}\}', content)
         for space in space_matches:
             val = int(space)
             if val not in self.rules["fibonacci"]:
-                issues.append(f"LAYOUT: Non-Fibonacci spacing value '{val}' used. Recommended: {self.rules['fibonacci']}.")
+                issues.append(f"LAYOUT ({lang.upper()}): Non-Fibonacci spacing value '{val}' used. Recommended: {self.rules['fibonacci']}.")
 
         return issues
 
@@ -69,44 +55,42 @@ def main():
         print(f"Guidelines not found at {guidelines_path}")
         sys.exit(1)
 
-    target_file = get_latest_draft()
-    if not target_file:
+    targets = get_drafts()
+    if not targets:
         print("No drafts found.")
         sys.exit(0)
 
-    print(f"Validating design for: {target_file}")
-    
-    with open(target_file, "r", encoding="utf-8") as f:
-        full_text = f.read()
-
-    # Extract Front Matter
-    fm_match = re.match(r'^---\s*\n(.*?)\n---\s*\n', full_text, re.DOTALL)
-    fm = {}
-    content = full_text
-    if fm_match:
-        try:
-            fm = yaml.safe_load(fm_match.group(1))
-            content = full_text[fm_match.end():]
-        except:
-            pass
-
     validator = BrandValidator(guidelines_path)
-    
     report = []
-    report.append(f"# Design Compliance Report: {os.path.basename(target_file)}")
-    report.append(f"**Date:** {json.dumps(str(os.environ.get('GITHUB_RUN_ID', 'local')))}")
-    report.append("\n## Audit Results")
+    report.append("# Multi-Post Design Compliance Report")
+    report.append(f"**Run ID:** {os.environ.get('GITHUB_RUN_ID', 'local')}")
+    
+    for target_file in targets:
+        print(f"Validating design for: {target_file}")
+        with open(target_file, "r", encoding="utf-8") as f:
+            full_text = f.read()
 
-    fm_issues = validator.validate_front_matter(fm)
-    content_issues = validator.validate_content(content)
+        # Extract Front Matter
+        fm_match = re.match(r'^---\s*\n(.*?)\n---\s*\n', full_text, re.DOTALL)
+        fm = {}
+        content = full_text
+        lang = "de"
+        if fm_match:
+            try:
+                fm = yaml.safe_load(fm_match.group(1))
+                content = full_text[fm_match.end():]
+                lang = fm.get("language", "de")
+            except:
+                pass
 
-    all_issues = fm_issues + content_issues
+        report.append(f"\n### Audit: {os.path.basename(target_file)} ({lang.upper()})")
+        issues = validator.validate_content(content, lang)
 
-    if not all_issues:
-        report.append("✅ All checks passed. The post aligns with Rə:Ecosystem Brand Guidelines v4.0.")
-    else:
-        for issue in all_issues:
-            report.append(f"- ⚠️ {issue}")
+        if not issues:
+            report.append("✅ All checks passed.")
+        else:
+            for issue in issues:
+                report.append(f"- ⚠️ {issue}")
 
     report_text = "\n".join(report)
     print(report_text)

@@ -1,32 +1,23 @@
-# Roadmap: Build Verification & E2E Validation
+# Roadmap: Visual Integrity & Bilingual Content Parity
 
-## Phase 4: Language Switch & UI Polish
-- [ ] **Task 4.1: Research Blowfish Header Config**
-    - Identify how to enable the language switcher in the Blowfish theme.
-- [ ] **Task 4.2: Implement Language Toggle**
-    - Update `hugo.toml` or `params.toml` to show the flag/text switch.
-- [ ] **Task 4.3: Verify Multilingual Navigation**
-    - Ensure `content/de` and `content/en` are correctly handled by the theme.
+## Phase 8: Diagram Rendering & Language Fixes
+- [ ] **Task 8.1: Debug SVG/WebP Logic**
+    - Investigate why diagrams are failing to render (path issue vs. file format).
+- [ ] **Task 8.2: Implement Language-Aware Image Descriptions**
+    - Update `scripts/image.py` to detect post language and translate captions.
+    - Remove "agent-specific" mentions from captions.
 
-## Phase 5: Workflow Deliverables & SOPs
-- [ ] **Task 5.1: Define Agent SOPs**
-    - Create `.planning/SOPs/` directory.
-    - Write 10 Markdown files (one per agent) detailing Input, Process, Output, and Success Criteria.
-- [ ] **Task 5.2: Consolidate Documentation**
-    - Update `regenerative-blog-documentation.md` with links to these SOPs.
+## Phase 9: Mandatory Bilingual Core
+- [ ] **Task 9.1: Refactor `scripts/writer.py` for DE+EN Pairs**
+    - Implement a two-pass generation or translation pass to ensure identical content in both languages.
+- [ ] **Task 9.2: Update System Prompts for Bilingual Content**
+    - Refine `writer-v1.md` to enforce exact semantic parity between translations.
 
-## Phase 6: E2E Verification & Refinement
-- [ ] **Task 6.1: Post Refinement**
-    - Analyze and refine the latest "algorithmic symbiosis" post.
-- [ ] **Task 6.2: Trigger E2E Run**
-    - Use the GitHub Issue template to trigger a new post.
-    - Follow the execution through all 10 agents.
-- [ ] **Task 6.3: Deployment Audit**
-    - Verify the final post on GitHub Pages.
-    - Test the language switch on the live site.
-
-## Phase 7: Final Wrap-up
-- [ ] **Task 7.1: Access Verification**
-    - Confirm all links are working and the post is publicly accessible.
-- [ ] **Task 7.2: Milestone Closure**
-    - Update `STATE.md` and `PROJECT.md` to reflect completion.
+## Phase 10: Content Cleanup & E2E Validation
+- [ ] **Task 10.1: Repair Low-Quality German Articles**
+    - Delete or replace the "poorly written" 400-word and 0-byte placeholders with high-quality pairs.
+- [ ] **Task 10.2: E2E Verification Run**
+    - Trigger a new post generation.
+    - Verify that both DE and EN files are created, diagrams are functional, and descriptions are localized.
+- [ ] **Task 10.3: Final Site Audit**
+    - Verify the live blog on GitHub Pages.

@@ -1,0 +1,120 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#0F1A15"/>
+
+  <style>
+    .label { font-family: "JetBrains Mono", monospace; font-size: 14px; fill: #C5B388; }
+    .main-label { font-family: "JetBrains Mono", monospace; font-size: 18px; fill: #C5B388; font-weight: bold; }
+    .sub-label { font-family: "JetBrains Mono", monospace; font-size: 12px; fill: #2C3330; }
+    .percentage { font-family: "JetBrains Mono", monospace; font-size: 16px; font-weight: bold; fill: #2C3330; }
+    .main-line { stroke: #C5B388; stroke-width: 2; fill: none; }
+    .accent-line { stroke: #2C3330; stroke-width: 1; fill: none; }
+    .node-fill { fill: #C5B388; }
+    .icon-fill { fill: #2C3330; }
+  </style>
+
+  <!-- Central Hub: Regenerative Economy -->
+  <circle cx="400" cy="300" r="70" class="node-fill"/>
+  <text x="400" y="290" text-anchor="middle" class="main-label">Regenerative</text>
+  <text x="400" y="315" text-anchor="middle" class="main-label">Economy</text>
+
+  <!-- Precision Agriculture Node -->
+  <circle cx="400" cy="180" r="40" class="node-fill"/>
+  <text x="400" y="175" text-anchor="middle" class="label">Precision</text>
+  <text x="400" y="190" text-anchor="middle" class="label">Agriculture</text>
+  <!-- Organic connection to Regenerative Economy -->
+  <path d="M400 220 C350 250 450 250 400 280" class="main-line"/>
+
+  <!-- Technologies (radiating from Precision Agriculture) -->
+  <!-- Satellite Data -->
+  <path d="M400 180 C350 120 300 100 250 100" class="main-line"/>
+  <circle cx="250" cy="100" r="20" class="node-fill"/>
+  <path d="M240 95 L260 95 M250 90 L250 110 M245 105 L255 105" class="icon-fill" stroke="#2C3330" stroke-width="1"/>
+  <text x="250" y="130" text-anchor="middle" class="sub-label">Satellite Data</text>
+
+  <!-- Drones -->
+  <path d="M400 180 C450 120 500 100 550 100" class="main-line"/>
+  <circle cx="550" cy="100" r="20" class="node-fill"/>
+  <path d="M540 95 L560 95 M540 105 L560 105 M545 90 L545 110 M555 90 L555 110" class="icon-fill" stroke="#2C3330" stroke-width="1"/>
+  <text x="550" y="130" text-anchor="middle" class="sub-label">Drones</text>
+
+  <!-- Sensors -->
+  <path d="M400 180 C300 200 200 200 150 200" class="main-line"/>
+  <circle cx="150" cy="200" r="20" class="node-fill"/>
+  <rect x="140" y="190" width="20" height="20" class="icon-fill"/>
+  <text x="150" y="230" text-anchor="middle" class="sub-label">Sensors</text>
+
+  <!-- IoT -->
+  <path d="M400 180 C500 200 600 200 650 200" class="main-line"/>
+  <circle cx="650" cy="200" r="20" class="node-fill"/>
+  <path d="M640 195 L660 195 M640 205 L660 205 M645 190 L645 210 M655 190 L655 210" class="icon-fill" stroke="#2C3330" stroke-width="1"/>
+  <text x="650" y="230" text-anchor="middle" class="sub-label">IoT</text>
+
+  <!-- GPS -->
+  <path d="M400 180 C300 250 250 280 250 300" class="main-line"/>
+  <circle cx="250" cy="300" r="20" class="node-fill"/>
+  <path d="M250 290 L250 310 M240 300 L260 300 M245 295 L255 295" class="icon-fill" stroke="#2C3330" stroke-width="1"/>
+  <text x="250" y="330" text-anchor="middle" class="sub-label">GPS</text>
+
+  <!-- Advanced Monitoring Systems -->
+  <path d="M400 180 C500 250 550 280 550 300" class="main-line"/>
+  <circle cx="550" cy="300" r="20" class="node-fill"/>
+  <path d="M540 295 L560 295 M550 290 L550 310 M545 305 L555 305" class="icon-fill" stroke="#2C3330" stroke-width="1"/>
+  <text x="550" y="330" text-anchor="middle" class="sub-label">Adv. Monitoring</text>
+
+  <!-- Computational Intelligence Node -->
+  <path d="M400 220 C400 300 400 380 400 430" class="main-line"/>
+  <circle cx="400" cy="450" r="40" class="node-fill"/>
+  <text x="400" y="440" text-anchor="middle" class="label">Computational</text>
+  <text x="400" y="455" text-anchor="middle" class="label">Intelligence</text>
+
+  <!-- Outcomes/Benefits (from Computational Intelligence) -->
+  <!-- Crop Yield Increase -->
+  <path d="M400 450 C300 500 250 520 200 550" class="accent-line" stroke-dasharray="4 2"/>
+  <circle cx="200" cy="550" r="20" class="node-fill"/>
+  <text x="200" y="545" text-anchor="middle" class="percentage">+20-30%</text>
+  <text x="200" y="565" text-anchor="middle" class="sub-label">Crop Yield</text>
+
+  <!-- Input Waste Reduction -->
+  <path d="M400 450 C500 500 550 520 600 550" class="accent-line" stroke-dasharray="4 2"/>
+  <circle cx="600" cy="550" r="20" class="node-fill"/>
+  <text x="600" y="545" text-anchor="middle" class="percentage">-40-60%</text>
+  <text x="600" y="565" text-anchor="middle" class="sub-label">Input Waste</text>
+
+  <!-- Automated Planting & Harvesting -->
+  <path d="M400 450 L400 520" class="accent-line" stroke-dasharray="4 2"/>
+  <circle cx="400" cy="550" r="20" class="node-fill"/>
+  <!-- Simplified Gear icon -->
+  <g transform="translate(400, 550)">
+    <circle cx="0" cy="0" r="8" class="icon-fill"/>
+    <rect x="-1" y="-12" width="2" height="4" class="icon-fill"/>
+    <rect x="-1" y="8" width="2" height="4" class="icon-fill"/>
+    <rect x="-12" y="-1" width="4" height="2" class="icon-fill"/>
+    <rect x="8" y="-1" width="4" height="2" class="icon-fill"/>
+  </g>
+  <text x="400" y="580" text-anchor="middle" class="sub-label">Automated</text>
+  <text x="400" y="595" text-anchor="middle" class="sub-label">Systems</text>
+
+  <!-- Diverse Crop Rotations (from Automated Systems) -->
+  <path d="M400 550 C350 560 320 570 300 580" class="accent-line" stroke-dasharray="2 2"/>
+  <circle cx="300" cy="580" r="15" class="node-fill"/>
+  <!-- Simple triangle for Crop Rotations -->
+  <path d="M295 585 L305 585 L300 575 Z" class="icon-fill"/>
+  <text x="300" y="595" text-anchor="middle" class="sub-label" font-size="10px">Crop Rotations</text>
+
+  <!-- Intercropping (from Automated Systems) -->
+  <path d="M400 550 C450 560 480 570 500 580" class="accent-line" stroke-dasharray="2 2"/>
+  <circle cx="500" cy="580" r="15" class="node-fill"/>
+  <!-- Two overlapping triangles for Intercropping -->
+  <path d="M495 585 L505 585 L500 575 Z" class="icon-fill"/>
+  <path d="M490 580 L500 580 L495 570 Z" class="icon-fill"/>
+  <text x="500" y="595" text-anchor="middle" class="sub-label" font-size="10px">Intercropping</text>
+
+  <!-- Digitalization & Multi-dimensional Solutions (connecting CI to Regenerative Economy) -->
+  <path id="digitalization-path" d="M440 430 C500 400 500 350 440 320" class="accent-line" stroke-dasharray="3 1"/>
+  <text>
+    <textPath href="#digitalization-path" startOffset="50%" text-anchor="middle" class="sub-label">
+      Digitalization &amp; Multi-dimensional Solutions
+    </textPath>
+  </text>
+
+</svg>

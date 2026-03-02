@@ -1,7 +1,7 @@
-# Milestone State: Build Verification & E2E Validation
+# Milestone State: Visual Integrity & Bilingual Content Parity
 
 ## Summary
-Test and verify the entire blog build process. Every workflow must provide a specific deliverable (SOP). Success is defined as a fully-deployed and accessible blog post with all features integrated, including the implementation of the missing en/de language switch.
+Fix broken diagrams, ensure language consistency in descriptions, and enforce strict bilingual content parity (DE+EN for every post). Clean up low-quality/placeholder content.
 
 ## Current Phase
 [x] 1. Questioning
@@ -10,8 +10,9 @@ Test and verify the entire blog build process. Every workflow must provide a spe
 [x] 4. Roadmap
 
 ## Tasks
-- [ ] Define success criteria for every workflow deliverable (SOP).
-- [ ] Research and implement the en/de language switch in the Blowfish theme.
-- [ ] Conduct end-to-end (E2E) testing of the 10-agent pipeline.
-- [ ] Verify deployment and link accessibility.
-- [ ] Document final SOPs for all build steps.
+- [ ] Debug the broken diagram SVG/WebP rendering issue.
+- [ ] Implement language-aware descriptions for the image-agent.
+- [ ] Enforce "Reader-Facing" descriptions (remove "created by agent" mentions).
+- [ ] Establish a mandatory bilingual workflow (Writer Agent must produce DE+EN pairs).
+- [ ] Identify and repair/replace low-quality German articles.
+- [ ] Update Titles for uniqueness and brand alignment.

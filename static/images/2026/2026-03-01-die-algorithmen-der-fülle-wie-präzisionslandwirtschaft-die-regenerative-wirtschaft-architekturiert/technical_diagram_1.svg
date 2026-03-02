@@ -1,0 +1,142 @@
+<svg width="800" height="550" viewBox="0 0 800 550" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
+  <defs>
+    <style>
+      .primary-bg { fill: #0F1A15; }
+      .secondary-color { fill: #C5B388; stroke: #C5B388; }
+      .accent-color { fill: #2C3330; stroke: #2C3330; }
+      .text-color { fill: #C5B388; font-size: 14px; }
+      .small-text { font-size: 12px; }
+      .line-stroke { stroke: #2C3330; stroke-width: 1.5; fill: none; }
+      .thick-line-stroke { stroke: #2C3330; stroke-width: 2.5; fill: none; }
+      .arrowhead-path { fill: #2C3330; }
+    </style>
+    <polygon id="arrowhead-shape" points="0,0 -8,4 -8,-4" class="arrowhead-path"/>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="550" class="primary-bg"/>
+
+  <!-- Central Regenerative Agriculture Plant/Soil -->
+  <g transform="translate(400, 350)">
+    <!-- Soil Base -->
+    <path d="M -100 0 Q -150 50 -100 100 H 100 Q 150 50 100 0 Z" class="secondary-color" stroke-width="2" stroke="#C5B388"/>
+    <!-- Plant Stem -->
+    <path d="M 0 0 V -100 Q 10 -120 30 -150 Q 50 -180 40 -200" class="secondary-color" stroke-width="3" stroke="#C5B388"/>
+    <!-- Leaves/Branches -->
+    <path d="M 30 -150 Q 10 -160 0 -140 Q -10 -160 -30 -150" class="secondary-color" stroke-width="2" stroke="#C5B388"/>
+    <path d="M 40 -200 Q 50 -210 60 -190 Q 70 -210 80 -200" class="secondary-color" stroke-width="2" stroke="#C5B388"/>
+    <path d="M 40 -200 Q 30 -210 20 -190 Q 10 -210 0 -200" class="secondary-color" stroke-width="2" stroke="#C5B388"/>
+  </g>
+
+  <!-- Data Processing Unit (Central Hub) -->
+  <g transform="translate(400, 200)">
+    <circle r="40" class="accent-color" stroke="#C5B388" stroke-width="2"/>
+    <circle r="30" fill="#0F1A15"/>
+    <path d="M -25 0 H 25 M 0 -25 V 25" stroke="#C5B388" stroke-width="1" opacity="0.7"/>
+    <text x="0" y="5" text-anchor="middle" class="text-color small-text">DATA</text>
+  </g>
+
+  <!-- Micro Arm -->
+  <g transform="translate(400, 200)">
+    <!-- Base segment -->
+    <rect x="-5" y="0" width="10" height="40" class="accent-color"/>
+    <circle cx="0" cy="40" r="4" class="secondary-color"/>
+    <!-- Second segment, rotated -->
+    <g transform="translate(0, 40) rotate(20)">
+      <rect x="-4" y="0" width="8" height="50" class="accent-color"/>
+      <circle cx="0" cy="50" r="4" class="secondary-color"/>
+      <!-- Third segment, rotated further -->
+      <g transform="translate(0, 50) rotate(-40)">
+        <rect x="-3" y="0" width="6" height="40" class="accent-color"/>
+        <circle cx="0" cy="40" r="5" class="secondary-color"/>
+        <!-- End effector (sensor/planter) -->
+        <path d="M -5 40 L 0 50 L 5 40 Z" class="secondary-color"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Technology Nodes -->
+  <!-- Satellite -->
+  <g transform="translate(100, 100)">
+    <circle r="20" class="accent-color" stroke="#C5B388" stroke-width="1.5"/>
+    <path d="M -15 0 H 15 M 0 -15 V 15" stroke="#C5B388" stroke-width="1" opacity="0.7"/>
+    <text x="0" y="35" text-anchor="middle" class="text-color small-text">Satellite</text>
+  </g>
+  <path class="line-stroke" d="M 100 100 C 200 100 300 150 360 190"/>
+  <use href="#arrowhead-shape" transform="translate(360, 190) rotate(30)"/>
+
+  <!-- Drone -->
+  <g transform="translate(700, 100)">
+    <path d="M -20 -10 H 20 L 15 0 L 20 10 H -20 L -15 0 Z M -10 -15 V -25 M 10 -15 V -25 M -10 15 V 25 M 10 15 V 25" class="accent-color" stroke="#C5B388" stroke-width="1.5"/>
+    <text x="0" y="35" text-anchor="middle" class="text-color small-text">Drone</text>
+  </g>
+  <path class="line-stroke" d="M 700 100 C 600 100 500 150 440 190"/>
+  <use href="#arrowhead-shape" transform="translate(440, 190) rotate(150)"/>
+
+  <!-- Sensors -->
+  <g transform="translate(100, 250)">
+    <rect x="-15" y="-15" width="30" height="30" rx="5" ry="5" class="accent-color" stroke="#C5B388" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="5" fill="#C5B388"/>
+    <text x="0" y="35" text-anchor="middle" class="text-color small-text">Sensors</text>
+  </g>
+  <path class="line-stroke" d="M 100 250 C 200 250 300 220 360 210"/>
+  <use href="#arrowhead-shape" transform="translate(360, 210) rotate(10)"/>
+
+  <!-- GPS -->
+  <g transform="translate(700, 250)">
+    <path d="M 0 -20 V 0 L -10 10 A 10 10 0 0 0 0 20 A 10 10 0 0 0 10 10 L 0 0 Z" class="accent-color" stroke="#C5B388" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="4" fill="#C5B388"/>
+    <text x="0" y="35" text-anchor="middle" class="text-color small-text">GPS</text>
+  </g>
+  <path class="line-stroke" d="M 700 250 C 600 250 500 220 440 210"/>
+  <use href="#arrowhead-shape" transform="translate(440, 210) rotate(170)"/>
+
+  <!-- IoT -->
+  <g transform="translate(100, 400)">
+    <circle r="10" class="accent-color" stroke="#C5B388" stroke-width="1.5"/>
+    <circle cx="-15" cy="-15" r="5" fill="#C5B388"/>
+    <circle cx="15" cy="-15" r="5" fill="#C5B388"/>
+    <circle cx="-15" cy="15" r="5" fill="#C5B388"/>
+    <circle cx="15" cy="15" r="5" fill="#C5B388"/>
+    <text x="0" y="35" text-anchor="middle" class="text-color small-text">IoT</text>
+  </g>
+  <path class="line-stroke" d="M 100 400 C 200 400 300 300 360 230"/>
+  <use href="#arrowhead-shape" transform="translate(360, 230) rotate(45)"/>
+
+  <!-- Benefits -->
+  <g transform="translate(600, 350)">
+    <rect x="-80" y="-20" width="160" height="40" rx="10" ry="10" class="accent-color" stroke="#C5B388" stroke-width="1.5"/>
+    <text x="0" y="5" text-anchor="middle" class="text-color">Yield +20-30%</text>
+  </g>
+  <path class="thick-line-stroke" d="M 440 230 C 500 280 550 320 580 340"/>
+  <use href="#arrowhead-shape" transform="translate(580, 340) rotate(30)"/>
+
+  <g transform="translate(600, 450)">
+    <rect x="-80" y="-20" width="160" height="40" rx="10" ry="10" class="accent-color" stroke="#C5B388" stroke-width="1.5"/>
+    <text x="0" y="5" text-anchor="middle" class="text-color">Waste -40-60%</text>
+  </g>
+  <path class="thick-line-stroke" d="M 440 240 C 500 300 550 400 580 440"/>
+  <use href="#arrowhead-shape" transform="translate(580, 440) rotate(45)"/>
+
+  <g transform="translate(200, 450)">
+    <rect x="-80" y="-20" width="160" height="40" rx="10" ry="10" class="accent-color" stroke="#C5B388" stroke-width="1.5"/>
+    <text x="0" y="5" text-anchor="middle" class="text-color">Automated Systems</text>
+  </g>
+  <path class="thick-line-stroke" d="M 360 240 C 300 300 250 400 220 440"/>
+  <use href="#arrowhead-shape" transform="translate(220, 440) rotate(-45)"/>
+
+  <g transform="translate(200, 350)">
+    <rect x="-80" y="-20" width="160" height="40" rx="10" ry="10" class="accent-color" stroke="#C5B388" stroke-width="1.5"/>
+    <text x="0" y="5" text-anchor="middle" class="text-color">Sustainable Future</text>
+  </g>
+  <path class="thick-line-stroke" d="M 360 230 C 300 280 250 320 220 340"/>
+  <use href="#arrowhead-shape" transform="translate(220, 340) rotate(-30)"/>
+
+  <g transform="translate(400, 500)">
+    <rect x="-100" y="-20" width="200" height="40" rx="10" ry="10" class="accent-color" stroke="#C5B388" stroke-width="1.5"/>
+    <text x="0" y="5" text-anchor="middle" class="text-color">Economic Viability</text>
+  </g>
+  <path class="thick-line-stroke" d="M 400 240 V 470"/>
+  <use href="#arrowhead-shape" transform="translate(400, 470) rotate(90)"/>
+
+</svg>

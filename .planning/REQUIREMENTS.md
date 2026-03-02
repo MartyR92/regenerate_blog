@@ -1,32 +1,30 @@
-# Requirements: Build Verification & E2E Validation
+# Requirements: Visual Integrity & Bilingual Content Parity
 
 ## 1. Goal
-Ensure the entire 10-agent blog pipeline is robust, verifiable, and produces a high-quality, fully accessible bilingual blog post on GitHub Pages.
+Achieve professional visual standards for technical diagrams and ensure 100% bilingual content parity (DE+EN) for every blog post.
 
-## 2. Workflow Deliverables (SOPs)
-### 2.1 Documentation
-- Every agent (1-10) must have a clearly defined Standard Operating Procedure (SOP).
-- SOPs must be stored in `.planning/SOPs/` as individual Markdown files.
-- SOPs must be summarized in the main `regenerative-blog-documentation.md`.
-### 2.2 Success Criteria per Agent
-- **Research Agent:** Validated JSON in `research-queue.json`.
-- **Writer Agent:** Hugo-compliant Markdown in `_drafts/` with proper metadata.
-- **Image Agent:** WebP diagram generated and correctly referenced in draft.
-- **Editor Agent:** PR opened with specific feedback comments.
-- **Visual Agent:** Hero image downloaded and front matter updated.
-- **Designer Agent:** Compliance report generated and posted to PR.
-- **Staging Agent:** Preview URL active and Lighthouse scores documented.
-- **Publish Agent:** PR merged and `main` branch updated.
-- **Distribution Agent:** Social media copy generated in `_distribution/`.
-- **Memory Agent:** `blog-memory.json` and `ontology.json` updated.
+## 2. Diagram Fixes & Consistency
+### 2.1 Technical Rendering
+- Debug and fix the SVG/WebP rendering issue identified in the screenshot.
+- Ensure diagrams use the "Organic Precision" aesthetic (Micro) or "Terrain Depth" (Macro) as per Brand Guidelines v4.0.
+### 2.2 Language-Aware Descriptions
+- The `image-agent` must detect the primary language of the post and output the description/caption in the matching language.
+- Descriptions must be "Reader-Facing" (describing the data/visuals).
+- **Prohibited:** Never include internal metadata like "created by image-agent" in reader-facing captions.
 
-## 3. Bilingual Support (en/de)
-- **UI:** A functional language toggle (flag or text) must be present in the site header.
-- **Content:** The system must support and verify the automatic or manual creation of both German and English versions of a post.
-- **Navigation:** Switching languages on a post must lead to the corresponding translated post (if available) or the home page of that language.
+## 3. Mandatory Bilingual Workflow
+### 3.1 Content Parity
+- The `writer-agent` must be reconfigured to ALWAYS output a pair of files: one in German (`content/de/posts/`) and one in English (`content/en/posts/`).
+- The translations must be of equal quality and depth (1,500 - 3,000 words each).
+### 3.2 Automated Linkage
+- Ensure Hugo's relative path matching correctly links the DE and EN versions for the language switcher.
 
-## 4. E2E Verification
-- **Refinement:** Manually refine the "algorithmic symbiosis" post based on findings.
-- **Trigger:** Start a completely new post via the `new-post` issue template.
-- **Validation:** Monitor the entire chain from Issue -> GitHub Pages live link.
-- **Accessibility:** Verify the live link is accessible and all assets (images, fonts) load correctly.
+## 4. Content Cleanup & Quality
+### 4.1 Post Repair
+- Identify and replace low-quality/placeholder posts (e.g., `2026-02-28-...md` and `hello-world.md` if necessary).
+- Ensure all published posts meet the 1,500+ word count requirement.
+### 4.2 Title Uniqueness
+- Implement strict title uniqueness rules to prevent keyword recurrence (e.g., avoiding "Algorithmisch" in every title).
+
+## 5. Deployment Success
+- **Success Criteria:** A single production deployment that contains identical DE and EN versions of the same new article, with functional SVG diagrams and a working language switch.

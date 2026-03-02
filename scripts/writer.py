@@ -4,6 +4,7 @@ import requests
 from datetime import datetime
 import sys
 import re
+import time
 
 # Disable SSL warnings
 import urllib3
@@ -17,10 +18,24 @@ def get_context_file(path):
 
 def slugify(text):
     text = text.lower()
+    # Handle German umlauts
+    text = text.replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
     text = re.sub(r'[^\w\s-]', '', text)
     text = re.sub(r'[\s_-]+', '-', text)
     text = re.sub(r'^-+|-+$', '', text)
     return text
+
+def call_gemini(url, payload):
+    try:
+        res = requests.post(url, json=payload, timeout=300)
+        if res.status_code == 200:
+            return res.json()['candidates'][0]['content']['parts'][0]['text']
+        else:
+            print(f"Gemini API error: {res.status_code} - {res.text}")
+            return None
+    except Exception as e:
+        print(f"Execution error: {e}")
+        return None
 
 def main():
     gemini_key = os.environ.get("GEMINI_API_KEY", "").strip()
@@ -32,113 +47,99 @@ def main():
     identity = get_context_file("context/system-identity.md")
     memory = get_context_file("context/blog-memory.json")
     series = get_context_file("context/series-registry.json")
+    prompt_template = get_context_file("context/agent-prompts/writer-v1.md")
     
-    # 2. Load Research Queue (Top 3 relevant)
+    # 2. Load Research Queue (Top Item)
     research_data = []
     if os.path.exists("context/research-queue.json"):
         with open("context/research-queue.json", "r", encoding="utf-8") as f:
             try:
                 queue = json.load(f)
+                # Filter out used items if field exists, otherwise take top
+                unused = [x for x in queue if not x.get("used")]
+                queue = unused if unused else queue
                 queue.sort(key=lambda x: x.get("relevance_score", 0), reverse=True)
-                research_data = queue[:3]
+                research_data = queue[:1]
             except:
                 pass
 
-    # 3. Dynamic Model Discovery (Prioritizing 2.5)
-    print("Discovering available models (Prioritizing Gemini 2.5)...")
-    target_model = "models/gemini-2.5-flash" # Default based on last successful run
-    try:
-        diag = requests.get(f"https://generativelanguage.googleapis.com/v1beta/models?key={gemini_key}")
-        if diag.status_code == 200:
-            model_list = [m['name'] for m in diag.json().get('models', [])]
-            # Try to find exactly 2.5 models
-            gemini_25_models = [m for m in model_list if "2.5" in m]
-            if gemini_25_models:
-                target_model = gemini_25_models[0]
-                print(f"Using discovered Gemini 2.5 model: {target_model}")
-            else:
-                print(f"No Gemini 2.5 found, available: {model_list[:3]}")
-                # Fallback to the first one in the list if no 2.5 found
-                target_model = model_list[0]
-    except Exception as e:
-        print(f"Discovery failed, falling back to default: {e}")
+    if not research_data:
+        print("No research data found.")
+        sys.exit(0)
 
-    # 4. Construct Prompt
-    prompt = f"""
-    SYSTEM IDENTITY:
-    {identity}
-
-    BLOG MEMORY (Previously published titles and concepts):
-    {memory}
-
-    SERIES REGISTRY:
-    {series}
-
-    RESEARCH INPUT (Top Items):
-    {json.dumps(research_data, indent=2)}
-
-    TASK:
-    Write a 1.500 - 3.000 word deep-dive blog post based on the research input. 
-    Follow the 'Natural Solarpunk x Avantgarde Prestige' style guide.
-    
-    IMPORTANT: 
-    - Ensure the TITLE and CONTENT are unique compared to the BLOG MEMORY.
-    - DO NOT use overused keywords like 'Algorithmic', 'Symbiosis', or 'Precision' in the title unless strictly necessary for the technical context.
-    - Prefer evocative, biological, or architectural metaphors.
-    
-    Use [VERIFY] tags for any factual claims not backed by the research input.
-    Provide the output in Markdown format with Hugo Front Matter.
-    The Front Matter MUST include:
-    - title
-    - date (current: {datetime.now().isoformat()})
-    - draft: true
-    - ai_assisted: true
-    - ai_model: {target_model}
-    - author: "Martin Reiter"
-    - categories and tags from the ontology.
-    """
-
-    # 5. Call Gemini REST API
+    target_model = "models/gemini-2.5-flash"
     url = f"https://generativelanguage.googleapis.com/v1beta/{target_model}:generateContent?key={gemini_key}"
-    payload = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {
-            "temperature": 0.9,
-            "maxOutputTokens": 8192,
-            "topP": 0.95
-        }
+
+    # --- PASS 1: GERMAN GENERATION ---
+    print("Generating German version (Pass 1)...")
+    prompt_de = f"""
+    {prompt_template}
+    
+    CONTEXT:
+    IDENTITY: {identity}
+    MEMORY: {memory}
+    RESEARCH: {json.dumps(research_data, indent=2)}
+    
+    MODE: GENERATION
+    LANGUAGE: DE
+    """
+    
+    payload_de = {
+        "contents": [{"parts": [{"text": prompt_de}]}],
+        "generationConfig": {"temperature": 0.9, "maxOutputTokens": 8192}
     }
     
-    try:
-        res = requests.post(url, json=payload, timeout=180) # Increased timeout for Gemini 2.5
-        if res.status_code == 200:
-            content = res.json()['candidates'][0]['content']['parts'][0]['text']
-            
-            # 6. Save to _drafts
-            # Try to extract title from Front Matter
-            title_match = re.search(r'title:\s*"(.*)"', content)
-            if not title_match:
-                title_match = re.search(r'title:\s*(.*)', content)
-                
-            title = title_match.group(1).strip() if title_match else "generated-post"
-            title = title.replace('"', '')
-            
-            date_str = datetime.now().strftime("%Y-%m-%d")
-            filename = f"_drafts/{date_str}-{slugify(title)}.md"
-            
-            # Ensure _drafts exists
-            os.makedirs("_drafts", exist_ok=True)
-            
-            with open(filename, "w", encoding="utf-8") as f:
-                f.write(content)
-            
-            print(f"Successfully generated post using {target_model}: {filename}")
-        else:
-            print(f"Gemini API error: {res.status_code} - {res.text}")
-            sys.exit(1)
-    except Exception as e:
-        print(f"Execution error: {e}")
+    content_de = call_gemini(url, payload_de)
+    if not content_de:
         sys.exit(1)
+
+    # --- PASS 2: ENGLISH TRANSLATION ---
+    print("Generating English version (Pass 2)...")
+    prompt_en = f"""
+    {prompt_template}
+    
+    ORIGINAL ARTICLE (DE):
+    {content_de}
+    
+    MODE: TRANSLATION
+    LANGUAGE: EN
+    INSTRUCTION: Create a semantic mirror of the DE article. Maintain all [VERIFY] and [DIAGRAM] tags.
+    """
+    
+    payload_en = {
+        "contents": [{"parts": [{"text": prompt_en}]}],
+        "generationConfig": {"temperature": 0.4, "maxOutputTokens": 8192} # Lower temp for translation consistency
+    }
+    
+    content_en = call_gemini(url, payload_en)
+    if not content_en:
+        sys.exit(1)
+
+    # 3. Save Both Versions
+    os.makedirs("_drafts", exist_ok=True)
+    date_prefix = datetime.now().strftime("%Y-%m-%d")
+    
+    # Extract title from DE version for slug
+    title_match = re.search(r'title:\s*"(.*)"', content_de)
+    if not title_match:
+        title_match = re.search(r'title:\s*(.*)', content_de)
+    
+    raw_title = title_match.group(1).strip() if title_match else "generated-post"
+    slug = slugify(raw_title.replace('"', ''))
+    
+    # German File
+    file_de = f"_drafts/{date_prefix}-{slug}.de.md"
+    with open(file_de, "w", encoding="utf-8") as f:
+        f.write(content_de)
+    
+    # English File
+    file_en = f"_drafts/{date_prefix}-{slug}.en.md"
+    with open(file_en, "w", encoding="utf-8") as f:
+        f.write(content_en)
+
+    print(f"Successfully generated bilingual pair:")
+    print(f"  - DE: {file_de}")
+    print(f"  - EN: {file_en}")
 
 if __name__ == "__main__":
     main()
