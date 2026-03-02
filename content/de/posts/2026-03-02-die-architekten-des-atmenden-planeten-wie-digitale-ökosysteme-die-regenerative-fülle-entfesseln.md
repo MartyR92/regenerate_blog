@@ -2,7 +2,7 @@
 ---
 title: "Die Architekten des atmenden Planeten: Wie digitale Ökosysteme die regenerative Fülle entfesseln"
 date: 2026-03-02T06:55:50.217596
-draft: true
+draft: false
 ai_assisted: true
 ai_model: models/gemini-2.5-flash
 author: "Martin Reiter"
