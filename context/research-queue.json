@@ -13,5 +13,22 @@
     "timestamp": "2026-02-26T14:08:02.617254",
     "query": "Symbiotic Technology Precision Agriculture latest developments in regenerative economy",
     "engine": "Gemini (models/gemini-2.5-flash)"
+  },
+  {
+    "title": "Symbiotic Digital Twins for Regenerative Economic Systems",
+    "summary": "The latest developments indicate a strong convergence of symbiotic technology and digital twins in advancing a regenerative economy. Digital twins are increasingly recognized as foundational elements for achieving circular economy principles, sustainability goals, and optimizing renewable energy investments. Frameworks like the 'Symbiotic Digital Environment Framework' integrate Human and Machine Digital Twins, while 'Symbiotic Architecture' leverages generative AI to optimize energy consumption and predict maintenance, contributing to resource efficiency. This synergistic interplay of AI and digital twins is crucial for environmentally planning sustainable smart cities and facilitating energy transitions, all of which are essential components of a regenerative economic model.",
+    "relevance_score": 82,
+    "sources": [
+      "Digital twin technology and artificial intelligence in energy transition",
+      "A Symbiotic Digital Environment Framework for Industry 4.0 and 5.0",
+      "Digital twins: cornerstone to circular economy and sustainability goals",
+      "The Symbiotic Architecture: How Generative AI and Digital Twins on ...",
+      "Economic impact of digital twins on renewable energy investments",
+      "The Relationship Between Artificial Intelligence (AI) and Building Information Modeling (BIM) Technologies for Sustainable Building in the Context of Smart Cities",
+      "The synergistic interplay of artificial intelligence and digital twin in environmentally planning sustainable smart cities: A comprehensive systematic review"
+    ],
+    "timestamp": "2026-03-02T06:55:31.416526",
+    "query": "Symbiotic Technology Digital Twins latest developments in regenerative economy",
+    "engine": "Gemini (models/gemini-2.5-flash)"
   }
 ]
