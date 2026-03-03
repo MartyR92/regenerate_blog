@@ -1,29 +1,21 @@
-# Milestone State: Visual Integrity & Bilingual Content Parity
+# Project State
 
-## Summary
-Successfully resolved diagram rendering issues, implemented language-aware descriptions, and established a mandatory bilingual pipeline. Cleaned legacy content and verified the system with a high-fidelity E2E run.
+## Project Reference
+**Core Value**: A fully automated, GitHub-hosted blog for the "Regenerative Economy" niche, combining Natural Solarpunk aesthetics with Avantgarde Prestige.
+**Current Focus**: Milestone v4.0 - Ensure all visuals render correctly on the live blog and integrate a deep-research function using the Interactions API for verifiable citations.
 
-## Current Phase
-[x] 1. Questioning
-[x] 2. Research (Optional)
-[x] 3. Requirements
-[x] 4. Roadmap
-[x] 8. Diagram Rendering & Language Fixes
-[x] 9. Mandatory Bilingual Core
-[x] 10. Content Cleanup & E2E Validation
+## Current Position
+**Phase**: 11
+**Plan**: —
+**Status**: Roadmap Created
+**Progress**: 0%
 
-## Tasks
-- [x] Debug the broken diagram SVG/WebP rendering issue.
-- [x] Implement language-aware descriptions for the image-agent.
-- [x] Enforce "Reader-Facing" descriptions (remove "created by agent" mentions).
-- [x] Establish a mandatory bilingual workflow (Writer Agent must produce DE+EN pairs).
-- [x] Identify and repair/replace low-quality German articles.
-- [x] Update Titles for uniqueness and brand alignment.
-- [x] Conduct final E2E Validation run (Mycelial Networks post).
+## Accumulated Context
+- Need to resolve absolute/relative path rendering issues for SVGs/WebPs on `renatureforce.com/blog`.
+- Need to ensure any research agents or deep search agents have appropriate Google Interactions API access for citations.
+- Project uses 10 specialized agents coordinated via GitHub Actions.
+- Milestone v4.0 focuses strictly on Visual Fixes and Deep Research integrations.
 
-## Quick Tasks Completed
-| Task | Description | Status |
-| :--- | :--- | :--- |
-| FIX_HUGO_BUILD | Installed `hugo-bin@latest` and fixed template indexing for bilingual sites. | [x] |
-| UPDATE_BASEURL | Set `baseURL` to `https://renatureforce.com/blog/` in `hugo.toml`. | [x] |
-| FIX_TITLES | Rewrote repetitive AI-slop titles, fixed wrong 2024 date, and updated `writer-v1.md` prompt with strict anti-repetition rules. | [x] |
+## Session Continuity
+- [x] Roadmap created with Phases 11 and 12 covering all 4 v4.0 requirements.
+- [ ] Ready for `/gsd:plan-phase 11`

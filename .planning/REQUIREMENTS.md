@@ -1,30 +1,18 @@
-# Requirements: Visual Integrity & Bilingual Content Parity
+## Milestone v4.0 Requirements
 
-## 1. Goal
-Achieve professional visual standards for technical diagrams and ensure 100% bilingual content parity (DE+EN) for every blog post.
+### Visuals
+- [ ] **VIS-01**: Fix broken diagram, graph, chart, and image rendering in the browser view on `renatureforce.com/blog`.
+- [ ] **VIS-02**: Verify and grant (if necessary) staging and image-agent access to Interactions API.
 
-## 2. Diagram Fixes & Consistency
-### 2.1 Technical Rendering
-- Debug and fix the SVG/WebP rendering issue identified in the screenshot.
-- Ensure diagrams use the "Organic Precision" aesthetic (Micro) or "Terrain Depth" (Macro) as per Brand Guidelines v4.0.
-### 2.2 Language-Aware Descriptions
-- The `image-agent` must detect the primary language of the post and output the description/caption in the matching language.
-- Descriptions must be "Reader-Facing" (describing the data/visuals).
-- **Prohibited:** Never include internal metadata like "created by image-agent" in reader-facing captions.
+### Research & Citations
+- [ ] **RES-01**: Implement actual, evident citations and quotes in blog posts.
+- [ ] **RES-02**: Implement a `deep-research-agent` with Google Interactions API (deep-search tool) OR integrate deep research functionality via Interactions API into the existing research agents.
 
-## 3. Mandatory Bilingual Workflow
-### 3.1 Content Parity
-- The `writer-agent` must be reconfigured to ALWAYS output a pair of files: one in German (`content/de/posts/`) and one in English (`content/en/posts/`).
-- The translations must be of equal quality and depth (1,500 - 3,000 words each).
-### 3.2 Automated Linkage
-- Ensure Hugo's relative path matching correctly links the DE and EN versions for the language switcher.
+## Traceability
 
-## 4. Content Cleanup & Quality
-### 4.1 Post Repair
-- Identify and replace low-quality/placeholder posts (e.g., `2026-02-28-...md` and `hello-world.md` if necessary).
-- Ensure all published posts meet the 1,500+ word count requirement.
-### 4.2 Title Uniqueness
-- Implement strict title uniqueness rules to prevent keyword recurrence (e.g., avoiding "Algorithmisch" in every title).
-
-## 5. Deployment Success
-- **Success Criteria:** A single production deployment that contains identical DE and EN versions of the same new article, with functional SVG diagrams and a working language switch.
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| VIS-01 | Phase 11 | Pending |
+| VIS-02 | Phase 11 | Pending |
+| RES-01 | Phase 12 | Pending |
+| RES-02 | Phase 12 | Pending |

@@ -34,9 +34,16 @@ A fully automated, GitHub-hosted blog for the "Regenerative Economy" niche, comb
 - [x] Pipeline extension to 10 agents.
 - [x] Full documentation and system prompt updates.
 
-## Current Milestone: Build Verification & E2E Validation
-**Objective:** Test and verify the 10-agent build process, implement the missing language switch, and ensure a fully functional deployment on GitHub Pages.
-- [ ] Define and document SOPs for all 10 agents.
-- [ ] Implement en/de language toggle in the header.
-- [ ] Refine the latest post and conduct E2E verification by triggering a new one.
-- [ ] Verify link accessibility and full feature integration on GitHub Pages.
+### Milestone 3: Build Verification & E2E Validation
+- [x] Define and document SOPs for all 10 agents.
+- [x] Implement en/de language toggle in the header.
+- [x] Refine the latest post and conduct E2E verification by triggering a new one.
+- [x] Verify link accessibility and full feature integration on GitHub Pages.
+
+## Current Milestone: v4.0 Visuals Fixes & Deep Research
+**Goal:** Ensure all visuals render correctly on the live blog and integrate a deep-research function using the Interactions API for verifiable citations.
+
+**Target features:**
+- Fix broken visual rendering (SVG/WebP, paths) on renatureforce.com/blog.
+- Verify/grant staging and image-agent access to Interactions API if needed.
+- Implement deep-research via Interactions API (either new agent or upgrade existing research agents) to support facts with evident citations and quotes.
