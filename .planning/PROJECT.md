@@ -40,10 +40,10 @@ A fully automated, GitHub-hosted blog for the "Regenerative Economy" niche, comb
 - [x] Refine the latest post and conduct E2E verification by triggering a new one.
 - [x] Verify link accessibility and full feature integration on GitHub Pages.
 
-## Current Milestone: v4.0 Visuals Fixes & Deep Research
-**Goal:** Ensure all visuals render correctly on the live blog and integrate a deep-research function using the Interactions API for verifiable citations.
+### Milestone v5.0: Visual Retrofit & Enrichment
+**Goal:** Retrofit all 6 existing articles with a complete visual set (1 Unsplash hero image, 1 existing technical diagram, and 2 new technical visuals - 1 chart and 1 diagram).
 
 **Target features:**
-- Fix broken visual rendering (SVG/WebP, paths) on renatureforce.com/blog.
-- Verify/grant staging and image-agent access to Interactions API if needed.
-- Implement deep-research via Interactions API (either new agent or upgrade existing research agents) to support facts with evident citations and quotes.
+- Enhance `visual.py` to retrofit all existing articles with Unsplash hero images.
+- Enhance `image.py` to generate multiple technical visuals (1 chart, 1 diagram) per article with WebP fallbacks.
+- Implement a one-time automated retrofit task to ensure all 6 articles meet the "3 visuals" standard.

@@ -1,37 +1,37 @@
-# ROADMAP: Milestone v4.0 Visuals Fixes & Deep Research
+# ROADMAP: Milestone v5.0 Visual Retrofit & Enrichment
 
 ## Phases
-- [x] **Phase 11: Visual Infrastructure & Rendering** - Fix visual rendering on the live blog and ensure API access for image agents.
-- [x] **Phase 12: Deep Research & Citations** - Implement verifiable citations and quotes powered by Interactions API.
+- [ ] **Phase 13: Agent Infrastructure for Retrofit** - Update `visual.py` and `image.py` to support multi-article processing and multi-visual generation.
+- [ ] **Phase 14: Retrofit Execution & Validation** - Execute the retrofit on all 6 articles and verify rendering.
 
 ## Phase Details
 
-### Phase 11: Visual Infrastructure & Rendering
-**Goal**: Users experience flawlessly rendered visuals and agents have proper API access for future capability.
-**Depends on**: None
-**Requirements**: VIS-01, VIS-02
+### Phase 13: Agent Infrastructure for Retrofit
+**Goal**: Agents are equipped to handle the visual enrichment of the entire archive.
+**Depends on**: Milestone v4.0
+**Requirements**: RET-01, RET-02, RET-03
 **Success Criteria**:
-  1. User can view all diagrams, graphs, and images correctly rendered on the live blog without broken paths.
-  2. The automated pipeline successfully generates images without permission errors regarding the Interactions API.
-  3. Users can inspect SVG/WebP visuals clearly across different viewport sizes.
+  1. `visual.py` successfully identifies and processes all content files.
+  2. `image.py` can generate a "chart" and a "diagram" based on specific instructions.
+  3. `image.py` ensures WebP fallbacks are created for all new SVGs.
 **Plans**: 2 plans
-- [x] 11-01-PLAN.md — Update CI/CD pipelines and generate WebP fallbacks
-- [x] 11-02-PLAN.md — Implement custom Hugo picture render hook
+- [ ] 13-01-PLAN.md — Update `visual.py` for archive processing.
+- [ ] 13-02-PLAN.md — Update `image.py` for multi-visual generation.
 
-### Phase 12: Deep Research & Citations
-**Goal**: Users can read blog posts with verifiable facts, evident citations, and quotes sourced via deep research.
-**Depends on**: Phase 11
-**Requirements**: RES-01, RES-02
+### Phase 14: Retrofit Execution & Validation
+**Goal**: All existing articles meet the 3-visual standard.
+**Depends on**: Phase 13
+**Requirements**: VIS-03, VIS-04, VIS-05, VIS-06, RET-04, RET-05
 **Success Criteria**:
-  1. User can see explicit citations and source quotes integrated naturally within the blog post content.
-  2. User can click or reference the provided citations to verify factual claims made in the articles.
-  3. The automated pipeline successfully produces heavily researched articles utilizing the Interactions API for deep searching.
+  1. All 6 articles have a valid `featureImage` in front matter.
+  2. All 6 articles have 3 working technical visuals in the body.
+  3. All visuals render correctly in the Hugo preview with WebP fallbacks.
 **Plans**: 1 plan
-- [x] 12-01-PLAN.md — Enhance research agent and writer prompt for citations
+- [ ] 14-01-PLAN.md — Execute retrofit task and verify.
 
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 11. Visual Infrastructure & Rendering | 2/2 | Completed | 2026-03-03 |
-| 12. Deep Research & Citations | 1/1 | Completed | 2026-03-03 |
+| 13. Agent Infrastructure for Retrofit | 0/2 | Not started | - |
+| 14. Retrofit Execution & Validation | 0/1 | Not started | - |
