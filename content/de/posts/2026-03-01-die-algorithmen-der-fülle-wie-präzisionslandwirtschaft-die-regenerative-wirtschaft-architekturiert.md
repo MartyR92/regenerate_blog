@@ -1,5 +1,5 @@
 ---
-title: "Die Algorithmen der Fülle: Wie Präzisionslandwirtschaft die Regenerative Wirtschaft Architekturiert"
+title: "Agro-Kybernetik: Das Betriebssystem für widerstandsfähige Böden"
 date: 2026-03-01T18:03:27.269284
 draft: false
 ai_assisted: true

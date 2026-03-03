@@ -1,5 +1,5 @@
 ---
-title: "Precision in the Field: How Techno-Organic Intelligence Transforms Regenerative Agriculture"
+title: "The Learning Field: AI-Driven Polycultures in Practice"
 language: en
 date: 2026-02-26T14:08:02+01:00
 draft: false

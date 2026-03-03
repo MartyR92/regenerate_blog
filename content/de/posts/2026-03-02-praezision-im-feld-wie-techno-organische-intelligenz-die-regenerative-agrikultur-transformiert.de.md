@@ -1,5 +1,5 @@
 ---
-title: "Präzision im Feld: Wie Techno-Organische Intelligenz die regenerative Agrikultur transformiert"
+title: "Das lernende Feld: KI-gesteuerte Polykulturen in der Praxis"
 language: de
 date: 2026-02-26T14:08:02+01:00
 draft: false

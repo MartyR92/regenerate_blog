@@ -1,6 +1,6 @@
 ```markdown
 ---
-title: "Die Architekten des atmenden Planeten: Wie digitale Ökosysteme die regenerative Fülle entfesseln"
+title: "Symbiotische Zwillinge: Wenn Smart Cities auf Biosphären-Design treffen"
 date: 2026-03-02T06:55:50.217596
 draft: false
 ai_assisted: true

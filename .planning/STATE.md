@@ -25,4 +25,5 @@ Successfully resolved diagram rendering issues, implemented language-aware descr
 | Task | Description | Status |
 | :--- | :--- | :--- |
 | FIX_HUGO_BUILD | Installed `hugo-bin@latest` and fixed template indexing for bilingual sites. | [x] |
-| UPDATE_BASEURL | Set `baseURL` to `https://renatureforce.com` in `hugo.toml`. | [x] |
+| UPDATE_BASEURL | Set `baseURL` to `https://renatureforce.com/blog/` in `hugo.toml`. | [x] |
+| FIX_TITLES | Rewrote repetitive AI-slop titles, fixed wrong 2024 date, and updated `writer-v1.md` prompt with strict anti-repetition rules. | [x] |

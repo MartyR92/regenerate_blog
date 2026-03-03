@@ -1,7 +1,7 @@
 ---
-title: Die Neuvermessung des Ackerlands – Präzision als Katalysator regenerativer Fülle
+title: "Radikale Metriken: Warum Sensoren den Pflug ersetzen"
 language: de
-date: 2024-05-15T10:00:00+01:00
+date: 2026-03-02T10:00:00+01:00
 draft: false
 description: Dieser Artikel analysiert, wie fortschrittliche Präzisionslandwirtschaftstechnologien – von Satellitendaten über KI bis hin zu autonomen Systemen – die regenerative Wirtschaft fundamental neu gestalten. Er beleuchtet die symbiotische Fusion von digitaler Intelligenz und ökologischer Resilienz und zeigt auf, wie diese die Ernteerträge signifikant steigert, Ressourcen effizienter nutzt und ein neues Paradigma der landwirtschaftlichen Fülle erschafft.
 categories:

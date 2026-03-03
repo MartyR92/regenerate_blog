@@ -1,5 +1,5 @@
 ---
-title: "Algorithmische Symbiose: Wie Präzisionstechnologie die regenerative Landwirtschaft transformiert und neues Kapital generiert"
+title: "Die Ertrags-Matrix: Tech-gestützte Agrikultur als neues Anlagevehikel"
 date: 2026-02-26T14:17:30.342881
 draft: false
 ai_assisted: true

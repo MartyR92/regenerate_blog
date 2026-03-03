@@ -1,5 +1,5 @@
 ---
-title: "The Mycelium as a Blueprint: Decentralized Abundance in the Regenerative Economy"
+title: "Fungal Protocols: Decentralized Infrastructure Modeled on Nature"
 
 language: en
 date: 2026-03-03T10:00:00+01:00

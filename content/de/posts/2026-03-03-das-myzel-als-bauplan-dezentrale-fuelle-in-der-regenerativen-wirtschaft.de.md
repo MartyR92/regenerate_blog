@@ -1,5 +1,5 @@
 ---
-title: "Das Myzel als Bauplan: Dezentrale Fülle in der regenerativen Wirtschaft"
+title: "Pilz-Protokolle: Dezentrale Infrastrukturen nach dem Vorbild der Natur"
 language: de
 date: 2026-03-03T10:00:00+01:00
 draft: false
