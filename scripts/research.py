@@ -50,23 +50,42 @@ def main():
         print(f"OpenAlex API error: {e}")
 
     # Prepare context for AI
-    context_str = f"Query: {query}\\n\\nWeb:\\n"
+    context_str = f"Query: {query}\n\nWeb:\n"
     for r in serper_results: 
-        context_str += f"- {r.get('title')}: {r.get('snippet')}\\n"
-    context_str += "\\nAcademic:\\n"
+        context_str += f"- {r.get('title')} (URL: {r.get('link')}): {r.get('snippet')}\n"
+    context_str += "\nAcademic:\n"
     for w in openalex_results: 
-        context_str += f"- {w.get('title')}\\n"
+        context_str += f"- {w.get('title')} (DOI: {w.get('doi')}, Date: {w.get('publication_date')})\n"
 
-    prompt = f"Analyze the research data and return a raw JSON object (no markdown, no code blocks) with keys: title, summary, relevance_score (1-100), sources (list of strings). Data:\\n{context_str}"
+    prompt = """
+    Analyze the research data and return a raw JSON object (no markdown, no code blocks).
+    
+    KEYS:
+    - title: A descriptive title for this research item.
+    - summary: A deep, technical summary of findings.
+    - relevance_score: (1-100).
+    - citations: An array of objects, each containing:
+        - source_title: Title of the source.
+        - source_url: Direct URL or DOI.
+        - author: Primary author or organization.
+        - pub_date: Publication date (if available).
+        - key_quote: A relevant snippet or data point.
+    
+    DATA:
+    """ + context_str
     
     gemini_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    interactions_key = os.environ.get("INTERACTIONS_API_KEY", "").strip()
     inception_key = os.environ.get("INCEPTION_API_KEY", "").strip()
 
     # DIAGNOSTIC: List models if 404 persists
     if gemini_key:
         print("Diagnostic: Fetching available models...")
         try:
-            diag = requests.get(f"https://generativelanguage.googleapis.com/v1beta/models?key={gemini_key}")
+            # Use Interactions API key if available for deep search capabilities, else fallback to standard Gemini key
+            active_key = interactions_key if interactions_key else gemini_key
+            
+            diag = requests.get(f"https://generativelanguage.googleapis.com/v1beta/models?key={active_key}")
             if diag.status_code == 200:
                 model_list = [m['name'] for m in diag.json().get('models', [])]
                 print(f"Found {len(model_list)} models. First 5: {model_list[:5]}")
@@ -74,17 +93,24 @@ def main():
                 # Dynamic model selection from available list
                 target_model = None
                 for m in model_list:
-                    if "gemini-1.5-flash" in m:
+                    if "gemini-2.5-flash" in m: # Prioritize 2.5 Flash for deep research
                         target_model = m
                         break
+                if not target_model:
+                    for m in model_list:
+                        if "gemini-1.5-flash" in m:
+                            target_model = m
+                            break
                 if not target_model and model_list:
                     target_model = model_list[0]
                 
                 if target_model:
                     print(f"Attempting dynamically found model: {target_model}")
-                    url = f"https://generativelanguage.googleapis.com/v1beta/{target_model}:generateContent?key={gemini_key}"
+                    url = f"https://generativelanguage.googleapis.com/v1beta/{target_model}:generateContent?key={active_key}"
                     res = requests.post(url, headers={"Content-Type": "application/json"},
-                                        json={"contents": [{"parts": [{"text": prompt}]}]}, timeout=30)
+                                        json={"contents": [{"parts": [{"text": prompt}]}],
+                                              "generationConfig": {"response_mime_type": "application/json"}}, 
+                                        timeout=60)
                     
                     if res.status_code == 200:
                         text = res.json()['candidates'][0]['content']['parts'][0]['text']

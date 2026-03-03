@@ -27,6 +27,11 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Set up Interactions API Key
+        env:
+          INTERACTIONS_API_KEY: ${{ secrets.INTERACTIONS_API_KEY }}
+        run: echo "Interactions API key available"
+
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:

@@ -8,6 +8,9 @@ from datetime import datetime
 import urllib3
 import time
 import yaml
+import subprocess
+import tempfile
+import cairosvg
 
 # Disable SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -35,13 +38,17 @@ def call_gemini_with_retry(url, payload, max_retries=3):
             elif res.status_code == 429:
                 print(f"Quota exceeded. Retrying in 60s... (Attempt {i+1}/{max_retries})")
                 time.sleep(60)
+            elif res.status_code >= 500:
+                print(f"Server Error ({res.status_code}). Retrying in 10s...")
+                time.sleep(10)
             else:
-                print(f"API Error: {res.status_code} - {res.text}")
-                break
+                print(f"Critical API Error: {res.status_code} - {res.text}")
+                sys.exit(1)
         except requests.exceptions.Timeout:
             print(f"Timeout occurred. Retrying... (Attempt {i+1}/{max_retries})")
             time.sleep(10)
-    return None
+    print("Maximum retries reached. Halting pipeline.")
+    sys.exit(1)
 
 def process_file(target_file, gemini_key, research_data):
     print(f"Processing visuals for: {target_file}")
@@ -82,7 +89,12 @@ def process_file(target_file, gemini_key, research_data):
     
     REQUIREMENTS:
     1. Return a JSON object with two fields: 'svg' and 'caption'.
-    2. 'svg': The raw <svg>...</svg> code (width 800).
+    2. 'svg': The raw <svg>...</svg> code.
+       - Use embedded CSS inside the SVG for responsiveness.
+       - Use 'currentColor' or '@media (prefers-color-scheme: dark)' for dark/light mode compatibility.
+       - Use '@media (max-width: 600px)' for mobile text resizing (ensure readability).
+       - Enforce a maximum width constraint (e.g., max-width: 800px).
+       - Ensure a scalable 'viewBox' attribute is present.
     3. 'caption': A professional, reader-facing description of the visual data in {lang.upper()}.
     4. NO mentions of 'AI', 'agents', or 'image-agent'.
     5. Ensure high-contrast and precision.
@@ -129,10 +141,34 @@ def process_file(target_file, gemini_key, research_data):
             
         print(f"Saved SVG diagram to: {img_path}")
 
-        # 5. Update Markdown with localized caption
-        markdown_ref = f"\n\n![{caption}](/images/{year}/{slug}/{img_filename})\n*{caption}*\n"
+        # 4b. Synchronous WebP Fallback Generation
+        webp_filename = img_filename.replace(".svg", ".webp")
+        webp_path = f"{img_dir}/{webp_filename}"
         
-        if f"/images/{year}/{slug}/{img_filename}" in full_text:
+        try:
+            with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp_png:
+                temp_png_path = tmp_png.name
+            
+            print(f"Generating WebP fallback for {img_path}...")
+            # Convert SVG to PNG using cairosvg
+            cairosvg.svg2png(bytestring=svg_text.encode('utf-8'), write_to=temp_png_path)
+            
+            # Convert PNG to WebP using cwebp
+            subprocess.run(['cwebp', '-q', '80', temp_png_path, '-o', webp_path], check=True, capture_output=True)
+            
+            # Cleanup temp PNG
+            if os.path.exists(temp_png_path):
+                os.remove(temp_png_path)
+                
+            print(f"Saved WebP fallback to: {webp_path}")
+        except Exception as webp_err:
+            print(f"WebP generation failed: {webp_err}")
+            sys.exit(1)
+
+        # 5. Update Markdown with localized caption and root-relative path
+        markdown_ref = f"\n\n![{caption}](/blog/images/{year}/{slug}/{img_filename})\n*{caption}*\n"
+        
+        if f"/blog/images/{year}/{slug}/{img_filename}" in full_text:
             print("Diagram already referenced. Skipping.")
         else:
             if "##" in full_text:
