@@ -14,7 +14,9 @@
   1. User can view all diagrams, graphs, and images correctly rendered on the live blog without broken paths.
   2. The automated pipeline successfully generates images without permission errors regarding the Interactions API.
   3. Users can inspect SVG/WebP visuals clearly across different viewport sizes.
-**Plans**: TBD
+**Plans**: 2 plans
+- [ ] 11-01-PLAN.md — Update CI/CD pipelines and generate WebP fallbacks
+- [ ] 11-02-PLAN.md — Implement custom Hugo picture render hook
 
 ### Phase 12: Deep Research & Citations
 **Goal**: Users can read blog posts with verifiable facts, evident citations, and quotes sourced via deep research.
@@ -30,5 +32,5 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 11. Visual Infrastructure & Rendering | 0/0 | Not started | - |
+| 11. Visual Infrastructure & Rendering | 0/2 | Planned | - |
 | 12. Deep Research & Citations | 0/0 | Not started | - |
