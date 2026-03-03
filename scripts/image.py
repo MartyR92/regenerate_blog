@@ -50,19 +50,22 @@ def process_file(target_file, gemini_key, research_data):
         full_text = f.read()
 
     # Detect Language and extract Front Matter
-    fm_match = re.match(r'^---\s*\n(.*?)\n---\s*\n', full_text, re.DOTALL)
+    # Be more robust with whitespace and potential code block wrappers (which shouldn't be there anymore)
+    fm_match = re.search(r'^---\s*\n(.*?)\n---\s*\n', full_text, re.DOTALL | re.MULTILINE)
     lang = "de" # Default
     if fm_match:
         try:
             fm = yaml.safe_load(fm_match.group(1))
             if "language" in fm:
                 lang = fm["language"]
-            elif "content/en/" in target_file or ".en.md" in target_file:
-                lang = "en"
-            elif "content/de/" in target_file or ".de.md" in target_file:
-                lang = "de"
         except:
             pass
+    
+    # Second pass if FM match failed or language still de and file has .en.md
+    if ".en.md" in target_file:
+        lang = "en"
+    elif ".de.md" in target_file:
+        lang = "de"
 
     top_research = research_data[0]
     metrics = top_research.get("summary", "")

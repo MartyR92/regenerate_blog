@@ -1,34 +1,16 @@
 [
   {
-    "title": "Symbiotic Technology and Precision Agriculture Driving Regenerative Economy Developments",
-    "summary": "Latest developments highlight precision agriculture, utilizing satellite data, sensors, GPS, drones, IoT, AI, and advanced monitoring systems, as crucial for the regenerative economy. These technologies significantly enhance crop yields by 20-30% and reduce input waste by 40-60%. Automated planting and harvesting systems are emerging to support diverse crop rotations and intercropping—key practices in regenerative agriculture—while also reducing labor demands. Digitalization and AI deliver multi-dimensional solutions enabling farmers to track improvements and foster a more sustainable and economically viable agricultural future, underscoring the significant investment potential of regenerative practices.",
-    "relevance_score": 88,
+    "title": "Mycelial Networks: The Biological Internet of the Regenerative Economy",
+    "summary": "Mycelial networks provide a profound biological model for decentralized, resilient, and resource-efficient economic systems. In nature, mycelium facilitates nutrient exchange, communication between diverse plant species, and soil restoration. Translating these principles to the regenerative economy suggests a shift from competitive to collaborative resource management, distributed governance models, and bio-inspired logistics. Latest research highlights the role of mycelium in carbon sequestration and its potential as a biomaterial for sustainable construction and packaging, embodying the principles of a circular, life-aligned economy.",
+    "relevance_score": 95,
     "sources": [
-      "7 Shocking Tech Breakthroughs In Innovative Agriculture - Farmonaut",
-      "The role of modern agricultural technologies in improving ... - Frontiers",
-      "Cultivating a Sustainable Future: The Investability of Regenerative ...",
-      "Technology Innovations in Regenerative Agriculture → Scenario",
-      "Delivering regenerative agriculture through digitalization and AI"
+      "Merlin Sheldrake - Entangled Life",
+      "Paul Stamets - Mycelium Running",
+      "Biomimicry Institute - Nature's Design for Distributed Systems",
+      "Latest developments in Mycology for Sustainable Industry"
     ],
-    "timestamp": "2026-02-26T14:08:02.617254",
-    "query": "Symbiotic Technology Precision Agriculture latest developments in regenerative economy",
-    "engine": "Gemini (models/gemini-2.5-flash)"
-  },
-  {
-    "title": "Symbiotic Digital Twins for Regenerative Economic Systems",
-    "summary": "The latest developments indicate a strong convergence of symbiotic technology and digital twins in advancing a regenerative economy. Digital twins are increasingly recognized as foundational elements for achieving circular economy principles, sustainability goals, and optimizing renewable energy investments. Frameworks like the 'Symbiotic Digital Environment Framework' integrate Human and Machine Digital Twins, while 'Symbiotic Architecture' leverages generative AI to optimize energy consumption and predict maintenance, contributing to resource efficiency. This synergistic interplay of AI and digital twins is crucial for environmentally planning sustainable smart cities and facilitating energy transitions, all of which are essential components of a regenerative economic model.",
-    "relevance_score": 82,
-    "sources": [
-      "Digital twin technology and artificial intelligence in energy transition",
-      "A Symbiotic Digital Environment Framework for Industry 4.0 and 5.0",
-      "Digital twins: cornerstone to circular economy and sustainability goals",
-      "The Symbiotic Architecture: How Generative AI and Digital Twins on ...",
-      "Economic impact of digital twins on renewable energy investments",
-      "The Relationship Between Artificial Intelligence (AI) and Building Information Modeling (BIM) Technologies for Sustainable Building in the Context of Smart Cities",
-      "The synergistic interplay of artificial intelligence and digital twin in environmentally planning sustainable smart cities: A comprehensive systematic review"
-    ],
-    "timestamp": "2026-03-02T06:55:31.416526",
-    "query": "Symbiotic Technology Digital Twins latest developments in regenerative economy",
-    "engine": "Gemini (models/gemini-2.5-flash)"
+    "timestamp": "2026-03-03T10:00:00.000000",
+    "query": "Mycelial Networks Biological Internet Regenerative Economy",
+    "engine": "Manual Injection"
   }
 ]

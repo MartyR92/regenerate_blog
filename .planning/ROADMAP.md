@@ -1,16 +1,16 @@
 # Roadmap: Visual Integrity & Bilingual Content Parity
 
 ## Phase 8: Diagram Rendering & Language Fixes
-- [ ] **Task 8.1: Debug SVG/WebP Logic**
+- [x] **Task 8.1: Debug SVG/WebP Logic**
     - Investigate why diagrams are failing to render (path issue vs. file format).
-- [ ] **Task 8.2: Implement Language-Aware Image Descriptions**
+- [x] **Task 8.2: Implement Language-Aware Image Descriptions**
     - Update `scripts/image.py` to detect post language and translate captions.
     - Remove "agent-specific" mentions from captions.
 
 ## Phase 9: Mandatory Bilingual Core
-- [ ] **Task 9.1: Refactor `scripts/writer.py` for DE+EN Pairs**
+- [x] **Task 9.1: Refactor `scripts/writer.py` for DE+EN Pairs**
     - Implement a two-pass generation or translation pass to ensure identical content in both languages.
-- [ ] **Task 9.2: Update System Prompts for Bilingual Content**
+- [x] **Task 9.2: Update System Prompts for Bilingual Content**
     - Refine `writer-v1.md` to enforce exact semantic parity between translations.
 
 ## Phase 10: Content Cleanup & E2E Validation

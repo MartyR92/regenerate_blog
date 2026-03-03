@@ -1,0 +1,44 @@
+{{ if hugo.IsMultilingual }}
+  <div class="translation nested-menu">
+    <button class="cursor-pointer flex items-center" aria-label="{{ i18n "global.language" }}">
+      <span class="me-1">
+        {{ partial "icon.html" "language" }}
+      </span>
+      <span class="text-sm font-medium bf-icon-color-hover">
+        {{- .Language.Lang | upper -}}
+      </span>
+    </button>
+    <ul class="menuhide">
+      <li class="rounded-xl backdrop-blur shadow-2xl p-2 flex flex-col gap-1 bg-neutral/25 dark:bg-neutral-800/25">
+        {{ range site.Languages }}
+          {{ if ne .Lang site.Language.Lang }}
+            {{ $lang := . }}
+            {{ $found := false }}
+            {{ range $.AllTranslations }}
+              {{ if eq .Language $lang }}
+                <a href="{{ .RelPermalink }}" class="flex items-center bf-icon-color-hover px-3 py-1">
+                  <span class="text-sm font-sm">
+                    {{ .Language.Params.displayName | default .Language.LanguageName | emojify }}
+                  </span>
+                </a>
+                {{ $found = true }}
+              {{ end }}
+            {{ end }}
+            {{ if not $found }}
+              {{ $targetLang := .Lang }}
+              {{ range site.Sites }}
+                {{ if eq .Language.Lang $targetLang }}
+                  <a href="{{ .Home.RelPermalink }}" class="flex items-center bf-icon-color-hover px-3 py-1">
+                    <span class="text-sm font-sm">
+                      {{ .Language.Params.displayName | default .Language.LanguageName | emojify }}
+                    </span>
+                  </a>
+                {{ end }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      </li>
+    </ul>
+  </div>
+{{ end }}

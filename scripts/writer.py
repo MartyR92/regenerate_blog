@@ -29,7 +29,12 @@ def call_gemini(url, payload):
     try:
         res = requests.post(url, json=payload, timeout=300)
         if res.status_code == 200:
-            return res.json()['candidates'][0]['content']['parts'][0]['text']
+            text = res.json()['candidates'][0]['content']['parts'][0]['text']
+            # Strip triple backticks if present
+            text = re.sub(r'^```markdown\n', '', text, flags=re.MULTILINE)
+            text = re.sub(r'^```\n', '', text, flags=re.MULTILINE)
+            text = re.sub(r'\n```$', '', text, flags=re.MULTILINE)
+            return text.strip()
         else:
             print(f"Gemini API error: {res.status_code} - {res.text}")
             return None

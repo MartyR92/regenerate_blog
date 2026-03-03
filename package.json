@@ -1,0 +1,24 @@
+{
+  "name": "regenerate_blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "marinate_tasks.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MartyR92/regenerate_blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MartyR92/regenerate_blog/issues"
+  },
+  "homepage": "https://github.com/MartyR92/regenerate_blog#readme",
+  "devDependencies": {
+    "hugo-bin": "^0.149.2"
+  }
+}
