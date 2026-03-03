@@ -1,0 +1,186 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="chartTitle chartDesc">
+  <title id="chartTitle">Myzeliale Netzwerke und die Regenerative Ökonomie</title>
+  <desc id="chartDesc">Diagramm, das die Prinzipien myzelialer Netzwerke veranschaulicht, die auf ein regeneratives Wirtschaftsmodell übertragen werden, mit Hervorhebung der wichtigsten Anwendungen und Vorteile.</desc>
+  <style>
+    /* Embedded CSS for responsiveness and dark/light mode */
+    :root {
+      --primary-bg: #FFFFFF; /* Default light mode background */
+      --primary-text: #0F1A15; /* Default light mode text */
+      --secondary-color: #C5B388;
+      --accent-color: #2C3330;
+      --line-color: #0F1A15;
+      --node-fill: #F0F0F0;
+      --node-border: #0F1A15;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-bg: #0F1A15; /* Dark mode background */
+        --primary-text: #E0E0E0; /* Dark mode text */
+        --line-color: #C5B388;
+        --node-fill: #2C3330;
+        --node-border: #C5B388;
+      }
+    }
+
+    svg {
+      max-width: 800px;
+      height: auto;
+      background-color: var(--primary-bg);
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--primary-text);
+    }
+
+    .chart-title {
+      font-size: 28px;
+      font-weight: bold;
+      fill: var(--primary-text);
+      text-anchor: middle;
+    }
+
+    .node-label {
+      font-size: 14px;
+      fill: var(--primary-text);
+      text-anchor: middle;
+    }
+
+    .sub-node-label {
+      font-size: 12px;
+      fill: var(--primary-text);
+      text-anchor: middle;
+    }
+
+    .connection-label {
+      font-size: 10px;
+      fill: var(--accent-color);
+      text-anchor: middle;
+    }
+
+    .node-shape {
+      fill: var(--node-fill);
+      stroke: var(--node-border);
+      stroke-width: 2;
+      rx: 8; /* Rounded corners for organic feel */
+      ry: 8;
+    }
+
+    .path-line {
+      stroke: var(--line-color);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .arrowhead {
+      fill: var(--line-color);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 600px) {
+      .chart-title {
+        font-size: 22px;
+      }
+      .node-label {
+        font-size: 12px;
+      }
+      .sub-node-label {
+        font-size: 10px;
+      }
+      .connection-label {
+        font-size: 8px;
+      }
+    }
+  </style>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" class="arrowhead" />
+    </marker>
+  </defs>
+
+  <!-- Chart Title -->
+  <text x="400" y="40" class="chart-title">Myzeliale Netzwerke &amp; Regenerative Ökonomie</text>
+
+  <!-- Main Nodes -->
+  <g>
+    <!-- Mycelial Networks (Central) -->
+    <rect x="300" y="80" width="200" height="60" class="node-shape" />
+    <text x="400" y="115" class="node-label">Myzeliale Netzwerke</text>
+
+    <!-- Natural Principles -->
+    <rect x="100" y="200" width="180" height="60" class="node-shape" />
+    <text x="190" y="235" class="node-label">Natürliche Prinzipien</text>
+
+    <!-- Economic Applications -->
+    <rect x="520" y="200" width="180" height="60" class="node-shape" />
+    <text x="610" y="235" class="node-label">Ökonomische Anwendungen</text>
+
+    <!-- Sustainable Outcomes -->
+    <rect x="300" y="450" width="200" height="60" class="node-shape" />
+    <text x="400" y="485" class="node-label">Nachhaltige Ergebnisse</text>
+  </g>
+
+  <!-- Sub-nodes for Natural Principles -->
+  <g>
+    <rect x="20" y="300" width="150" height="40" class="node-shape" />
+    <text x="95" y="325" class="sub-node-label">Nährstoffaustausch</text>
+
+    <rect x="170" y="300" width="150" height="40" class="node-shape" />
+    <text x="245" y="325" class="sub-node-label">Kommunikation</text>
+
+    <rect x="95" y="350" width="150" height="40" class="node-shape" />
+    <text x="170" y="375" class="sub-node-label">Bodenregeneration</text>
+  </g>
+
+  <!-- Sub-nodes for Economic Applications -->
+  <g>
+    <rect x="480" y="300" width="150" height="40" class="node-shape" />
+    <text x="555" y="325" class="sub-node-label">Kollaboratives Management</text>
+
+    <rect x="630" y="300" width="150" height="40" class="node-shape" />
+    <text x="705" y="325" class="sub-node-label">Verteilte Governance</text>
+
+    <rect x="555" y="350" width="150" height="40" class="node-shape" />
+    <text x="630" y="375" class="sub-node-label">Bio-inspirierte Logistik</text>
+  </g>
+
+  <!-- Sub-nodes for Sustainable Outcomes -->
+  <g>
+    <rect x="200" y="530" width="150" height="40" class="node-shape" />
+    <text x="275" y="555" class="sub-node-label">Kohlenstoffbindung</text>
+
+    <rect x="450" y="530" width="150" height="40" class="node-shape" />
+    <text x="525" y="555" class="sub-node-label">Biomaterialien</text>
+  </g>
+
+  <!-- Connections -->
+  <g>
+    <!-- Mycelial Networks to Natural Principles -->
+    <path d="M400,140 C400,170 200,170 190,200" class="path-line" marker-end="url(#arrow)" />
+    <text x="300" y="175" class="connection-label">Modell für</text>
+
+    <!-- Mycelial Networks to Economic Applications -->
+    <path d="M400,140 C400,170 600,170 610,200" class="path-line" marker-end="url(#arrow)" />
+    <text x="500" y="175" class="connection-label">Übertragung auf</text>
+
+    <!-- Natural Principles to its sub-nodes -->
+    <path d="M190,260 L95,300" class="path-line" marker-end="url(#arrow)" />
+    <path d="M190,260 L245,300" class="path-line" marker-end="url(#arrow)" />
+    <path d="M190,260 L170,350" class="path-line" marker-end="url(#arrow)" />
+
+    <!-- Economic Applications to its sub-nodes -->
+    <path d="M610,260 L555,300" class="path-line" marker-end="url(#arrow)" />
+    <path d="M610,260 L705,300" class="path-line" marker-end="url(#arrow)" />
+    <path d="M610,260 L630,350" class="path-line" marker-end="url(#arrow)" />
+
+    <!-- Natural Principles & Economic Applications to Sustainable Outcomes -->
+    <path d="M170,390 C170,420 350,420 350,450" class="path-line" marker-end="url(#arrow)" />
+    <text x="260" y="425" class="connection-label">Führt zu</text>
+
+    <path d="M630,390 C630,420 450,420 450,450" class="path-line" marker-end="url(#arrow)" />
+    <text x="540" y="425" class="connection-label">Ermöglicht</text>
+
+    <!-- Sustainable Outcomes to its sub-nodes -->
+    <path d="M400,510 L275,530" class="path-line" marker-end="url(#arrow)" />
+    <path d="M400,510 L525,530" class="path-line" marker-end="url(#arrow)" />
+  </g>
+</svg>

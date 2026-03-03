@@ -1,5 +1,7 @@
 ```markdown
 ---
+featureImage: "/blog/images/2026/2026-03-02-die-architekten-des-atmenden-planeten-wie-digitale-ökosysteme-die-regenerative-fülle-entfesseln/cover.jpg"
+featureImageAlt: "Cover image for article about Solarpunk Nature"
 title: "Symbiotische Zwillinge: Wenn Smart Cities auf Biosphären-Design treffen"
 date: 2026-03-02T06:55:50.217596
 draft: false
@@ -82,3 +84,13 @@ Der Übergang zur regenerativen Wirtschaft erfordert nicht weniger Technologie, 
 
 Wir sind die Architekten dieses atmenden Planeten. Unsere Werkzeuge sind nicht nur Code und Sensoren, sondern auch das tiefe Verständnis für die Vernetzung des Lebens. Wir schaffen nicht nur Produkte oder Dienstleistungen, sondern lebendige Systeme, die von Grund auf heilen, wachsen und unendlichen Wert generieren. Dies ist die Zukunft des Wohlstands, der Innovation und des wahren Prestiges. Es ist eine Zukunft, in der Fülle nicht durch Ausbeutung, sondern durch intelligente Regeneration entsteht.
 ```
+
+*Cover image by Jovan Vasiljević on Unsplash*
+
+
+![Dieses technische Diagramm veranschaulicht Myzelnetzwerke als ein tiefgreifendes biologisches Modell für dezentrale, widerstandsfähige und ressourceneffiziente Wirtschaftssysteme. Es zeigt die natürlichen Funktionen des Myzels – Nährstoffaustausch, Kommunikation zwischen Pflanzenarten und Bodenregeneration – und überträgt diese Prinzipien auf die regenerative Wirtschaft. Dazu gehören kollaboratives Ressourcenmanagement, verteilte Governance-Modelle und bio-inspirierte Logistik. Aktuelle Forschungsergebnisse heben zudem die Rolle des Myzels bei der Kohlenstoffbindung und sein Potenzial als Biomaterial für nachhaltiges Bauen und Verpacken hervor, was die Grundsätze einer zirkulären, lebensfreundlichen Wirtschaft verkörpert.](/blog/images/2026/2026-03-02-die-architekten-des-atmenden-planeten-wie-digitale-ökosysteme-die-regenerative-fülle-entfesseln/technical_visual_2_de.svg)
+*Dieses technische Diagramm veranschaulicht Myzelnetzwerke als ein tiefgreifendes biologisches Modell für dezentrale, widerstandsfähige und ressourceneffiziente Wirtschaftssysteme. Es zeigt die natürlichen Funktionen des Myzels – Nährstoffaustausch, Kommunikation zwischen Pflanzenarten und Bodenregeneration – und überträgt diese Prinzipien auf die regenerative Wirtschaft. Dazu gehören kollaboratives Ressourcenmanagement, verteilte Governance-Modelle und bio-inspirierte Logistik. Aktuelle Forschungsergebnisse heben zudem die Rolle des Myzels bei der Kohlenstoffbindung und sein Potenzial als Biomaterial für nachhaltiges Bauen und Verpacken hervor, was die Grundsätze einer zirkulären, lebensfreundlichen Wirtschaft verkörpert.*
+
+
+![Visuelle Darstellung: Technical Diagram zu 2026-03-02-die-architekten-des-atmenden-planeten-wie-digitale-ökosysteme-die-regenerative-fülle-entfesseln](/blog/images/2026/2026-03-02-die-architekten-des-atmenden-planeten-wie-digitale-ökosysteme-die-regenerative-fülle-entfesseln/technical_visual_3_de.svg)
+*Visuelle Darstellung: Technical Diagram zu 2026-03-02-die-architekten-des-atmenden-planeten-wie-digitale-ökosysteme-die-regenerative-fülle-entfesseln*

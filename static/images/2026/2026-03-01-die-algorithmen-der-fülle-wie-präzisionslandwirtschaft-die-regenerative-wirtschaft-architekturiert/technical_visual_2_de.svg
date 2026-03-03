@@ -1,0 +1,16 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="400" fill="#0F1A15"/>
+    <path d="M 50 350 L 750 350" stroke="#2C3330" stroke-width="2"/>
+    <path d="M 50 50 L 50 350" stroke="#2C3330" stroke-width="2"/>
+    <text x="400" y="200" font-family="JetBrains Mono, monospace" font-size="24" fill="#C5B388" text-anchor="middle">
+        Technical Chart
+    </text>
+    <text x="400" y="240" font-family="JetBrains Mono, monospace" font-size="16" fill="#2C3330" text-anchor="middle">
+        2026-03-01-die-algorithmen-der-fülle-wie-präzisionslandwirtschaft-die-regenerative-wirtschaft-architekturiert
+    </text>
+    <circle cx="100" cy="300" r="5" fill="#C5B388"/>
+    <circle cx="200" cy="250" r="5" fill="#C5B388"/>
+    <circle cx="300" cy="280" r="5" fill="#C5B388"/>
+    <circle cx="400" cy="150" r="5" fill="#C5B388"/>
+    <path d="M 100 300 L 200 250 L 300 280 L 400 150" fill="none" stroke="#C5B388" stroke-width="2" stroke-dasharray="5,5"/>
+</svg>

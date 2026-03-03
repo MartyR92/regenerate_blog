@@ -1,4 +1,6 @@
 ---
+featureImage: "/blog/images/2026/2026-03-01-die-algorithmen-der-fülle-wie-präzisionslandwirtschaft-die-regenerative-wirtschaft-architekturiert/cover.jpg"
+featureImageAlt: "Lush Solarpunk nature: green city with vertical gardens and integrated solar energy."
 title: "Agro-Kybernetik: Das Betriebssystem für widerstandsfähige Böden"
 date: 2026-03-01T18:03:27.269284
 draft: false
@@ -81,3 +83,13 @@ Prestige misst sich nicht länger am Grad der Zerstörung, die wir uns leisten k
 Dieser Wandel ist keine Option, sondern eine Evolution. Er erfordert nicht weniger Technologie, sondern eine fundamental intelligentere – eine Architektur, die atmet, lernt und mit den Rhythmen der Biosphäre ko-kreiert. Wir sind Zeugen und Gestalter einer Ära, in der aus ökologischer Theorie harte ökonomische Praxis wird und aus visionären Konzepten anwendbares, prestigeträchtiges Design entsteht.
 
 Die Algorithmen der Fülle sind geschrieben. Es liegt an uns, sie in die lebendige Architektur unserer Zukunft zu übersetzen. Die Natur ist nicht nur unsere Inspiration, sondern unser überlegenster Technologiepartner. Ihre Regeneration ist nicht nur unsere Aufgabe, sondern unser größter Gewinn.
+
+*Cover image by Jovan Vasiljević on Unsplash*
+
+
+![Visuelle Darstellung: Technical Chart zu 2026-03-01-die-algorithmen-der-fülle-wie-präzisionslandwirtschaft-die-regenerative-wirtschaft-architekturiert](/blog/images/2026/2026-03-01-die-algorithmen-der-fülle-wie-präzisionslandwirtschaft-die-regenerative-wirtschaft-architekturiert/technical_visual_2_de.svg)
+*Visuelle Darstellung: Technical Chart zu 2026-03-01-die-algorithmen-der-fülle-wie-präzisionslandwirtschaft-die-regenerative-wirtschaft-architekturiert*
+
+
+![Visuelle Darstellung: Technical Diagram zu 2026-03-01-die-algorithmen-der-fülle-wie-präzisionslandwirtschaft-die-regenerative-wirtschaft-architekturiert](/blog/images/2026/2026-03-01-die-algorithmen-der-fülle-wie-präzisionslandwirtschaft-die-regenerative-wirtschaft-architekturiert/technical_visual_3_de.svg)
+*Visuelle Darstellung: Technical Diagram zu 2026-03-01-die-algorithmen-der-fülle-wie-präzisionslandwirtschaft-die-regenerative-wirtschaft-architekturiert*
