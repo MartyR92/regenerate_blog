@@ -1,4 +1,3 @@
-```markdown
 ---
 featureImage: "/images/2026/2026-03-02-die-architekten-des-atmenden-planeten-wie-digitale-oekosysteme-die-regenerative-fuelle-entfesseln/cover.jpg"
 featureImageAlt: "Cover image for article about Solarpunk Nature"
@@ -93,4 +92,3 @@ Wir sind die Architekten dieses atmenden Planeten. Unsere Werkzeuge sind nicht n
 
 
 ![Visuelle Darstellung: Technical Diagram zu 2026-03-02-die-architekten-des-atmenden-planeten-wie-digitale-oekosysteme-die-regenerative-fuelle-entfesseln](/images/2026/2026-03-02-die-architekten-des-atmenden-planeten-wie-digitale-oekosysteme-die-regenerative-fuelle-entfesseln/technical_visual_3_de.svg)
-*Visuelle Darstellung: Technical Diagram zu 2026-03-02-die-architekten-des-atmenden-planeten-wie-digitale-oekosysteme-die-regenerative-fuelle-entfesseln*

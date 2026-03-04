@@ -3,19 +3,19 @@
 {{- $base := strings.TrimSuffix ".svg" $src -}}
 {{- $webp := printf "%s.webp" $base -}}
 
-<figure>
+<figure style="text-align: center;">
   <picture>
     {{- if $isSVG -}}
-      <source srcset="{{ $webp | relURL | safeURL }}" type="image/webp">
+      <source srcset="{{ $webp | absURL }}" type="image/webp">
     {{- end -}}
-    <img src="{{ $src | relURL | safeURL }}" 
+    <img src="{{ $src | absURL }}" 
          alt="{{ .Text }}" 
          {{ with .Title }} title="{{ . }}" {{ end }}
          loading="lazy" 
          style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
   </picture>
   {{- with .Title -}}
-    <figcaption style="text-align: center; font-style: italic; margin-top: 0.5rem;">
+    <figcaption style="font-style: italic; margin-top: 0.5rem;">
       {{- . | markdownify -}}
     </figcaption>
   {{- end -}}
