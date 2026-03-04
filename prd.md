@@ -1,68 +1,71 @@
-# Fix Invisible Visuals PRD
+# Fix Broken Visuals on Live Site PRD
 
 ## HR Eng
 
-| Fix Invisible Visuals PRD |  | Addressing the "invisible visuals" problem caused by redundant path prefixes and encoding-sensitive folder names in the blog archive. |
+| Fix Broken Visuals PRD |  | Resolving the "invisible visuals" issue on the live site by fixing root-relative pathing and ensuring Hugo's subpath is correctly prepended. |
 | :---- | :---- | :---- |
 | **Author**: Pickle Rick **Contributors**: Morty **Intended audience**: Engineering, Design | **Status**: Draft **Created**: 2026-03-04 | **Self Link**: [Link] **Context**: [Link] 
 
 ## Introduction
 
-The current blog archive features "invisible visuals" due to a combination of redundant path prefixes (`/blog/blog/`) and encoding issues with folder names on the live site. This PRD outlines the steps to normalize these paths and folder names for deployment-readiness.
+The blog visuals (hero images and technical visuals) are currently broken on the live site (`https://renatureforce.com/blog/`) because they are linked using root-relative paths (e.g., `/images/...`) instead of site-relative paths (e.g., `/blog/images/...`). This PRD details the steps to fix the rendering logic and validate the build.
 
 ## Problem Statement
 
-**Current Process:** Visuals are retrofitted using `scripts/visual.py` and `scripts/image.py` using root-relative paths like `/blog/images/...`.
-**Primary Users:** Readers of the RenatureForce blog.
-**Pain Points:** Images do not load on the live site, resulting in a broken visual experience.
-**Importance:** Visuals are a core part of the "Natural Solarpunk" aesthetic. A blog without its visuals is like a Morty without his stammer—pointless.
+**Current Process:** Visuals are referenced in markdown as `/images/2026/...`. The image render hook outputs these paths exactly as provided.
+**Primary Users:** Readers of the live blog.
+**Pain Points:** Images fail to load (404), resulting in a broken user experience.
+**Importance:** High. Visuals are a core part of the "Natural Solarpunk" aesthetic and "Avantgarde Prestige" brand identity.
 
 ## Objective & Scope
 
-**Objective:** Ensure all hero and technical visuals are correctly rendered on the live site.
-**Ideal Outcome:** All 9 articles display their 1 hero image and 3 technical visuals correctly.
+**Objective:** Ensure all images render correctly on both local preview and live deployment.
+**Ideal Outcome:** All 9 articles show their hero images and technical visuals.
 
 ### In-scope or Goals
-- Fix the redundant `/blog/` prefix in `featureImage` and body markdown references.
-- Sanitize image folder names to remove non-ASCII characters that cause issues with Hugo and some web servers.
-- Update `scripts/image.py` and `scripts/visual.py` to use relative paths or correct site-relative paths.
+- Update `layouts/_default/_markup/render-image.html` to use Hugo's `relURL` or `absURL` logic.
+- Verify if `featureImage` in front matter is also broken and fix if necessary (likely in theme partials).
+- Standardize all image references in markdown to be consistent.
+- Test the build and verify HTML output in `public/`.
 
 ### Not-in-scope or Non-Goals
-- Generating new visuals (the ones we have are fine, they just aren't visible).
+- Generating new visuals.
+- Renaming files (already done in previous session).
 
 ## Product Requirements
 
-1. **Path Correction**: All `featureImage` and body image paths must be updated from `/blog/images/...` to `/images/...` or correct relative paths, depending on the final deployment structure.
-2. **Folder Sanitization**: Rename all folders in `static/images/2026/` to use slug-safe, ASCII-only names.
-3. **Agent Retrofit**: Update the generation scripts to ensure future visuals are created with the correct pathing and naming conventions.
+1. **Path Normalization**: All image links in HTML must be relative to the site base or absolute to the domain root including the `/blog/` prefix.
+2. **Build Validation**: The `hugo` command must produce HTML where image `src` and `srcset` attributes are correct.
+3. **Future-Proofing**: Ensure the automation scripts (`image.py`, `visual.py`) don't need further changes if the render hook is fixed.
 
 ### Critical User Journeys (CUJs)
-1. **Visual Load**: A user visits a blog post and immediately sees the high-quality hero image and technical visuals.
+1. **Article Viewing**: A user opens an article and sees all images loading instantly.
 
 ### Functional Requirements
 
 | Priority | Requirement | User Story |
 | :---- | :---- | :---- |
-| P0 | Fix Image Path Prefix | As a user, I want the images to load correctly so the blog isn't ugly. |
-| P0 | Sanitize Folder Names | As a developer, I want my folder names to not break on different OSs. |
-| P1 | Update Generation Scripts | As a developer, I want my automation to not produce broken results. |
+| P0 | Fix Image Render Hook | As a user, I want images to load correctly regardless of the site subpath. |
+| P0 | Fix Front Matter Paths | As a user, I want the hero image to appear on the post list and header. |
+| P1 | Verify Built HTML | As a developer, I want to be 100% sure the paths are correct before I commit. |
 
 ## Assumptions
 
-- The `baseURL` in `hugo.toml` will remain `https://renatureforce.com/blog/`.
+- The `baseURL` will remain `https://renatureforce.com/blog/`.
+- The theme (Blowfish) uses the `featureImage` field correctly in its partials.
 
 ## Risks & Mitigations
 
-- **Risk**: Broken links during renaming. -> **Mitigation**: Use a global search-and-replace to update all markdown files after renaming folders.
+- **Risk**: `relURL` might produce double prefixes if not careful. -> **Mitigation**: Test build output thoroughly.
 
 ## Tradeoff
 
-- **Relative vs. Absolute Paths**: We will use site-relative paths (starting with `/`) to ensure compatibility across all pages, assuming the `baseURL` handles the context.
+- **Absolute vs Relative**: Using site-relative paths (via `relURL`) is generally safer for Hugo sites on subpaths.
 
 ## Business Benefits/Impact/Metrics
 
 **Success Metrics:**
-- 100% of retrofitted articles display visuals correctly.
+- 0 broken images on the live site.
 
 ## Stakeholders / Owners
 
