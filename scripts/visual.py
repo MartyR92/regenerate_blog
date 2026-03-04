@@ -4,6 +4,7 @@ import glob
 import requests
 import json
 import re
+import unicodedata
 import urllib3
 import time
 import random
@@ -36,6 +37,13 @@ def call_gemini_with_retry(url, payload, max_retries=5):
             time.sleep(10)
     print("Maximum retries reached.")
     return None
+
+def slugify(text):
+    text = text.lower().replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
+    text = re.sub(r'[^\w\s-]', '', text)
+    text = re.sub(r'[\s_-]+', '-', text)
+    return re.sub(r'^-+|-+$', '', text)
 
 def process_file(target_file, gemini_key, unsplash_key):
     print(f"Processing visuals for: {target_file}")
@@ -98,7 +106,7 @@ def process_file(target_file, gemini_key, unsplash_key):
     
     # Standardize slug
     base_name = os.path.basename(target_file).replace('.md', '')
-    slug = re.sub(r'\.(de|en)$', '', base_name)
+    slug = slugify(re.sub(r'\.(de|en)$', '', base_name))
     year = datetime.now().strftime("%Y")
     
     # Define paths
@@ -121,7 +129,7 @@ def process_file(target_file, gemini_key, unsplash_key):
         except: pass
     
     # 5. Update front matter
-    new_fm = f'featureImage: "/blog/images/{year}/{slug}/cover.jpg"\nfeatureImageAlt: "{alt_text}"\n'
+    new_fm = f'featureImage: "/images/{year}/{slug}/cover.jpg"\nfeatureImageAlt: "{alt_text}"\n'
     content = content.replace("---\n", f"---\n{new_fm}", 1)
     
     # Append attribution at the end

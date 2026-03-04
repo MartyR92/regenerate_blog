@@ -4,6 +4,7 @@ import glob
 import requests
 import json
 import re
+import unicodedata
 from datetime import datetime
 import urllib3
 import time
@@ -97,6 +98,13 @@ def generate_procedural_svg(visual_type, title, lang):
         caption = f"Visuelle Darstellung: {visual_type} zu {title}"
     return svg, caption
 
+def slugify(text):
+    text = text.lower().replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
+    text = re.sub(r'[^\w\s-]', '', text)
+    text = re.sub(r'[\s_-]+', '-', text)
+    return re.sub(r'^-+|-+$', '', text)
+
 def process_file(target_file, gemini_key, research_data):
     print(f"Processing visuals for: {target_file}")
     
@@ -134,7 +142,7 @@ def process_file(target_file, gemini_key, research_data):
 
     # Standardize slug
     base_name = os.path.basename(target_file).replace('.md', '')
-    slug = re.sub(r'\.(de|en)$', '', base_name)
+    slug = slugify(re.sub(r'\.(de|en)$', '', base_name))
     year = datetime.now().strftime("%Y")
     img_dir = f"static/images/{year}/{slug}"
     os.makedirs(img_dir, exist_ok=True)
@@ -146,7 +154,7 @@ def process_file(target_file, gemini_key, research_data):
         img_path = f"{img_dir}/{img_filename}"
         
         # Skip if already exists
-        if f"/blog/images/{year}/{slug}/{img_filename}" in updated_content:
+        if f"/images/{year}/{slug}/{img_filename}" in updated_content:
             print(f"Visual {task['id']} already referenced in {target_file}. Skipping.")
             continue
 
@@ -232,7 +240,7 @@ def process_file(target_file, gemini_key, research_data):
             print("Skipping WebP fallback (Cairo missing).")
 
         # Smart Placement Logic
-        markdown_ref = f"\n\n![{caption}](/blog/images/{year}/{slug}/{img_filename})\n*{caption}*\n"
+        markdown_ref = f"\n\n![{caption}](/images/{year}/{slug}/{img_filename})\n*{caption}*\n"
         
         sections = updated_content.split("\n## ")
         if len(sections) > task['id']:
