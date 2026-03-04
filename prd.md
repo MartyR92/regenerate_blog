@@ -1,71 +1,71 @@
-# Fix Broken Visuals on Live Site PRD
+# Fix Broken Visuals on Live Site PRD (v2 - Verification Heavy)
 
 ## HR Eng
 
-| Fix Broken Visuals PRD |  | Resolving the "invisible visuals" issue on the live site by fixing root-relative pathing and ensuring Hugo's subpath is correctly prepended. |
+| Fix Broken Visuals PRD |  | Resolving the "invisible visuals" issue on the live site by fixing root-relative pathing and ENSURING verification via browser. |
 | :---- | :---- | :---- |
 | **Author**: Pickle Rick **Contributors**: Morty **Intended audience**: Engineering, Design | **Status**: Draft **Created**: 2026-03-04 | **Self Link**: [Link] **Context**: [Link] 
 
 ## Introduction
 
-The blog visuals (hero images and technical visuals) are currently broken on the live site (`https://renatureforce.com/blog/`) because they are linked using root-relative paths (e.g., `/images/...`) instead of site-relative paths (e.g., `/blog/images/...`). This PRD details the steps to fix the rendering logic and validate the build.
+The blog visuals (hero images and technical visuals) are currently reported as broken on the live site (`https://renatureforce.com/blog/`). Previous attempts focused on build output, but this version mandates LIVE verification via browser automation to prove visual visibility.
 
 ## Problem Statement
 
-**Current Process:** Visuals are referenced in markdown as `/images/2026/...`. The image render hook outputs these paths exactly as provided.
+**Current Process:** Visuals are referenced in markdown as `/images/2026/...`. The image render hook was updated to use `absURL`.
 **Primary Users:** Readers of the live blog.
-**Pain Points:** Images fail to load (404), resulting in a broken user experience.
-**Importance:** High. Visuals are a core part of the "Natural Solarpunk" aesthetic and "Avantgarde Prestige" brand identity.
+**Pain Points:** Images fail to load (404) or are invisible, despite build-level green lights.
+**Importance:** High. Visuals are the soul of the blog.
 
 ## Objective & Scope
 
-**Objective:** Ensure all images render correctly on both local preview and live deployment.
-**Ideal Outcome:** All 9 articles show their hero images and technical visuals.
+**Objective:** Ensure all images render correctly on the live deployment.
+**Ideal Outcome:** All 9 articles show their hero images and technical visuals when viewed in a real browser.
 
 ### In-scope or Goals
-- Update `layouts/_default/_markup/render-image.html` to use Hugo's `relURL` or `absURL` logic.
-- Verify if `featureImage` in front matter is also broken and fix if necessary (likely in theme partials).
-- Standardize all image references in markdown to be consistent.
-- Test the build and verify HTML output in `public/`.
+- Use `browserbase` to visit `https://renatureforce.com/blog/`.
+- Take screenshots of multiple posts to visually confirm image loading.
+- Audit the console logs of the browser for 404 errors.
+- Fix any remaining discrepancies between build output and live server behavior.
 
 ### Not-in-scope or Non-Goals
 - Generating new visuals.
-- Renaming files (already done in previous session).
 
 ## Product Requirements
 
-1. **Path Normalization**: All image links in HTML must be relative to the site base or absolute to the domain root including the `/blog/` prefix.
-2. **Build Validation**: The `hugo` command must produce HTML where image `src` and `srcset` attributes are correct.
-3. **Future-Proofing**: Ensure the automation scripts (`image.py`, `visual.py`) don't need further changes if the render hook is fixed.
+1. **Live Browser Verification**: Use the browser tool to visit the live site and confirm image rendering.
+2. **Path Finalization**: Ensure the server-side configuration (likely GitHub Pages or similar) isn't mangling paths.
+3. **Build Validation**: The `hugo` command must produce HTML that matches the browser's expectations.
 
 ### Critical User Journeys (CUJs)
-1. **Article Viewing**: A user opens an article and sees all images loading instantly.
+1. **Visual Load (Live)**: A user visits a live blog post and sees all images loading correctly in the browser.
 
 ### Functional Requirements
 
 | Priority | Requirement | User Story |
 | :---- | :---- | :---- |
-| P0 | Fix Image Render Hook | As a user, I want images to load correctly regardless of the site subpath. |
-| P0 | Fix Front Matter Paths | As a user, I want the hero image to appear on the post list and header. |
-| P1 | Verify Built HTML | As a developer, I want to be 100% sure the paths are correct before I commit. |
+| P0 | Browser Verification | As a user, I want to SEE the images on the actual website. |
+| P0 | Audit Browser Logs | As a developer, I want to confirm zero 404s in the browser console. |
+| P1 | Standardize Naming | As a developer, I want to ensure encoding-safe filenames throughout. |
 
 ## Assumptions
 
-- The `baseURL` will remain `https://renatureforce.com/blog/`.
-- The theme (Blowfish) uses the `featureImage` field correctly in its partials.
+- The `baseURL` is `https://renatureforce.com/blog/`.
+- The user can provide a recent screenshot of the "broken" state if my own browser check fails to reproduce.
 
 ## Risks & Mitigations
 
-- **Risk**: `relURL` might produce double prefixes if not careful. -> **Mitigation**: Test build output thoroughly.
+- **Risk**: Caching on the live site. -> **Mitigation**: Use cache-busting or force-reload in the browser check.
 
 ## Tradeoff
 
-- **Absolute vs Relative**: Using site-relative paths (via `relURL`) is generally safer for Hugo sites on subpaths.
+- **Manual vs Automated Check**: Automated browser check is faster and more objective for a genius like me.
 
 ## Business Benefits/Impact/Metrics
 
 **Success Metrics:**
-- 0 broken images on the live site.
+- 100% visual confirmation via browser screenshots.
+- 0 404 errors in browser console.
 
 ## Stakeholders / Owners
 

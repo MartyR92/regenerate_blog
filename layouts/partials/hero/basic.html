@@ -3,7 +3,11 @@
 {{ $useDefault := false }}
 {{ $featured := "" }}
 {{ $featuredURL := "" }}
-{{ with .Params.featureimage }}
+
+{{/* Try both lowercase and camelCase for featureImage */}}
+{{ $rawImage := .Params.featureimage | default .Params.featureImage }}
+
+{{ with $rawImage }}
   {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
     {{ if site.Params.hotlinkFeatureImage }}
       {{ $featuredURL = . }}
@@ -34,7 +38,7 @@
 {{ end }}
 
 {{ if not (or $featured $featuredURL) }}
-  {{ with .Params.featureimage }}
+  {{ with $rawImage }}
     {{ $featuredURL = strings.TrimPrefix "/" . | relURL }}
   {{ end }}
 {{ end }}
