@@ -1,22 +1,22 @@
-{{ $src := .Destination }}
-{{ $isSVG := strings.HasSuffix $src ".svg" }}
-{{ $base := strings.TrimSuffix ".svg" $src }}
-{{ $webp := printf "%s.webp" $base }}
+{{- $src := .Destination -}}
+{{- $isSVG := strings.HasSuffix $src ".svg" -}}
+{{- $base := strings.TrimSuffix ".svg" $src -}}
+{{- $webp := printf "%s.webp" $base -}}
 
 <figure>
   <picture>
-    {{ if $isSVG }}
-      <source srcset="{{ $webp | safeURL }}" type="image/webp">
-    {{ end }}
-    <img src="{{ $src | safeURL }}" 
+    {{- if $isSVG -}}
+      <source srcset="{{ $webp | relURL | safeURL }}" type="image/webp">
+    {{- end -}}
+    <img src="{{ $src | relURL | safeURL }}" 
          alt="{{ .Text }}" 
          {{ with .Title }} title="{{ . }}" {{ end }}
          loading="lazy" 
          style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
   </picture>
-  {{ with .Title }}
+  {{- with .Title -}}
     <figcaption style="text-align: center; font-style: italic; margin-top: 0.5rem;">
-      {{ . | markdownify }}
+      {{- . | markdownify -}}
     </figcaption>
-  {{ end }}
+  {{- end -}}
 </figure>
