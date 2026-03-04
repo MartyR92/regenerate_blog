@@ -1,5 +1,5 @@
 ---
-featureImage: "/blog/images/2026/2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle/cover.jpg"
+featureImage: "/images/2026/2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle/cover.jpg"
 featureImageAlt: "Cover image for article about Solarpunk Nature"
 title: "Radikale Metriken: Warum Sensoren den Pflug ersetzen"
 language: de
@@ -80,9 +80,9 @@ Die Reise von der extraktiven zur regenerativen Ökonomie ist ein Marathon, kein
 *Cover image by Jovan Vasiljević on Unsplash*
 
 
-![Visuelle Darstellung: Technical Chart zu 2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle.de](/blog/images/2026/2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle/technical_visual_2_de.svg)
+![Visuelle Darstellung: Technical Chart zu 2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle.de](/images/2026/2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle/technical_visual_2_de.svg)
 *Visuelle Darstellung: Technical Chart zu 2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle.de*
 
 
-![Visuelle Darstellung: Technical Diagram zu 2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle.de](/blog/images/2026/2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle/technical_visual_3_de.svg)
+![Visuelle Darstellung: Technical Diagram zu 2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle.de](/images/2026/2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle/technical_visual_3_de.svg)
 *Visuelle Darstellung: Technical Diagram zu 2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle.de*

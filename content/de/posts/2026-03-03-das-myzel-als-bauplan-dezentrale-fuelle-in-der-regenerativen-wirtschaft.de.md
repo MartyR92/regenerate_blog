@@ -1,5 +1,5 @@
 ---
-featureImage: "/blog/images/2026/2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft/cover.jpg"
+featureImage: "/images/2026/2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft/cover.jpg"
 featureImageAlt: "Cover image for article about Solarpunk Nature"
 title: "Pilz-Protokolle: Dezentrale Infrastrukturen nach dem Vorbild der Natur"
 language: de
@@ -62,7 +62,7 @@ Die symbiotische Natur des Myzels, das mit Pflanzen und anderen Mikroorganismen 
 Dies ist die "algorithmische Symbiose", die unsere Identität beschreibt – eine Synthese aus der Effizienz moderner Technologie und der tiefen, evolutionären Weisheit biologischer Kooperation.
 
 
-![Dieses Diagramm veranschaulicht die Übertragung der Prinzipien myzelialer Netzwerke aus der Natur auf ein regeneratives Wirtschaftsmodell. Es zeigt, wie natürliche Mechanismen wie Nährstoffaustausch, Kommunikation und Bodenregeneration als Vorbild für kollaboratives Ressourcenmanagement, verteilte Governance und bio-inspirierte Logistik dienen. Die Integration dieser Prinzipien führt zu nachhaltigen Ergebnissen wie Kohlenstoffbindung und der Entwicklung von Biomaterialien, die eine zirkuläre, lebensfreundliche Ökonomie fördern.](/blog/images/2026/2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft/technical_visual_2_de.svg)
+![Dieses Diagramm veranschaulicht die Übertragung der Prinzipien myzelialer Netzwerke aus der Natur auf ein regeneratives Wirtschaftsmodell. Es zeigt, wie natürliche Mechanismen wie Nährstoffaustausch, Kommunikation und Bodenregeneration als Vorbild für kollaboratives Ressourcenmanagement, verteilte Governance und bio-inspirierte Logistik dienen. Die Integration dieser Prinzipien führt zu nachhaltigen Ergebnissen wie Kohlenstoffbindung und der Entwicklung von Biomaterialien, die eine zirkuläre, lebensfreundliche Ökonomie fördern.](/images/2026/2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft/technical_visual_2_de.svg)
 *Dieses Diagramm veranschaulicht die Übertragung der Prinzipien myzelialer Netzwerke aus der Natur auf ein regeneratives Wirtschaftsmodell. Es zeigt, wie natürliche Mechanismen wie Nährstoffaustausch, Kommunikation und Bodenregeneration als Vorbild für kollaboratives Ressourcenmanagement, verteilte Governance und bio-inspirierte Logistik dienen. Die Integration dieser Prinzipien führt zu nachhaltigen Ergebnissen wie Kohlenstoffbindung und der Entwicklung von Biomaterialien, die eine zirkuläre, lebensfreundliche Ökonomie fördern.*
 
 ## Vom Untergrund in die Industrie – Myzeliale Materialien als Avantgarde der Zirkularität
@@ -78,7 +78,7 @@ Myzelbasierte Materialien sind keine bloße "eco-friendly" Alternative; sie sind
 Die Integration myzelialer Materialien in unsere Produktzyklen ist ein Akt des Avantgarde-Designs, der die falsch Dichotomie von Natur und Maschine überwindet. Es ist der Beweis, dass wahre Innovation nicht im krampfhaften Festhalten an Altem, sondern in der mutigen Adaption biologischer Logik liegt. Diese Materialien sind nicht nur funktional überlegen, sondern tragen auch das Prestige einer Zukunft, die mit den Systemen des Planeten im Einklang steht.
 
 
-![Visuelle Darstellung: Technical Diagram zu 2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft.de](/blog/images/2026/2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft/technical_visual_3_de.svg)
+![Visuelle Darstellung: Technical Diagram zu 2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft.de](/images/2026/2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft/technical_visual_3_de.svg)
 *Visuelle Darstellung: Technical Diagram zu 2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft.de*
 
 ## Die Ökonomie der Regeneration – Kapitalallokation im myzelialen Zeitalter

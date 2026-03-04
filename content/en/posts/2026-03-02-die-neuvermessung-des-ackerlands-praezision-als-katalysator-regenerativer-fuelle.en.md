@@ -1,5 +1,5 @@
 ---
-featureImage: "/blog/images/2026/2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle/cover.jpg"
+featureImage: "/images/2026/2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle/cover.jpg"
 featureImageAlt: "Cover image for article about Solarpunk Nature"
 title: "Radical Metrics: Why Sensors Are Replacing the Plow"
 language: en
@@ -80,9 +80,9 @@ The journey from an extractive to a regenerative economy is a marathon, not a sp
 *Cover image by Jovan Vasiljević on Unsplash*
 
 
-![Visual representation: Technical Chart regarding 2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle.en](/blog/images/2026/2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle/technical_visual_2_en.svg)
+![Visual representation: Technical Chart regarding 2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle.en](/images/2026/2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle/technical_visual_2_en.svg)
 *Visual representation: Technical Chart regarding 2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle.en*
 
 
-![This technical diagram illustrates the Mycelial Network Model as a blueprint for regenerative economic systems. It highlights how natural mycelial principles—nutrient exchange, inter-species communication, and soil restoration—translate into core tenets of a sustainable economy: collaborative resource management, distributed governance, and bio-inspired logistics. The model further integrates cutting-edge research on mycelium's role in carbon sequestration and its potential as a biomaterial for construction and packaging, ultimately converging towards a circular, life-aligned economic paradigm.](/blog/images/2026/2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle/technical_visual_3_en.svg)
+![This technical diagram illustrates the Mycelial Network Model as a blueprint for regenerative economic systems. It highlights how natural mycelial principles—nutrient exchange, inter-species communication, and soil restoration—translate into core tenets of a sustainable economy: collaborative resource management, distributed governance, and bio-inspired logistics. The model further integrates cutting-edge research on mycelium's role in carbon sequestration and its potential as a biomaterial for construction and packaging, ultimately converging towards a circular, life-aligned economic paradigm.](/images/2026/2026-03-02-die-neuvermessung-des-ackerlands-praezision-als-katalysator-regenerativer-fuelle/technical_visual_3_en.svg)
 *This technical diagram illustrates the Mycelial Network Model as a blueprint for regenerative economic systems. It highlights how natural mycelial principles—nutrient exchange, inter-species communication, and soil restoration—translate into core tenets of a sustainable economy: collaborative resource management, distributed governance, and bio-inspired logistics. The model further integrates cutting-edge research on mycelium's role in carbon sequestration and its potential as a biomaterial for construction and packaging, ultimately converging towards a circular, life-aligned economic paradigm.*

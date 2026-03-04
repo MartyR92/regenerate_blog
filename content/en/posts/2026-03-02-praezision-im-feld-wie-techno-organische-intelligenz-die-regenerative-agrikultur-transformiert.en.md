@@ -1,5 +1,5 @@
 ---
-featureImage: "/blog/images/2026/2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert/cover.jpg"
+featureImage: "/images/2026/2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert/cover.jpg"
 featureImageAlt: "Cover image for article about Solarpunk Nature"
 title: "The Learning Field: AI-Driven Polycultures in Practice"
 language: en
@@ -80,7 +80,7 @@ For capital allocators and investors seeking tomorrow's frameworks, regenerative
 Investing in regenerative agriculture is thus an investment in future abundance – one that synergistically creates ecological, social, and economic value. It is proof that prestige is no longer measured by the degree of destruction we can afford, but by the scalability of our regenerative capacity.
 
 
-![Visual representation: Technical Chart regarding 2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert.en](/blog/images/2026/2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert/technical_visual_2_en.svg)
+![Visual representation: Technical Chart regarding 2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert.en](/images/2026/2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert/technical_visual_2_en.svg)
 *Visual representation: Technical Chart regarding 2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert.en*
 
 ## The Promise of the Techno-Organic Paradigm
@@ -94,5 +94,5 @@ Regenerative agriculture, driven by the precision of the digital, is the bluepri
 *Cover image by Jovan Vasiljević on Unsplash*
 
 
-![This technical diagram illustrates the Mycelial Network Model as a blueprint for regenerative economic systems. Originating from its natural functions—nutrient exchange, inter-species communication, and soil restoration—the model translates these principles into a framework for a life-aligned economy. Key applications include collaborative resource management, distributed governance, and bio-inspired logistics. Emerging research further highlights mycelium's potential in carbon sequestration and as a sustainable biomaterial, underscoring its role in fostering a truly circular economy.](/blog/images/2026/2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert/technical_visual_3_en.svg)
+![This technical diagram illustrates the Mycelial Network Model as a blueprint for regenerative economic systems. Originating from its natural functions—nutrient exchange, inter-species communication, and soil restoration—the model translates these principles into a framework for a life-aligned economy. Key applications include collaborative resource management, distributed governance, and bio-inspired logistics. Emerging research further highlights mycelium's potential in carbon sequestration and as a sustainable biomaterial, underscoring its role in fostering a truly circular economy.](/images/2026/2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert/technical_visual_3_en.svg)
 *This technical diagram illustrates the Mycelial Network Model as a blueprint for regenerative economic systems. Originating from its natural functions—nutrient exchange, inter-species communication, and soil restoration—the model translates these principles into a framework for a life-aligned economy. Key applications include collaborative resource management, distributed governance, and bio-inspired logistics. Emerging research further highlights mycelium's potential in carbon sequestration and as a sustainable biomaterial, underscoring its role in fostering a truly circular economy.*

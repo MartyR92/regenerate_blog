@@ -1,5 +1,5 @@
 ---
-featureImage: "/blog/images/2026/2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft/cover.jpg"
+featureImage: "/images/2026/2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft/cover.jpg"
 featureImageAlt: "Cover image for article about Solarpunk Nature"
 title: "Fungal Protocols: Decentralized Infrastructure Modeled on Nature"
 
@@ -63,7 +63,7 @@ The symbiotic nature of the mycelium, which collaborates with plants and other m
 This is the "algorithmic symbiosis" that our identity describes – a synthesis of the efficiency of modern technology and the deep, evolutionary wisdom of biological cooperation.
 
 
-![Visual representation: Technical Chart regarding 2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft.en](/blog/images/2026/2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft/technical_visual_2_en.svg)
+![Visual representation: Technical Chart regarding 2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft.en](/images/2026/2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft/technical_visual_2_en.svg)
 *Visual representation: Technical Chart regarding 2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft.en*
 
 ## From Underground to Industry – Mycelial Materials as the Avant-Garde of Circularity
@@ -79,7 +79,7 @@ Mycelium-based materials are not merely an "eco-friendly" alternative; they are 
 The integration of mycelial materials into our product cycles is an act of avant-garde design that overcomes the false dichotomy of nature and machine. It is proof that true innovation lies not in desperately clinging to the old, but in the courageous adaptation of biological logic. These materials are not only functionally superior but also carry the prestige of a future in harmony with the planet's systems.
 
 
-![Visual representation: Technical Diagram regarding 2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft.en](/blog/images/2026/2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft/technical_visual_3_en.svg)
+![Visual representation: Technical Diagram regarding 2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft.en](/images/2026/2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft/technical_visual_3_en.svg)
 *Visual representation: Technical Diagram regarding 2026-03-03-das-myzel-als-bauplan-dezentrale-fuelle-in-der-regenerativen-wirtschaft.en*
 
 ## The Economy of Regeneration – Capital Allocation in the Mycelial Age

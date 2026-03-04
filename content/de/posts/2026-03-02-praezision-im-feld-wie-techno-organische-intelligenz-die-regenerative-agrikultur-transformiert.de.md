@@ -1,5 +1,5 @@
 ---
-featureImage: "/blog/images/2026/2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert/cover.jpg"
+featureImage: "/images/2026/2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert/cover.jpg"
 featureImageAlt: "Cover image for article about Solarpunk Nature"
 title: "Das lernende Feld: KI-gesteuerte Polykulturen in der Praxis"
 language: de
@@ -80,7 +80,7 @@ Für Kapitalallokatoren und Investoren, die nach den Frameworks von morgen suche
 Die Investition in regenerative Agrikultur ist somit eine Investition in die zukünftige Fülle – eine, die ökologischen, sozialen und ökonomischen Wert synergistisch schafft. Sie ist ein Beweis dafür, dass Prestige sich nicht länger am Grad der Zerstörung misst, die wir uns leisten können, sondern an der Skalierbarkeit unserer regenerativen Kapazität.
 
 
-![Visuelle Darstellung: Technical Chart zu 2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert.de](/blog/images/2026/2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert/technical_visual_2_de.svg)
+![Visuelle Darstellung: Technical Chart zu 2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert.de](/images/2026/2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert/technical_visual_2_de.svg)
 *Visuelle Darstellung: Technical Chart zu 2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert.de*
 
 ## Das Versprechen des techno-organischen Paradigmas
@@ -94,5 +94,5 @@ Die regenerative Agrikultur, angetrieben durch die Präzision des Digitalen, ist
 *Cover image by Jovan Vasiljević on Unsplash*
 
 
-![Visuelle Darstellung: Technical Diagram zu 2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert.de](/blog/images/2026/2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert/technical_visual_3_de.svg)
+![Visuelle Darstellung: Technical Diagram zu 2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert.de](/images/2026/2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert/technical_visual_3_de.svg)
 *Visuelle Darstellung: Technical Diagram zu 2026-03-02-praezision-im-feld-wie-techno-organische-intelligenz-die-regenerative-agrikultur-transformiert.de*

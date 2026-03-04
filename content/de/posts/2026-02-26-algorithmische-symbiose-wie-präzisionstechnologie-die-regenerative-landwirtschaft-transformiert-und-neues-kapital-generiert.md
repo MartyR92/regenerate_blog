@@ -1,5 +1,5 @@
 ---
-featureImage: "/blog/images/2026/2026-02-26-algorithmische-symbiose-wie-präzisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert/cover.jpg"
+featureImage: "/images/2026/2026-02-26-algorithmische-symbiose-wie-praezisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert/cover.jpg"
 featureImageAlt: "Cover image for article about Solarpunk Nature"
 title: "Die Ertrags-Matrix: Tech-gestützte Agrikultur als neues Anlagevehikel"
 date: 2026-02-26T14:17:30.342881
@@ -84,9 +84,9 @@ Wir sind die Architekten dieser Zukunft. Die Werkzeuge sind vorhanden, die Prinz
 *Cover image by Jovan Vasiljević on Unsplash*
 
 
-![Visuelle Darstellung: Technical Chart zu 2026-02-26-algorithmische-symbiose-wie-präzisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert](/blog/images/2026/2026-02-26-algorithmische-symbiose-wie-präzisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert/technical_visual_2_de.svg)
-*Visuelle Darstellung: Technical Chart zu 2026-02-26-algorithmische-symbiose-wie-präzisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert*
+![Visuelle Darstellung: Technical Chart zu 2026-02-26-algorithmische-symbiose-wie-praezisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert](/images/2026/2026-02-26-algorithmische-symbiose-wie-praezisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert/technical_visual_2_de.svg)
+*Visuelle Darstellung: Technical Chart zu 2026-02-26-algorithmische-symbiose-wie-praezisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert*
 
 
-![Visuelle Darstellung: Technical Diagram zu 2026-02-26-algorithmische-symbiose-wie-präzisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert](/blog/images/2026/2026-02-26-algorithmische-symbiose-wie-präzisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert/technical_visual_3_de.svg)
-*Visuelle Darstellung: Technical Diagram zu 2026-02-26-algorithmische-symbiose-wie-präzisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert*
+![Visuelle Darstellung: Technical Diagram zu 2026-02-26-algorithmische-symbiose-wie-praezisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert](/images/2026/2026-02-26-algorithmische-symbiose-wie-praezisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert/technical_visual_3_de.svg)
+*Visuelle Darstellung: Technical Diagram zu 2026-02-26-algorithmische-symbiose-wie-praezisionstechnologie-die-regenerative-landwirtschaft-transformiert-und-neues-kapital-generiert*
