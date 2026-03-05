@@ -12,5 +12,43 @@
     "timestamp": "2026-03-03T10:00:00.000000",
     "query": "Mycelial Networks Biological Internet Regenerative Economy",
     "engine": "Manual Injection"
+  },
+  {
+    "title": "Symbiotic and Regenerative Economy Frameworks: Integrating Circular Principles and Emerging Technologies",
+    "summary": "The research highlights the evolving shift from traditional sustainability to a regenerative economic model, emphasizing a symbiotic relationship between natural systems and human activity. Key to this transition are symbiotic and regenerative sustainability frameworks that promote circular economy principles. These principles aim to significantly reduce resource consumption, minimize waste generation, and actively preserve natural resources. Implementing such frameworks often involves scaling integrated networks, retrofitting existing businesses, and embracing regenerative design, natural finance, and advanced technological innovations. Emerging technologies are framed as crucial drivers for this shift, fostering thriving systems and addressing pressing climate and ecological challenges. The overarching goal is to ensure a future where both humanity and the environment can flourish by designing economies that are inherently regenerative. However, specific mentions or 'latest developments' explicitly related to 'DeSci' (Decentralized Science) were not found in the provided data, indicating a gap in direct coverage for that specific aspect of the query.",
+    "relevance_score": 75,
+    "citations": [
+      {
+        "source_title": "The Regenerative Economy: Moving Beyond Sustainability to a ...",
+        "source_url": "https://iankhan.com/the-regenerative-economy-moving-beyond-sustainability-to-a-future-of-thriving-systems/",
+        "author": "Ian Khan",
+        "pub_date": null,
+        "key_quote": "I frame the shift from sustainability to regeneration through the lens of emerging technologies, demographic changes, and global megatrends."
+      },
+      {
+        "source_title": "Reimagining Our Future: A Regenerative Approach to Economy and ...",
+        "source_url": "https://ernesto-87727.medium.com/reimagining-our-future-a-regenerative-approach-to-economy-and-ecology-cfe70ceb9298",
+        "author": "Ernesto",
+        "pub_date": null,
+        "key_quote": "By embracing regenerative design, natural finance, and the latest technological innovations, we can ensure a future where both humanity and ..."
+      },
+      {
+        "source_title": "[PDF] Symbiotic and Regenerative Sustainability Frameworks",
+        "source_url": "https://par.nsf.gov/servlets/purl/10371717",
+        "author": null,
+        "pub_date": null,
+        "key_quote": "Implementing circular principles in cities can involve actions such as scaling up integrated networks, retrofitting existing businesses, and ..."
+      },
+      {
+        "source_title": "[PDF] Circular Business Innovations for Post-Carbon Industrial Ecosystems",
+        "source_url": "https://iscsitr.in/index.php/ISCSITR-IJSDGRD/article/download/ISCSITR-IJSDGRD_2024_05_02_001/ISCSITR-IJSDGRD_2024_05_02_001/1279",
+        "author": null,
+        "pub_date": "2024-05-02",
+        "key_quote": "Designing regenerative economies through circular business innovations represents a promising pathway for addressing climate, ecological, and ..."
+      }
+    ],
+    "timestamp": "2026-03-05T06:50:15.630890",
+    "query": "Symbiotic Technology DeSci latest developments in regenerative economy",
+    "engine": "Gemini (models/gemini-2.5-flash)"
   }
 ]
