@@ -50,5 +50,57 @@
     "timestamp": "2026-03-05T06:50:15.630890",
     "query": "Symbiotic Technology DeSci latest developments in regenerative economy",
     "engine": "Gemini (models/gemini-2.5-flash)"
+  },
+  {
+    "title": "Permaculture's Evolving Role in Regenerative Economy and Applied Ecosystem Design",
+    "summary": "Recent research and developments highlight Permaculture's pivotal and expanding role in both regenerative economics and applied ecosystem design. Fundamentally, permaculture design principles provide the framework for creating regenerative, domesticated ecosystems. This foundational approach is increasingly integrated with regenerative economic models, aiming to foster resilient futures where resources are not merely sustained but actively enhanced and regenerated. Applications include the development of livelihoods that are economically viable while positively impacting ecological systems, as well as the design of sustainable settlements like ecovillages. The broader implications extend to conceptual frameworks for regenerative social-ecological systems, with global recognition from organizations like the UN World Food Programme, which emphasizes permaculture's contribution to regenerative resilience. This signifies a contemporary shift towards actively restoring and enriching natural capital within economic and design paradigms.",
+    "relevance_score": 95,
+    "citations": [
+      {
+        "source_title": "Regenerative Design and Regenerative Economics: Shaping Resilient Futures",
+        "source_url": "https://permacultureeducation.org/regenerative-design-and-regenerative-economics-shaping-resilient-futures/",
+        "author": "Permaculture Education Institute",
+        "pub_date": null,
+        "key_quote": "The connection between Permaculture Design and Regenerative Economics strengthens the vision of a future where resources are utilized..."
+      },
+      {
+        "source_title": "Regenerative Economics in Permaculture: Building Sustainable Livelihoods",
+        "source_url": "https://ecolots.co.uk/regenerative-economics-in-permaculture-building-sustainable-livelihoods-2/",
+        "author": "Ecolots.co.uk",
+        "pub_date": null,
+        "key_quote": "This article explores how we can apply these principles to foster livelihoods that are not just economically viable, but actively regenerate the ecosystems."
+      },
+      {
+        "source_title": "Permaculture as Regenerative Design",
+        "source_url": "https://medium.com/the-regenerative-transition/permaculture-as-regenerative-design-894238d9f340",
+        "author": "Galen Meyers",
+        "pub_date": null,
+        "key_quote": "Permaculture design principles were originally developed as a way to design regenerative, domesticated ecosystems."
+      },
+      {
+        "source_title": "WFP Regenerative Speaker Series: Andrew Millison on Watershed Regeneration and Permaculture Design",
+        "source_url": "https://www.youtube.com/watch?v=v2msQS9wMvM",
+        "author": "UN World Food Programme",
+        "pub_date": null,
+        "key_quote": "In this global webinar hosted by Natalie Topa, Global Advisor for Regenerative Resilience at the UN World Food Programme (WFP), permaculture..."
+      },
+      {
+        "source_title": "A conceptual framework for regenerative social-ecological systems",
+        "source_url": "https://www.sciencedirect.com/science/article/pii/S2590332223003020",
+        "author": null,
+        "pub_date": null,
+        "key_quote": "Regenerative agriculture offers examples, such as applying compost and manure rather than synthetic fertilizer and relying on natural pest..."
+      },
+      {
+        "source_title": "Ecovillages and Transition Towns: Practices of Sustainable Settlements in Urban and Rural Austria",
+        "source_url": "https://doi.org/10.3390/land14010192",
+        "author": null,
+        "pub_date": "2025-01-18",
+        "key_quote": "Practices of Sustainable Settlements in Urban and Rural Austria."
+      }
+    ],
+    "timestamp": "2026-03-09T06:59:43.137767",
+    "query": "Applied Ecosystem Design Permaculture latest developments in regenerative economy",
+    "engine": "Gemini (models/gemini-2.5-flash)"
   }
 ]
