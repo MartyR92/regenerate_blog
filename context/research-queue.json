@@ -102,5 +102,57 @@
     "timestamp": "2026-03-09T06:59:43.137767",
     "query": "Applied Ecosystem Design Permaculture latest developments in regenerative economy",
     "engine": "Gemini (models/gemini-2.5-flash)"
+  },
+  {
+    "title": "Strategic Systems Thinking and System Dynamics in Regenerative and Circular Economies: Latest Developments",
+    "summary": "Strategic systems thinking and system dynamics are increasingly recognized as essential frameworks and tools for understanding, modeling, and driving the transition towards regenerative and circular economies. Recent developments highlight their application in various sectors, from urban planning to social sustainability and material management. System Dynamics is explicitly explored for its role in educational materials and as a foundational theory of change for regenerative economics, underscoring its capacity to foster a holistic understanding of complex economic systems. Studies demonstrate that system dynamics models can reveal critical reinforcing loops governing social impacts within circular construction, identifying key factors like local employment. Furthermore, systems thinking underpins efforts in regenerative urbanism, innovation design, and broader sustainability agendas, facilitating a shift to higher levels of social intelligence and enabling frameworks such as Doughnut Economics. The practical application extends to the transition towards a circular plastic economy, particularly in developing countries, where systemic approaches are crucial for navigating complex socio-economic shifts.",
+    "relevance_score": 93,
+    "citations": [
+      {
+        "source_title": "Regenerative Economics",
+        "source_url": "https://systemdynamics.org/project/regenerative-economics/",
+        "author": "System Dynamics Society",
+        "pub_date": null,
+        "key_quote": "the role of systems thinking in both the educational materials and the wider theory of change behind the project were explored."
+      },
+      {
+        "source_title": "System dynamics modeling of social sustainability in circular construction: A multi-stakeholder perspective",
+        "source_url": "https://www.sciencedirect.com/science/article/abs/pii/S0195925525003944",
+        "author": "Not specified",
+        "pub_date": null,
+        "key_quote": "System dynamics model reveals four reinforcing loops governing social impacts. · Local employment emerges as highest-ranked circular construction social factor."
+      },
+      {
+        "source_title": "Regenerative Urbanism & Systems Thinking",
+        "source_url": "https://www.sustainability2030.com/resources-regen-urb-systems-think",
+        "author": "Sustainability2030",
+        "pub_date": null,
+        "key_quote": "Supplemental resources page on regenerative urbanism, systems modeling tools, and scaling for success."
+      },
+      {
+        "source_title": "Systems Thinking – Seeing the Whole: Unlocking Innovation and Sustainability",
+        "source_url": "https://digitalvital.org/systems-thinking-seeing-the-whole/",
+        "author": "DigitalVital",
+        "pub_date": null,
+        "key_quote": "This article offers a scientific and practical review of Systems Thinking as it applies to Innovation Design and sustainability."
+      },
+      {
+        "source_title": "Systems thinking for sustainability: shifting to a higher level of social intelligence",
+        "source_url": "https://www.tandfonline.com/doi/full/10.1080/01605682.2025.2486698",
+        "author": "Not specified",
+        "pub_date": "2025",
+        "key_quote": "Systems thinking is crucial to address sustainability challenges and an agenda for sustainable development."
+      },
+      {
+        "source_title": "Transition to Circular Plastic Economy: How It Is Unfolding in Developing Countries",
+        "source_url": "https://doi.org/10.1007/s43615-026-00851-0",
+        "author": "Springer Nature",
+        "pub_date": "2026-03-07",
+        "key_quote": "Examines the unfolding transition to a circular plastic economy in developing countries."
+      }
+    ],
+    "timestamp": "2026-03-12T06:53:10.110404",
+    "query": "Strategic Systems Thinking System Dynamics latest developments in regenerative economy",
+    "engine": "Gemini (models/gemini-2.5-flash)"
   }
 ]
