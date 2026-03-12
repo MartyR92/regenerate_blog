@@ -43,4 +43,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add _drafts/*.md static/images/
           git commit -m "chore: image agent added technical diagrams" || echo "No changes to commit"
+          git pull --rebase
           git push
