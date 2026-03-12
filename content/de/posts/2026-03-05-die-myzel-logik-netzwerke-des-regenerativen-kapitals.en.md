@@ -62,6 +62,10 @@ Mycelium is the master of circularity. It transforms dead organic matter into ne
 
 [DIAGRAM]: A flowchart illustrating a mycelium-inspired circular economy. It shows biomass input, transformation by mycelium into biomaterials (packaging, construction, textiles), their use, and subsequent return as nutrients to the cycle or composting. Arrows indicate closed loops and minimal waste.
 
+
+![Visual representation: Technical Chart regarding 2026-03-05-die-myzel-logik-netzwerke-des-regenerativen-kapitals.en](/images/2026/2026-03-05-die-myzel-logik-netzwerke-des-regenerativen-kapitals/technical_visual_2_en.svg)
+*Visual representation: Technical Chart regarding 2026-03-05-die-myzel-logik-netzwerke-des-regenerativen-kapitals.en*
+
 ## The Mycelial Economy in Practice: Examples and Potentials
 
 The principles of mycelium are already visible in various sectors of the regenerative economy and point the way to a sustainable future practice.
@@ -88,6 +92,10 @@ Even if not directly mycelium-based, its structural principles can be applied to
 
 *   **Decentralized Water Management Systems:** Similar to how mycelium stores and distributes water in the soil, decentralized, natural water management systems (e.g., rainwater harvesting, wetlands for purification) could create resilience at the local level.
 *   **Renewable Energy Networks:** The networking of small, local energy producers (solar, wind, biomass) in a smart grid that shares surplus capacity and compensates for outages reflects the decentralized resilience of mycelium. [VERIFY]
+
+
+![Visual representation: Technical Diagram regarding 2026-03-05-die-myzel-logik-netzwerke-des-regenerativen-kapitals.en](/images/2026/2026-03-05-die-myzel-logik-netzwerke-des-regenerativen-kapitals/technical_visual_3_en.svg)
+*Visual representation: Technical Diagram regarding 2026-03-05-die-myzel-logik-netzwerke-des-regenerativen-kapitals.en*
 
 ## Beyond Profit: The Ecological ROI of Mycelium
 

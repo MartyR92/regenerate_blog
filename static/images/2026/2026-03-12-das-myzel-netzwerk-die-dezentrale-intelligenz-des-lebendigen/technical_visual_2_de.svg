@@ -1,0 +1,178 @@
+<svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="chartTitle chartDesc">
+    <title id="chartTitle">Konzeptionelles Diagramm: Myzelnetzwerke und die Regenerative Wirtschaft</title>
+    <desc id="chartDesc">Dieses Diagramm veranschaulicht die Prinzipien von Myzelnetzwerken als Modell für dezentrale, resiliente und ressourceneffiziente Wirtschaftssysteme. Es zeigt die Übertragung biologischer Funktionen wie Nährstoffaustausch und Kommunikation auf kollaboratives Ressourcenmanagement und dezentrale Governance. Forschungsergebnisse zu Kohlenstoffbindung und Biomaterialien werden als Beiträge zu einer zirkulären, lebensfreundlichen Wirtschaft dargestellt.</desc>
+    <style>
+        /* Embedded CSS for Organic Precision aesthetic */
+        :root {
+            --primary-dark: #0F1A15;
+            --primary-light: #C5B388;
+            --accent-detail: #2C3330;
+
+            /* Light mode defaults */
+            --bg: #FFFFFF;
+            --text: var(--primary-dark);
+            --stroke: var(--primary-dark);
+            --fill-node: var(--primary-light);
+            --fill-secondary: var(--accent-detail);
+            --link: var(--accent-detail);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: var(--primary-dark);
+                --text: var(--primary-light);
+                --stroke: var(--primary-light);
+                --fill-node: var(--accent-detail);
+                --fill-secondary: var(--primary-light);
+                --link: var(--primary-light);
+            }
+        }
+
+        svg {
+            max-width: 800px; /* Maximum width constraint */
+            height: auto;
+            background-color: var(--bg);
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text); /* For currentColor usage if desired, though explicit vars are used */
+            transition: background-color 0.3s ease;
+        }
+
+        .node {
+            fill: var(--fill-node);
+            stroke: var(--stroke);
+            stroke-width: 2px;
+            transition: fill 0.3s ease, stroke 0.3s ease;
+        }
+
+        .node-text {
+            fill: var(--text);
+            font-size: 16px;
+            text-anchor: middle;
+            dominant-baseline: central;
+            transition: fill 0.3s ease;
+        }
+
+        .sub-node {
+            fill: var(--fill-secondary);
+            stroke: var(--stroke);
+            stroke-width: 1px;
+            transition: fill 0.3s ease, stroke 0.3s ease;
+        }
+
+        .sub-node-text {
+            fill: var(--text);
+            font-size: 14px;
+            text-anchor: middle;
+            dominant-baseline: central;
+            transition: fill 0.3s ease;
+        }
+
+        .link {
+            stroke: var(--link);
+            stroke-width: 2px;
+            fill: none;
+            transition: stroke 0.3s ease;
+        }
+
+        .arrowhead {
+            fill: var(--link);
+            transition: fill 0.3s ease;
+        }
+
+        /* Mobile text resizing */
+        @media (max-width: 600px) {
+            .node-text {
+                font-size: 14px;
+            }
+            .sub-node-text {
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+            <path d="M0,0 L10,5 L0,10 z" class="arrowhead" />
+        </marker>
+    </defs>
+
+    <!-- Main Nodes -->
+    <g class="chart-nodes">
+        <rect id="mycelial-networks-node" x="350" y="50" width="300" height="60" rx="10" ry="10" class="node" />
+        <text x="500" y="80" class="node-text">Myzelnetzwerke</text>
+
+        <rect id="bio-model-node" x="100" y="200" width="300" height="60" rx="10" ry="10" class="node" />
+        <text x="250" y="230" class="node-text">Biologisches Modell</text>
+
+        <rect id="regen-economy-node" x="600" y="200" width="300" height="60" rx="10" ry="10" class="node" />
+        <text x="750" y="230" class="node-text">Regenerative Wirtschaft</text>
+
+        <rect id="research-node" x="600" y="480" width="300" height="60" rx="10" ry="10" class="node" />
+        <text x="750" y="510" class="node-text">Forschungsergebnisse</text>
+
+        <rect id="circular-economy-node" x="350" y="700" width="300" height="60" rx="10" ry="10" class="node" />
+        <text x="500" y="730" class="node-text">Zirkuläre, lebensfreundliche Wirtschaft</text>
+    </g>
+
+    <!-- Sub-Nodes for Biological Model -->
+    <g class="sub-nodes-bio">
+        <rect x="150" y="300" width="200" height="40" rx="8" ry="8" class="sub-node" />
+        <text x="250" y="320" class="sub-node-text">Nährstoffaustausch</text>
+        <rect x="150" y="350" width="200" height="40" rx="8" ry="8" class="sub-node" />
+        <text x="250" y="370" class="sub-node-text">Kommunikation</text>
+        <rect x="150" y="400" width="200" height="40" rx="8" ry="8" class="sub-node" />
+        <text x="250" y="420" class="sub-node-text">Bodenregeneration</text>
+    </g>
+
+    <!-- Sub-Nodes for Regenerative Economy -->
+    <g class="sub-nodes-regen">
+        <rect x="650" y="300" width="200" height="40" rx="8" ry="8" class="sub-node" />
+        <text x="750" y="320" class="sub-node-text">
+            <tspan x="750" dy="-0.5em">Kollaboratives</tspan>
+            <tspan x="750" dy="1em">Ressourcenmanagement</tspan>
+        </text>
+        <rect x="650" y="350" width="200" height="40" rx="8" ry="8" class="sub-node" />
+        <text x="750" y="370" class="sub-node-text">Dezentrale Governance</text>
+        <rect x="650" y="400" width="200" height="40" rx="8" ry="8" class="sub-node" />
+        <text x="750" y="420" class="sub-node-text">Bio-inspirierte Logistik</text>
+    </g>
+
+    <!-- Sub-Nodes for Research Highlights -->
+    <g class="sub-nodes-research">
+        <rect x="650" y="580" width="200" height="40" rx="8" ry="8" class="sub-node" />
+        <text x="750" y="600" class="sub-node-text">Kohlenstoffbindung</text>
+        <rect x="650" y="630" width="200" height="40" rx="8" ry="8" class="sub-node" />
+        <text x="750" y="650" class="sub-node-text">Biomaterialien</text>
+    </g>
+
+    <!-- Links -->
+    <g class="chart-links">
+        <!-- Mycelial Networks to Biological Model -->
+        <path d="M500,110 C450,150 300,150 250,200" class="link" marker-end="url(#arrow)" />
+        <!-- Mycelial Networks to Regenerative Economy -->
+        <path d="M500,110 C550,150 700,150 750,200" class="link" marker-end="url(#arrow)" />
+
+        <!-- Biological Model to its sub-nodes -->
+        <path d="M250,260 L250,300" class="link" marker-end="url(#arrow)" />
+        <path d="M250,260 L250,350" class="link" marker-end="url(#arrow)" />
+        <path d="M250,260 L250,400" class="link" marker-end="url(#arrow)" />
+
+        <!-- Biological Model to Regenerative Economy (Principles translation) -->
+        <path d="M400,230 C450,220 550,220 600,230" class="link" marker-end="url(#arrow)" />
+
+        <!-- Regenerative Economy to its sub-nodes -->
+        <path d="M750,260 L750,300" class="link" marker-end="url(#arrow)" />
+        <path d="M750,260 L750,350" class="link" marker-end="url(#arrow)" />
+        <path d="M750,260 L750,400" class="link" marker-end="url(#arrow)" />
+
+        <!-- Regenerative Economy to Research Highlights -->
+        <path d="M750,260 L750,480" class="link" marker-end="url(#arrow)" />
+
+        <!-- Research Highlights to its sub-nodes -->
+        <path d="M750,540 L750,580" class="link" marker-end="url(#arrow)" />
+        <path d="M750,540 L750,630" class="link" marker-end="url(#arrow)" />
+
+        <!-- Biomaterials (from Research) to Circular Economy -->
+        <path d="M750,670 C700,685 550,685 500,700" class="link" marker-end="url(#arrow)" />
+    </g>
+</svg>

@@ -1,0 +1,188 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="chartTitle chartDesc">
+  <title id="chartTitle">Mycelial Principles for a Regenerative Economy</title>
+  <desc id="chartDesc">A conceptual diagram illustrating how mycelial network principles translate into applications for a regenerative, circular economy, highlighting key areas like collaborative resource management, distributed governance, bio-inspired logistics, carbon sequestration, and biomaterial development.</desc>
+  <style>
+    :root {
+      --primary-bg-color: #0F1A15;
+      --primary-text-color: #0F1A15;
+      --secondary-fill-color: #C5B388;
+      --accent-color: #2C3330;
+      --line-stroke-width: 2px;
+      --font-family: 'JetBrains Mono', monospace;
+      --font-size-large: 16px;
+      --font-size-medium: 14px;
+      --font-size-small: 12px;
+    }
+
+    svg {
+      background-color: white;
+      color: var(--primary-text-color);
+      max-width: 800px;
+      height: auto;
+      font-family: var(--font-family);
+      font-size: var(--font-size-medium);
+      overflow: visible;
+    }
+
+    .node-rect {
+      fill: var(--secondary-fill-color);
+      stroke: var(--accent-color);
+      stroke-width: var(--line-stroke-width);
+      rx: 8px;
+      ry: 8px;
+    }
+
+    .node-text {
+      fill: var(--primary-text-color);
+      font-size: var(--font-size-medium);
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+
+    .connector-line {
+      stroke: var(--accent-color);
+      stroke-width: var(--line-stroke-width);
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .central-node-rect {
+      fill: var(--accent-color);
+      stroke: var(--secondary-fill-color);
+      stroke-width: var(--line-stroke-width);
+      rx: 12px;
+      ry: 12px;
+    }
+
+    .central-node-text {
+      fill: var(--secondary-fill-color);
+      font-size: var(--font-size-large);
+      font-weight: bold;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+
+    .final-node-rect {
+      fill: var(--secondary-fill-color);
+      stroke: var(--accent-color);
+      stroke-width: var(--line-stroke-width);
+      rx: 10px;
+      ry: 10px;
+    }
+
+    .final-node-text {
+      fill: var(--primary-text-color);
+      font-size: var(--font-size-large);
+      font-weight: bold;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+
+    /* Dark Mode */
+    @media (prefers-color-scheme: dark) {
+      svg {
+        background-color: var(--primary-bg-color);
+        color: var(--secondary-fill-color);
+      }
+      .node-rect {
+        fill: var(--accent-color);
+        stroke: var(--secondary-fill-color);
+      }
+      .node-text {
+        fill: var(--secondary-fill-color);
+      }
+      .connector-line {
+        stroke: var(--secondary-fill-color);
+      }
+      .central-node-rect {
+        fill: var(--secondary-fill-color);
+        stroke: var(--accent-color);
+      }
+      .central-node-text {
+        fill: var(--primary-bg-color);
+      }
+      .final-node-rect {
+        fill: var(--accent-color);
+        stroke: var(--secondary-fill-color);
+      }
+      .final-node-text {
+        fill: var(--secondary-fill-color);
+      }
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 600px) {
+      :root {
+        --font-size-large: 14px;
+        --font-size-medium: 12px;
+        --font-size-small: 10px;
+      }
+      .node-text, .central-node-text, .final-node-text {
+        font-size: var(--font-size-medium);
+      }
+    }
+  </style>
+
+  <!-- Nodes -->
+  <!-- Central Node -->
+  <g>
+    <rect x="300" y="120" width="200" height="60" class="central-node-rect" />
+    <text x="400" y="150" class="central-node-text">Mycelial Principles</text>
+  </g>
+
+  <!-- Regenerative Economy Applications -->
+  <g>
+    <rect x="110" y="260" width="180" height="80" class="node-rect" />
+    <text x="200" y="290" class="node-text">
+      <tspan x="200" dy="-0.5em">Collaborative</tspan>
+      <tspan x="200" dy="1em">Resource Management</tspan>
+    </text>
+  </g>
+  <g>
+    <rect x="310" y="270" width="180" height="60" class="node-rect" />
+    <text x="400" y="300" class="node-text">Distributed Governance</text>
+  </g>
+  <g>
+    <rect x="510" y="270" width="180" height="60" class="node-rect" />
+    <text x="600" y="300" class="node-text">Bio-inspired Logistics</text>
+  </g>
+
+  <!-- Research & Innovation -->
+  <g>
+    <rect x="160" y="420" width="180" height="60" class="node-rect" />
+    <text x="250" y="450" class="node-text">Carbon Sequestration</text>
+  </g>
+  <g>
+    <rect x="440" y="410" width="220" height="80" class="node-rect" />
+    <text x="550" y="440" class="node-text">
+      <tspan x="550" dy="-0.5em">Biomaterials</tspan>
+      <tspan x="550" dy="1em">(Construction, Packaging)</tspan>
+    </text>
+  </g>
+
+  <!-- Concluding Node -->
+  <g>
+    <rect x="275" y="520" width="250" height="60" class="final-node-rect" />
+    <text x="400" y="550" class="final-node-text">Circular, Life-Aligned Economy</text>
+  </g>
+
+  <!-- Connectors (Organic Precision - slightly curved paths) -->
+  <!-- Central to Regenerative Economy Applications -->
+  <path d="M400,180 C400,220 200,240 200,260" class="connector-line" />
+  <path d="M400,180 C400,220 400,240 400,270" class="connector-line" />
+  <path d="M400,180 C400,220 600,240 600,270" class="connector-line" />
+
+  <!-- Central to Research & Innovation -->
+  <path d="M350,180 C300,300 250,380 250,420" class="connector-line" />
+  <path d="M450,180 C500,300 550,380 550,410" class="connector-line" />
+
+  <!-- Regenerative Economy Applications to Concluding Node -->
+  <path d="M200,340 C200,400 300,480 350,520" class="connector-line" />
+  <path d="M400,330 C400,400 400,480 400,520" class="connector-line" />
+  <path d="M600,330 C600,400 500,480 450,520" class="connector-line" />
+
+  <!-- Research & Innovation to Concluding Node -->
+  <path d="M250,480 C250,500 300,510 350,520" class="connector-line" />
+  <path d="M550,490 C550,500 500,510 450,520" class="connector-line" />
+</svg>
