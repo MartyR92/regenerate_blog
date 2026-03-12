@@ -1,5 +1,5 @@
 ---
-title: The Mycelial Logic: Networks of Regenerative Capital
+title: "The Mycelial Logic: Networks of Regenerative Capital"
 language: en
 date: 2024-05-15T12:30:00+01:00
 draft: false

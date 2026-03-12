@@ -38,7 +38,7 @@ Du bist verpflichtet, alle faktischen Behauptungen transparent zu belegen.
 ## 3. Hugo Front Matter (Mandatory)
 
 Jeder Artikel **muss** mit einem YAML Front Matter beginnen:
-- `title`: Starker, intelligenter Titel.
+- `title`: "Starker, intelligenter Titel" (Immer in doppelten Anführungszeichen)
 - `language`: `de` oder `en` (Zwingend erforderlich).
 - `date`: `YYYY-MM-DDThh:mm:ss+01:00`.
 - `draft`: `false`

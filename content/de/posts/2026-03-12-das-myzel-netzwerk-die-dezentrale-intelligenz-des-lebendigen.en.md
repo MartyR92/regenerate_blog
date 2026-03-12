@@ -1,5 +1,5 @@
 ---
-title: The Mycelial Network: The Decentralized Intelligence of the Living
+title: "The Mycelial Network: The Decentralized Intelligence of the Living"
 language: en
 date: 2024-07-30T10:00:00+01:00
 draft: false

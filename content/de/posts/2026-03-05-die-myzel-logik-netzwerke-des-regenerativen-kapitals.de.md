@@ -1,5 +1,5 @@
 ---
-title: Die Myzel-Logik: Netzwerke des regenerativen Kapitals
+title: "Die Myzel-Logik: Netzwerke des regenerativen Kapitals"
 language: de
 date: 2024-05-15T12:30:00+01:00
 draft: false

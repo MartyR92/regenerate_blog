@@ -1,5 +1,5 @@
 ---
-title: Das Myzel-Netzwerk: Die dezentrale Intelligenz des Lebendigen
+title: "Das Myzel-Netzwerk: Die dezentrale Intelligenz des Lebendigen"
 language: de
 date: 2024-07-30T10:00:00+01:00
 draft: false
