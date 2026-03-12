@@ -33,58 +33,26 @@ def main():
         print("Missing API Keys")
         sys.exit(1)
 
-    # 1. Identify file to review
-    target_file = None
+    # 1. Identify files to review
+    target_files = []
     
     # Try git diff first (for push/pr triggers)
     try:
         changed_files = subprocess.check_output(['git', 'diff', '--name-only', 'HEAD^', 'HEAD']).decode('utf-8').splitlines()
-        draft_files = [f for f in changed_files if f.startswith('_drafts/') and f.endswith('.md')]
-        if draft_files:
-            target_file = draft_files[0]
+        target_files = [f for f in changed_files if f.startswith('_drafts/') and f.endswith('.md')]
     except:
         pass
 
-    # Fallback to newest file in _drafts (for manual triggers or first commit)
-    if not target_file:
-        drafts = glob.glob("_drafts/*.md")
-        if drafts:
-            target_file = max(drafts, key=os.path.getctime)
+    # Fallback to all files in _drafts (for manual triggers or first commit)
+    if not target_files:
+        target_files = glob.glob("_drafts/*.md")
     
-    if not target_file:
+    if not target_files:
         print("No drafts found to review.")
         sys.exit(0)
 
-    print(f"Reviewing: {target_file}")
-    with open(target_file, "r", encoding="utf-8") as f:
-        content = f.read()
-
-    # 2. Check & Fix ai_assisted Flag
-    if "ai_assisted:" not in content:
-        content = content.replace("---", "---\nai_assisted: true", 1)
-        with open(target_file, "w", encoding="utf-8") as f:
-            f.write(content)
-        print("Added missing ai_assisted flag.")
-
-    # 3. Call Gemini 2.5 Pro for Review
-    editor_prompt = get_context_file("context/agent-prompts/editor-v1.md")
-    memory = get_context_file("context/blog-memory.json")
-    identity = get_context_file("context/system-identity.md")
-    ontology = get_context_file("context/ontology.json")
-    
-    final_prompt = f"""
-    {editor_prompt}
-    
-    --- CONTEXT ---
-    SYSTEM IDENTITY: {identity}
-    BLOG MEMORY: {memory}
-    ONTOLOGY: {ontology}
-    
-    --- ARTICLE ---
-    FILE: {target_file}
-    CONTENT:
-    {content}
-    """
+    base_file = target_files[0]
+    slug = os.path.basename(base_file).replace('.md', '').replace('.de', '').replace('.en', '')
     
     # Discovery available model
     target_model = "models/gemini-1.5-pro"
@@ -96,19 +64,52 @@ def main():
             if gemini_25: target_model = gemini_25[0]
     except: pass
 
-    print(f"Requesting review from {target_model}...")
-    url = f"https://generativelanguage.googleapis.com/v1beta/{target_model}:generateContent?key={gemini_key}"
-    res = requests.post(url, json={"contents": [{"parts": [{"text": final_prompt}]}]}, timeout=180)
-    
-    if res.status_code != 200:
-        print(f"Gemini Error: {res.text}")
-        sys.exit(1)
-    
-    review_output = res.json()['candidates'][0]['content']['parts'][0]['text']
+    review_outputs = []
+
+    for target_file in target_files:
+        print(f"Reviewing: {target_file}")
+        with open(target_file, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        # 2. Check & Fix ai_assisted Flag
+        if "ai_assisted:" not in content:
+            content = content.replace("---", "---\nai_assisted: true", 1)
+            with open(target_file, "w", encoding="utf-8") as f:
+                f.write(content)
+            print("Added missing ai_assisted flag.")
+
+        # 3. Call Gemini 2.5 Pro for Review
+        editor_prompt = get_context_file("context/agent-prompts/editor-v1.md")
+        memory = get_context_file("context/blog-memory.json")
+        identity = get_context_file("context/system-identity.md")
+        ontology = get_context_file("context/ontology.json")
+        
+        final_prompt = f"""
+        {editor_prompt}
+        
+        --- CONTEXT ---
+        SYSTEM IDENTITY: {identity}
+        BLOG MEMORY: {memory}
+        ONTOLOGY: {ontology}
+        
+        --- ARTICLE ---
+        FILE: {target_file}
+        CONTENT:
+        {content}
+        """
+
+        print(f"Requesting review from {target_model}...")
+        url = f"https://generativelanguage.googleapis.com/v1beta/{target_model}:generateContent?key={gemini_key}"
+        res = requests.post(url, json={"contents": [{"parts": [{"text": final_prompt}]}]}, timeout=180)
+        
+        if res.status_code != 200:
+            print(f"Gemini Error: {res.text}")
+            sys.exit(1)
+        
+        review_output = res.json()['candidates'][0]['content']['parts'][0]['text']
+        review_outputs.append(f"### Review for {os.path.basename(target_file)}\n\n{review_output}")
 
     # 4. Create Branch & PR
-    # Only if not already on a feature branch (avoid loops in GH Actions)
-    slug = os.path.basename(target_file).replace('.md', '')
     date_tag = datetime.now().strftime('%Y%m%d')
     branch_name = f"editor/{slug[:20]}-{date_tag}"
     
@@ -117,16 +118,19 @@ def main():
     
     # Check if branch exists
     subprocess.run(['git', 'checkout', '-b', branch_name])
-    subprocess.run(['git', 'add', target_file])
+    for tf in target_files:
+        subprocess.run(['git', 'add', tf])
+        
     # Always create a commit so the PR can be opened (differs from base)
     subprocess.run(['git', 'commit', '--allow-empty', '-m', f"Editor: Review for {slug}"])
     subprocess.run(['git', 'push', 'origin', branch_name, '--force'])
 
     # 5. Create PR via API
     pr_headers = {"Authorization": f"token {github_token}", "Accept": "application/vnd.github.v3+json"}
+    combined_review = "\n\n---\n\n".join(review_outputs)
     pr_payload = {
         "title": f"Editor Review: {slug}",
-        "body": f"## Automated Review by Editor Agent\n\n{review_output}",
+        "body": f"## Automated Review by Editor Agent\n\n{combined_review}",
         "head": branch_name,
         "base": "main"
     }

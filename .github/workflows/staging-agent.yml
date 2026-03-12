@@ -191,13 +191,17 @@ jobs:
                 
                 if (hoursOld >= 48) {
                   console.log(`Approving PR #${pr.number} (older than 48h and no veto)`);
-                  await github.rest.pulls.createReview({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    pull_number: pr.number,
-                    event: 'APPROVE',
-                    body: '🤖 Auto-approved by Staging Agent (48h passed without veto).'
-                  });
+                  try {
+                    await github.rest.pulls.createReview({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      pull_number: pr.number,
+                      event: 'APPROVE',
+                      body: '🤖 Auto-approved by Staging Agent (48h passed without veto).'
+                    });
+                  } catch (error) {
+                    console.error(`Failed to approve PR #${pr.number}:`, error.message);
+                  }
                 }
               }
             }
