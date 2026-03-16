@@ -199,5 +199,85 @@
     "timestamp": "2026-03-12T20:29:05.741850",
     "query": "Regenerative Finance Proof of Regeneration latest developments in regenerative economy",
     "engine": "Gemini (models/gemini-2.5-flash)"
+  },
+  {
+    "title": "Latest Developments in Permaculture and Regenerative Economics",
+    "summary": "The research highlights a significant and strengthening connection between Permaculture Design principles and the evolving field of Regenerative Economics. Permaculture, originally conceived for designing regenerative ecosystems, is now explicitly applied to foster livelihoods that are not only economically viable but actively contribute to ecosystem regeneration, moving beyond mere sustainability towards net positive impact. This integration is crucial for shaping resilient futures, emphasizing resource utilization that enhances natural systems. Key applications include regenerative agriculture, with examples like the use of compost over synthetic fertilizers, and emerging concepts such as regenerative aquaculture. Global initiatives, like the UN World Food Programme, are also engaging permaculture experts to explore regenerative resilience in critical areas such as watershed management. Academic research supports this transition, focusing on conceptual frameworks for regenerative social-ecological systems, sustainable development goals, and the importance of environmental, social, and economic resilience, as well as systemic governance models for community-based commons.",
+    "relevance_score": 95,
+    "citations": [
+      {
+        "source_title": "Regenerative Design and Regenerative Economics: Shaping Resilient Futures",
+        "source_url": "https://permacultureeducation.org/regenerative-design-and-regenerative-economics-shaping-resilient-futures/",
+        "author": "Permaculture Education",
+        "pub_date": "",
+        "key_quote": "The connection between Permaculture Design and Regenerative Economics strengthens the vision of a future where resources are utilized..."
+      },
+      {
+        "source_title": "Regenerative Economics in Permaculture: Building Sustainable Livelihoods",
+        "source_url": "https://ecolots.co.uk/regenerative-economics-in-permaculture-building-sustainable-livelihoods-2/",
+        "author": "Ecolots",
+        "pub_date": "",
+        "key_quote": "This article explores how we can apply these principles to foster livelihoods that are not just economically viable, but actively regenerate the ecosystems."
+      },
+      {
+        "source_title": "WFP Regenerative Speaker Series: Andrew Millison on Watershed Resilience Permaculture",
+        "source_url": "https://www.youtube.com/watch?v=v2msQS9wMvM",
+        "author": "Andrew Millison (UN World Food Programme)",
+        "pub_date": "",
+        "key_quote": "In this global webinar hosted by Natalie Topa, Global Advisor for Regenerative Resilience at the UN World Food Programme (WFP), permaculture..."
+      },
+      {
+        "source_title": "Permaculture as Regenerative Design",
+        "source_url": "https://medium.com/the-regenerative-transition/permaculture-as-regenerative-design-894238d9f340",
+        "author": "Galen Meyers",
+        "pub_date": "",
+        "key_quote": "Permaculture design principles were originally developed as a way to design regenerative, domesticated ecosystems."
+      },
+      {
+        "source_title": "A conceptual framework for regenerative social-ecological systems",
+        "source_url": "https://www.sciencedirect.com/science/article/pii/S2590332223003020",
+        "author": "",
+        "pub_date": "",
+        "key_quote": "Regenerative agriculture offers examples, such as applying compost and manure rather than synthetic fertilizer and relying on natural pest..."
+      },
+      {
+        "source_title": "Green education for sustainable development goals: Environmental, social, and economic resilience",
+        "source_url": "https://doi.org/10.70593/deepsci.0202004",
+        "author": "",
+        "pub_date": "2026-02-19",
+        "key_quote": "Focuses on environmental, social, and economic resilience for sustainable development goals, critical for regenerative economies."
+      },
+      {
+        "source_title": "Cultivating regenerative aquaculture: a conceptual framework based on a review of regenerative food systems literature",
+        "source_url": "https://doi.org/10.3389/fsufs.2026.1657695",
+        "author": "",
+        "pub_date": "2026-01-29",
+        "key_quote": "Develops a conceptual framework for regenerative aquaculture, linking to broader regenerative food systems literature."
+      },
+      {
+        "source_title": "Quality of Life in a Changing World: Spatial, Social and Environmental Perspectives from Maribor and Beyond",
+        "source_url": "https://doi.org/10.18690/um.ff.2.2026",
+        "author": "",
+        "pub_date": "2026-01-29",
+        "key_quote": "Explores spatial, social, and environmental perspectives on quality of life in a changing world, relevant to holistic regenerative design."
+      },
+      {
+        "source_title": "Systemic Governance From Below: Story Telling to Empower Access to the Commons Through Mapping and Modelling: A Mixed Methods Approach",
+        "source_url": "https://doi.org/10.1002/sres.3205",
+        "author": "",
+        "pub_date": "2026-01-14",
+        "key_quote": "Investigates systemic governance and empowering access to the commons, crucial for community-based regenerative economies."
+      },
+      {
+        "source_title": "Law and Policy, and Sustainable Agriculture",
+        "source_url": "https://doi.org/10.1007/978-3-032-03251-5_8",
+        "author": "",
+        "pub_date": "2025-12-10",
+        "key_quote": "Examines the intersection of law, policy, and sustainable agriculture, a foundational element for enabling regenerative practices."
+      }
+    ],
+    "timestamp": "2026-03-16T07:14:21.746135",
+    "query": "Applied Ecosystem Design Permaculture latest developments in regenerative economy",
+    "engine": "Gemini (models/gemini-2.5-flash)"
   }
 ]
