@@ -168,21 +168,26 @@ class ResearchState(BaseModel):
     outline: str = Field(..., description="Proposed markdown outline for the article.")
 
 class DraftState(BaseModel):
-    title: str = Field(..., description="SEO optimized title.")
-    content: str = Field(..., description="The full drafted article in markdown.")
-    seo_keywords: List[str] = Field(..., description="Target keywords used.")
+    title_de: str = Field(..., description="SEO optimized title in German.")
+    content_de: str = Field(..., description="The full drafted article in German markdown.")
+    seo_keywords_de: List[str] = Field(..., description="Target keywords used in German.")
+    title_en: str = Field(..., description="SEO optimized title in English.")
+    content_en: str = Field(..., description="The full drafted article in English markdown.")
+    seo_keywords_en: List[str] = Field(..., description="Target keywords used in English.")
 
 class EditorialFeedback(BaseModel):
     approved: bool = Field(..., description="True if ready to publish, False if revisions needed.")
     critique: str = Field(..., description="Constructive feedback based on brand guidelines.")
-    rewritten_content: Optional[str] = Field(None, description="The revised draft if changes were made.")
+    rewritten_content_de: Optional[str] = Field(None, description="The revised German draft if changes were made.")
+    rewritten_content_en: Optional[str] = Field(None, description="The revised English draft if changes were made.")
 
 class VisualAssets(BaseModel):
     hero_image_prompt: str = Field(..., description="Prompt for NanoBanana/Gemini to generate a hero image.")
     echarts_json: Optional[str] = Field(None, description="Optional ECharts configuration for data visualization.")
 
 class PublishState(BaseModel):
-    final_markdown: str = Field(..., description="The final merged post with frontmatter.")
+    final_markdown_de: str = Field(..., description="The final merged post with frontmatter in German.")
+    final_markdown_en: str = Field(..., description="The final merged post with frontmatter in English.")
     social_posts: List[str] = Field(..., description="Short posts for LinkedIn/X/Mastodon.")
 
 
@@ -208,7 +213,8 @@ writer_agent = Agent(
         "- `beautiful-prose`: Write elegantly, forcefully, and clearly.\n"
         "- `avoid-ai-writing`: Strip all typical AI cliches (e.g., 'In conclusion', 'Delve into').\n"
         "- `seo-content-writer`: Naturally weave in semantic keywords without stuffing.\n"
-        "Draft a compelling, high-signal post based on the provided research. NEVER reuse titles or exact themes from the blog memory."
+        "Draft a compelling, high-signal post based on the provided research. NEVER reuse titles or exact themes from the blog memory.\n"
+        "CRITICAL: You must generate a BILINGUAL post. The primary post MUST be in German (DE), and you must provide an exact semantic mirror in English (EN)."
     )
 )
 
@@ -341,21 +347,32 @@ async def main(mode: str = "test", topic: str = "The intersection of regenerativ
                 prompt=draft_prompt,
                 task_type="drafting"
             )
-            print(f"Draft Title: {draft_state.title}")
+            print(f"Draft Title (DE): {draft_state.title_de}")
             
-            # Save the draft
+            # Save the bilingual drafts
             import re
             from datetime import datetime
             os.makedirs("_drafts", exist_ok=True)
-            slug = re.sub(r'[^a-z0-9]+', '-', draft_state.title.lower()).strip('-')
+            
+            # German file
+            slug_de = re.sub(r'[^a-z0-9]+', '-', draft_state.title_de.lower()).strip('-')
             date_prefix = datetime.now().strftime("%Y-%m-%d")
-            draft_path = f"_drafts/{date_prefix}-{slug}.md"
-            with open(draft_path, "w", encoding="utf-8") as f:
-                f.write(f"---\ntitle: \"{draft_state.title}\"\n---\n\n{draft_state.content}")
-            logger.info(f"Saved draft to {draft_path}")
+            draft_path_de = f"_drafts/{date_prefix}-{slug_de}.de.md"
+            fm_de = f"---\ntitle: \"{draft_state.title_de}\"\nlanguage: de\ndate: {datetime.now().strftime('%Y-%m-%dT%H:%M:%S+01:00')}\ndraft: true\ndescription: \"\"\ncategories: []\ntags: {json.dumps(draft_state.seo_keywords_de)}\nauthor: \"Martin Reiter\"\n---\n\n"
+            with open(draft_path_de, "w", encoding="utf-8") as f:
+                f.write(fm_de + draft_state.content_de)
+            logger.info(f"Saved DE draft to {draft_path_de}")
+
+            # English file
+            slug_en = re.sub(r'[^a-z0-9]+', '-', draft_state.title_en.lower()).strip('-')
+            draft_path_en = f"_drafts/{date_prefix}-{slug_en}.en.md"
+            fm_en = f"---\ntitle: \"{draft_state.title_en}\"\nlanguage: en\ndate: {datetime.now().strftime('%Y-%m-%dT%H:%M:%S+01:00')}\ndraft: true\ndescription: \"\"\ncategories: []\ntags: {json.dumps(draft_state.seo_keywords_en)}\nauthor: \"Martin Reiter\"\n---\n\n"
+            with open(draft_path_en, "w", encoding="utf-8") as f:
+                f.write(fm_en + draft_state.content_en)
+            logger.info(f"Saved EN draft to {draft_path_en}")
             
             # Update memory since draft was successful
-            update_blog_memory(draft_state.title, draft_state.seo_keywords)
+            update_blog_memory(draft_state.title_de, draft_state.seo_keywords_de)
             
             logger.info("Draft complete. Push to _drafts/ to trigger full cloud pipeline.")
             
@@ -378,7 +395,7 @@ async def main(mode: str = "test", topic: str = "The intersection of regenerativ
                 prompt=draft_prompt,
                 task_type="drafting"
             )
-            print(f"Draft Title: {draft_state.title}")
+            print(f"Draft Title: {draft_state.title_de}")
             
             logger.info("--- Starting Editing Phase ---")
             edit_state = await router.execute(
@@ -391,14 +408,35 @@ async def main(mode: str = "test", topic: str = "The intersection of regenerativ
             logger.info("--- Starting Visual Phase ---")
             visual_state = await router.execute(
                 agent=visual_agent,
-                prompt=f"Create visual concepts for this article:\n{draft_state.title}\n{draft_state.content[:500]}...",
+                prompt=f"Create visual concepts for this article:\n{draft_state.title_de}\n{draft_state.content_de[:500]}...",
                 task_type="vision"
             )
             print(f"Hero Prompt: {visual_state.hero_image_prompt}")
 
+            # Save the final published files (bilingual)
+            import re
+            from datetime import datetime
+            
+            # German file
+            slug_de = re.sub(r'[^a-z0-9]+', '-', draft_state.title_de.lower()).strip('-')
+            date_prefix = datetime.now().strftime("%Y-%m-%d")
+            draft_path_de = f"_drafts/{date_prefix}-{slug_de}.de.md"
+            final_content_de = edit_state.rewritten_content_de if edit_state.rewritten_content_de else draft_state.content_de
+            fm_de = f"---\ntitle: \"{draft_state.title_de}\"\nlanguage: de\ndate: {datetime.now().strftime('%Y-%m-%dT%H:%M:%S+01:00')}\ndraft: false\ndescription: \"\"\ncategories: []\ntags: {json.dumps(draft_state.seo_keywords_de)}\nauthor: \"Martin Reiter\"\n---\n\n"
+            with open(draft_path_de, "w", encoding="utf-8") as f:
+                f.write(fm_de + final_content_de)
+
+            # English file
+            slug_en = re.sub(r'[^a-z0-9]+', '-', draft_state.title_en.lower()).strip('-')
+            draft_path_en = f"_drafts/{date_prefix}-{slug_en}.en.md"
+            final_content_en = edit_state.rewritten_content_en if edit_state.rewritten_content_en else draft_state.content_en
+            fm_en = f"---\ntitle: \"{draft_state.title_en}\"\nlanguage: en\ndate: {datetime.now().strftime('%Y-%m-%dT%H:%M:%S+01:00')}\ndraft: false\ndescription: \"\"\ncategories: []\ntags: {json.dumps(draft_state.seo_keywords_en)}\nauthor: \"Martin Reiter\"\n---\n\n"
+            with open(draft_path_en, "w", encoding="utf-8") as f:
+                f.write(fm_en + final_content_en)
+
             # Update memory on successful full run
             if mode == "publish":
-                 update_blog_memory(draft_state.title, draft_state.seo_keywords)
+                 update_blog_memory(draft_state.title_de, draft_state.seo_keywords_de)
 
     except Exception as e:
         logger.error(f"Pipeline failed: {e}")
