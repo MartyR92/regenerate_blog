@@ -1,0 +1,61 @@
+name: PydanticAI Publish Pipeline
+
+on:
+  schedule:
+    - cron: '0 3 */2 * *' # 3:00 AM GMT every 2nd day
+  push:
+    paths:
+      - '_drafts/**'
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Topic for the orchestrator to process'
+        required: false
+        default: 'The future of regenerative agritech'
+
+jobs:
+  orchestrate-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pydantic-ai openai anthropic google-genai python-dotenv
+
+      - name: Run PydanticAI Orchestrator (Publish Mode)
+        env:
+          INCEPTION_API_KEY: ${{ secrets.INCEPTION_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY_1: ${{ secrets.GEMINI_API_KEY_1 }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          OPENROUTER_API_KEY_1: ${{ secrets.OPENROUTER_API_KEY_1 }}
+          OPENROUTER_API_KEY_2: ${{ secrets.OPENROUTER_API_KEY_2 }}
+          OPENROUTER_API_KEY_3: ${{ secrets.OPENROUTER_API_KEY_3 }}
+          OPENROUTER_API_KEY_4: ${{ secrets.OPENROUTER_API_KEY_4 }}
+          OPENROUTER_API_KEY_5: ${{ secrets.OPENROUTER_API_KEY_5 }}
+        run: |
+          if [ -n "${{ github.event.inputs.topic }}" ]; then
+            python scripts/orchestrator.py --publish --topic "${{ github.event.inputs.topic }}"
+          else
+            python scripts/orchestrator.py --publish
+          fi
+
+      - name: Commit and Push Output
+        run: |
+          git config --global user.name 'Hydra Orchestrator Bot'
+          git config --global user.email 'hydra-bot@regenerate-blog.local'
+          git add content/ _drafts/
+          # Only commit if there are changes
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: publish orchestrated post" && git push)

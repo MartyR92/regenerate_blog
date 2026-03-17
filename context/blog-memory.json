@@ -1,8 +1,35 @@
-﻿{
+{
   "version": "1.0",
-  "last_updated": "2025-01-15",
-  "total_posts": 0,
-  "posts": [],
+  "last_updated": "2026-03-17",
+  "total_posts": 1,
+  "posts": [
+    {
+      "title": "Harnessing System Dynamics for Resilient Nature\u2011Based Solutions",
+      "keywords": [
+        "System Dynamics",
+        "Strategic Systems Thinking",
+        "Nature-Based Solutions",
+        "climate adaptation",
+        "urban green infrastructure",
+        "feedback loops",
+        "scenario analysis",
+        "ecosystem services",
+        "resilient planning",
+        "adaptive governance"
+      ]
+    }
+  ],
   "recurring_themes": [],
-  "avoid_repetition": []
+  "avoid_repetition": [
+    "System Dynamics",
+    "Strategic Systems Thinking",
+    "Nature-Based Solutions",
+    "climate adaptation",
+    "urban green infrastructure",
+    "feedback loops",
+    "scenario analysis",
+    "ecosystem services",
+    "resilient planning",
+    "adaptive governance"
+  ]
 }
