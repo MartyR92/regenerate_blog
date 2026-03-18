@@ -13,11 +13,11 @@ const schema = z.object({
 
 export const collections = {
   'de': defineCollection({
-    loader: glob({ pattern: "**/*.md", base: "./src/content/de" }),
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/de" }),
     schema: schema,
   }),
   'en': defineCollection({
-    loader: glob({ pattern: "**/*.md", base: "./src/content/en" }),
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/en" }),
     schema: schema,
   }),
 };
