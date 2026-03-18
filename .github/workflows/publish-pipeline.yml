@@ -81,7 +81,7 @@ jobs:
               try: fm = yaml.safe_load(fm_str) or {}
               except: fm = {}
               lang = fm.get("language", "de")
-              dest_dir = f"content/{lang}/posts"
+              dest_dir = f"src/content/{lang}"
               os.makedirs(dest_dir, exist_ok=True)
               dest_path = os.path.join(dest_dir, os.path.basename(draft))
 
@@ -96,7 +96,7 @@ jobs:
         run: |
           git config --global user.name 'Hydra Orchestrator Bot'
           git config --global user.email 'hydra-bot@regenerate-blog.local'
-          git add content/ _drafts/
+          git add src/content/ _drafts/
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: publish orchestrated post" && git pull --rebase && git push)
 
       - name: Build Astro Site
