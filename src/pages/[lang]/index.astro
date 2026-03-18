@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+// Default to German if no parameter or cookie is set
+const lang = Astro.params.lang || 'de';
+
+const posts = await getCollection(lang as 'de' | 'en', ({ data }) => {
+  return data.draft !== true;
+});
+
+const sortedPosts = posts.sort((a, b) => {
+  const dateA = new Date(a.data.date).valueOf();
+  const dateB = new Date(b.data.date).valueOf();
+  return dateB - dateA;
+});
+---
+
+<Layout title="Home">
+  <div class="max-w-7xl mx-auto px-6 md:px-8 py-24">
+    <header class="mb-24 text-center max-w-4xl mx-auto">
+      <nav class="flex justify-center gap-8 mb-12">
+        <a 
+          href="/de" 
+          class={`font-syne text-xs uppercase tracking-[0.2em] transition-all hover:text-brass-primary ${lang === 'de' ? 'text-brass-primary border-b border-brass-primary pb-1' : 'text-cream-primary/40'}`}
+        >
+          Deutsch
+        </a>
+        <a 
+          href="/en" 
+          class={`font-syne text-xs uppercase tracking-[0.2em] transition-all hover:text-brass-primary ${lang === 'en' ? 'text-brass-primary border-b border-brass-primary pb-1' : 'text-cream-primary/40'}`}
+        >
+          English
+        </a>
+      </nav>
+
+      <h1 class="font-garamond text-5xl md:text-7xl lg:text-8xl text-brass-primary mb-6 leading-tight">
+        Rə:NatureFørce
+      </h1>
+      <p class="font-inter text-xl md:text-2xl text-cream-primary/80 leading-relaxed font-light">
+        {lang === 'de' 
+          ? 'Die symbiotische Architektur regenerativer Ökonomien, natürlicher Intelligenz und technologischem Überfluss.'
+          : 'The symbiotic architecture of regenerative economies, natural intelligence, and technological abundance.'
+        }
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {sortedPosts.map(post => (
+        <a 
+          href={`/${lang}/posts/${post.id}`}
+          class="group block h-full leaf-laminate brass-hover rounded-xl overflow-hidden flex flex-col cursor-pointer"
+        >
+          {post.data.featureImage ? (
+            <div class="w-full aspect-[16/10] overflow-hidden relative border-b border-brass-primary/10">
+              <img 
+                src={post.data.featureImage} 
+                alt={post.data.title} 
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 mix-blend-luminosity opacity-80 group-hover:opacity-100"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-void-primary/90 via-transparent to-transparent"></div>
+            </div>
+          ) : (
+            <div class="w-full aspect-[16/10] bg-slate-primary/30 flex items-center justify-center border-b border-brass-primary/10 relative overflow-hidden">
+               <div class="absolute inset-0 botanical-grid opacity-20"></div>
+            </div>
+          )}
+          
+          <div class="p-6 flex flex-col flex-grow">
+            <time class="font-jetbrains text-xs text-brass-primary/70 mb-3 block">
+              {new Date(post.data.date).toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+              })}
+            </time>
+            <h2 class="font-garamond text-2xl md:text-3xl text-cream-primary mb-4 leading-snug group-hover:text-brass-primary transition-colors">
+              {post.data.title}
+            </h2>
+            <p class="font-inter text-sm text-cream-primary/60 line-clamp-3 mb-6 flex-grow">
+              {post.data.description || (lang === 'de' ? 'Erkundung der Schnittstellen von Technologie, Ökologie und regenerativen Systemen...' : 'Exploring the intersections of technology, ecology, and regenerative systems...')}
+            </p>
+            
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-brass-primary/10">
+                {post.data.tags.slice(0, 3).map((tag: string) => (
+                  <span class="text-[11px] font-inter text-brass-primary/80 bg-brass-primary/5 px-2 py-1 rounded">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
