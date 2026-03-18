@@ -19,9 +19,49 @@ const { Content } = await render(post);
 ---
 
 <Layout title={post.data.title}>
-  <article class="max-w-4xl mx-auto py-20 px-4">
-    <h1 class="font-garamond text-5xl md:text-7xl text-brass-primary mb-8">{post.data.title}</h1>
-    <div class="prose prose-invert prose-brass max-w-none">
+  <article class="max-w-4xl mx-auto py-24 px-6 md:px-8">
+    <header class="mb-16 text-center">
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="flex flex-wrap justify-center gap-2 mb-6">
+          {post.data.tags.map((tag: string) => (
+            <span class="px-3 py-1 text-xs uppercase tracking-widest font-syne text-brass-primary border border-brass-primary/30 rounded-full bg-slate-primary/20 backdrop-blur-sm">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+      <h1 class="font-garamond text-5xl md:text-7xl lg:text-8xl text-brass-primary mb-6 leading-tight">
+        {post.data.title}
+      </h1>
+      {post.data.description && (
+        <p class="font-inter text-xl text-cream-primary/80 max-w-2xl mx-auto leading-relaxed">
+          {post.data.description}
+        </p>
+      )}
+    </header>
+
+    {post.data.featureImage && (
+      <div class="w-full aspect-video rounded-xl overflow-hidden mb-16 leaf-laminate shadow-2xl relative">
+        <img 
+          src={post.data.featureImage} 
+          alt={post.data.title} 
+          class="w-full h-full object-cover mix-blend-luminosity opacity-90 transition-opacity duration-700 hover:opacity-100"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-void-primary/80 to-transparent"></div>
+      </div>
+    )}
+
+    <div class="prose prose-invert max-w-none 
+                prose-headings:font-garamond prose-headings:text-brass-primary 
+                prose-h2:text-4xl prose-h2:mt-16 prose-h2:mb-8 prose-h2:font-normal
+                prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-6 prose-h3:text-brass-primary/90
+                prose-p:font-inter prose-p:text-lg prose-p:leading-loose prose-p:text-cream-primary/80 prose-p:mb-8
+                prose-a:text-brass-primary prose-a:underline prose-a:decoration-brass-primary/30 hover:prose-a:text-cream-primary hover:prose-a:decoration-brass-primary prose-a:transition-all
+                prose-strong:text-cream-primary prose-strong:font-semibold
+                prose-blockquote:border-l-4 prose-blockquote:border-brass-primary/50 prose-blockquote:bg-slate-primary/30 prose-blockquote:py-4 prose-blockquote:px-8 prose-blockquote:rounded-r-xl prose-blockquote:font-syne prose-blockquote:italic prose-blockquote:my-10
+                prose-img:rounded-xl prose-img:shadow-2xl prose-img:border prose-img:border-brass-primary/20 prose-img:my-12 prose-img:w-full prose-img:object-cover
+                prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-8 prose-li:text-cream-primary/80 prose-li:font-inter prose-li:mb-2
+                prose-hr:border-brass-primary/20 prose-hr:my-16">
       <Content />
     </div>
   </article>
