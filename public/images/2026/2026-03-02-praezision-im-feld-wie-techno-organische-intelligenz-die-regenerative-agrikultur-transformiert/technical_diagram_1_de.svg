@@ -1,0 +1,118 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+      .jb-mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: #C5B388; text-anchor: middle; }
+      .jb-mono-large { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: bold; fill: #C5B388; text-anchor: middle; }
+      .node-bg { fill: #2C3330; stroke: #C5B388; stroke-width: 1; }
+      .line { stroke: #C5B388; stroke-width: 2; fill: none; }
+      .arrowhead { fill: #C5B388; }
+      .joint { fill: #C5B388; stroke: #2C3330; stroke-width: 1; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" class="arrowhead" />
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#0F1A15"/>
+
+  <!-- Central Node -->
+  <g transform="translate(400, 250)">
+    <rect x="-120" y="-40" width="240" height="80" rx="20" ry="20" class="node-bg"/>
+    <text x="0" y="-10" class="jb-mono-large">Präzisionslandwirtschaft</text>
+    <text x="0" y="15" class="jb-mono-large">für Regenerative Ökonomie</text>
+  </g>
+
+  <!-- Technology Nodes (Top Arc) - Connecting TO Central Node -->
+  <g>
+    <!-- Satellite Data -->
+    <rect x="100" y="80" width="120" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="160" y="105" class="jb-mono">Satellitendaten</text>
+    <path d="M220,100 C280,150 320,200 340,220" class="line" marker-end="url(#arrow)"/>
+    <circle cx="220" cy="100" r="3" class="joint"/>
+
+    <!-- Sensors -->
+    <rect x="250" y="40" width="100" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="300" y="65" class="jb-mono">Sensoren</text>
+    <path d="M350,60 C370,120 380,180 380,210" class="line" marker-end="url(#arrow)"/>
+    <circle cx="350" cy="60" r="3" class="joint"/>
+
+    <!-- GPS -->
+    <rect x="450" y="40" width="100" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="500" y="65" class="jb-mono">GPS</text>
+    <path d="M450,60 C430,120 420,180 420,210" class="line" marker-end="url(#arrow)"/>
+    <circle cx="450" cy="60" r="3" class="joint"/>
+
+    <!-- Drones -->
+    <rect x="580" y="80" width="100" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="630" y="105" class="jb-mono">Drohnen</text>
+    <path d="M580,100 C520,150 480,200 460,220" class="line" marker-end="url(#arrow)"/>
+    <circle cx="580" cy="100" r="3" class="joint"/>
+
+    <!-- IoT -->
+    <rect x="180" y="150" width="100" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="230" y="175" class="jb-mono">IoT</text>
+    <path d="M280,170 C300,200 320,220 340,230" class="line" marker-end="url(#arrow)"/>
+    <circle cx="280" cy="170" r="3" class="joint"/>
+
+    <!-- Advanced Monitoring -->
+    <rect x="520" y="150" width="160" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="600" y="175" class="jb-mono">Fortgeschr. Überwachung</text>
+    <path d="M520,170 C500,200 480,220 460,230" class="line" marker-end="url(#arrow)"/>
+    <circle cx="520" cy="170" r="3" class="joint"/>
+
+  </g>
+
+  <!-- Practices & Benefits Nodes (Bottom Arc) - Connecting FROM Central Node -->
+  <g>
+    <!-- Automated Planting & Harvesting -->
+    <rect x="100" y="380" width="200" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="200" y="405" class="jb-mono">Automatisierte Aussaat &amp; Ernte</text>
+    <path d="M360,290 C300,340 250,370 200,405" class="line" marker-end="url(#arrow)"/>
+    <circle cx="360" cy="290" r="3" class="joint"/>
+
+    <!-- Diverse Crop Rotations -->
+    <rect x="50" y="450" width="180" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="140" y="475" class="jb-mono">Vielfältige Fruchtfolgen</text>
+    <path d="M340,290 C280,340 220,400 140,470" class="line" marker-end="url(#arrow)"/>
+    <circle cx="340" cy="290" r="3" class="joint"/>
+
+    <!-- Intercropping -->
+    <rect x="100" y="520" width="160" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="180" y="545" class="jb-mono">Zwischenfruchtanbau</text>
+    <path d="M360,290 C300,380 250,450 180,540" class="line" marker-end="url(#arrow)"/>
+    <circle cx="360" cy="290" r="3" class="joint"/>
+
+    <!-- Yield Increase (20-30%) -->
+    <rect x="500" y="380" width="200" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="600" y="405" class="jb-mono">Ertragssteigerung (20-30%)</text>
+    <path d="M440,290 C500,340 550,370 600,405" class="line" marker-end="url(#arrow)"/>
+    <circle cx="440" cy="290" r="3" class="joint"/>
+
+    <!-- Input Waste Reduction (40-60%) -->
+    <rect x="570" y="450" width="200" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="670" y="475" class="jb-mono">Ressourceneinsparung (40-60%)</text>
+    <path d="M460,290 C520,340 580,400 670,470" class="line" marker-end="url(#arrow)"/>
+    <circle cx="460" cy="290" r="3" class="joint"/>
+
+    <!-- Reduced Labor Demands -->
+    <rect x="540" y="520" width="180" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="630" y="545" class="jb-mono">Geringerer Arbeitsaufwand</text>
+    <path d="M440,290 C500,380 550,450 630,540" class="line" marker-end="url(#arrow)"/>
+    <circle cx="440" cy="290" r="3" class="joint"/>
+
+    <!-- Sustainable & Economic Future -->
+    <rect x="300" y="500" width="200" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="400" y="525" class="jb-mono">Nachhaltige &amp; Wirtschaftliche Zukunft</text>
+    <path d="M400,290 C400,380 400,450 400,520" class="line" marker-end="url(#arrow)"/>
+    <circle cx="400" cy="290" r="3" class="joint"/>
+
+    <!-- Investment Potential -->
+    <rect x="300" y="550" width="200" height="40" rx="10" ry="10" class="node-bg"/>
+    <text x="400" y="575" class="jb-mono">Investitionspotenzial</text>
+    <path d="M400,290 C400,400 400,480 400,570" class="line" marker-end="url(#arrow)"/>
+    <circle cx="400" cy="290" r="3" class="joint"/>
+
+  </g>
+
+</svg>

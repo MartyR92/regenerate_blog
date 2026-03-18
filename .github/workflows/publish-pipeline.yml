@@ -38,15 +38,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Setup Hugo
-        run: |
-          HUGO_VERSION="0.143.1"
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
-          sudo dpkg -i ${{ runner.temp }}/hugo.deb
-
-      - name: Install Dart Sass
-        run: sudo snap install dart-sass
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -108,18 +99,21 @@ jobs:
           git add content/ _drafts/
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: publish orchestrated post" && git pull --rebase && git push)
 
-      - name: Build Hugo (Production)
-        run: hugo --gc --minify
-        env:
-          HUGO_ENV: production
+      - name: Build Astro Site
+        run: npm ci && npm run build
 
-      - name: Build Pagefind Index
-        run: npx --yes pagefind --site public
+      - name: Validate sitemap.xml
+        run: |
+          if [ -f dist/sitemap-0.xml ]; then
+            echo "Sitemap gefunden. Validierung..."
+          else
+            echo "Kritischer Fehler: Sitemap fehlt im Build-Output!" && exit 1
+          fi
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: ./dist
 
       - name: Deploy to GitHub Pages
         id: deployment

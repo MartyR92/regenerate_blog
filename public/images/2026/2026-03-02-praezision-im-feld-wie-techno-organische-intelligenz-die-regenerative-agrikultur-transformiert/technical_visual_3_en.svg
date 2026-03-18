@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="100%" height="auto">
+  <style>
+    :root {
+      --bg-color: #0F1A15;
+      --text-color: #C5B388;
+      --line-color: #C5B388;
+      --node-fill-color: #2C3330;
+      --arrow-color: #C5B388;
+      --font-family: 'JetBrains Mono', monospace;
+      --font-size-lg: 24px;
+      --font-size-md: 18px;
+      --font-size-sm: 14px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-color: #F8F8F8;
+        --text-color: #0F1A15;
+        --line-color: #2C3330;
+        --node-fill-color: #E0E5E3;
+        --arrow-color: #2C3330;
+      }
+    }
+
+    @media (max-width: 600px) {
+      :root {
+        --font-size-lg: 18px;
+        --font-size-md: 14px;
+        --font-size-sm: 11px;
+      }
+    }
+
+    svg {
+      background-color: var(--bg-color);
+      font-family: var(--font-family);
+      max-width: 800px;
+      height: auto;
+    }
+
+    .node-rect {
+      fill: var(--node-fill-color);
+      stroke: var(--line-color);
+      stroke-width: 2;
+      rx: 12;
+      ry: 12;
+    }
+
+    .node-text {
+      fill: var(--text-color);
+      font-size: var(--font-size-md);
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+
+    .main-title {
+      fill: var(--text-color);
+      font-size: var(--font-size-lg);
+      font-weight: bold;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+
+    .flow-line {
+      stroke: var(--line-color);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .arrowhead {
+      fill: var(--arrow-color);
+      stroke: var(--arrow-color);
+      stroke-width: 1;
+    }
+  </style>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrowhead" />
+    </marker>
+  </defs>
+
+  <!-- Central Node: Mycelial Network Model -->
+  <rect x="375" y="50" width="250" height="70" class="node-rect" />
+  <text x="500" y="85" class="main-title">Mycelial Network Model</text>
+
+  <!-- Natural Functions (Left Branch) -->
+  <rect x="100" y="200" width="200" height="60" class="node-rect" />
+  <text x="200" y="230" class="node-text">Nutrient Exchange</text>
+
+  <rect x="100" y="300" width="200" height="60" class="node-rect" />
+  <text x="200" y="330" class="node-text">Inter-species</text>
+  <text x="200" y="348" class="node-text">Communication</text>
+
+  <rect x="100" y="400" width="200" height="60" class="node-rect" />
+  <text x="200" y="430" class="node-text">Soil Restoration</text>
+
+  <!-- Regenerative Economy Translation (Right Branch) -->
+  <rect x="700" y="200" width="200" height="60" class="node-rect" />
+  <text x="800" y="230" class="node-text">Collaborative</text>
+  <text x="800" y="248" class="node-text">Resource Mgmt.</text>
+
+  <rect x="700" y="300" width="200" height="60" class="node-rect" />
+  <text x="800" y="330" class="node-text">Distributed</text>
+  <text x="800" y="348" class="node-text">Governance</text>
+
+  <rect x="700" y="400" width="200" height="60" class="node-rect" />
+  <text x="800" y="430" class="node-text">Bio-inspired</text>
+  <text x="800" y="448" class="node-text">Logistics</text>
+
+  <!-- Future Potential (Bottom Branch) -->
+  <rect x="250" y="550" width="160" height="60" class="node-rect" />
+  <text x="330" y="580" class="node-text">Carbon</text>
+  <text x="330" y="598" class="node-text">Sequestration</text>
+
+  <rect x="420" y="550" width="160" height="60" class="node-rect" />
+  <text x="500" y="580" class="node-text">Biomaterials</text>
+  <text x="500" y="598" class="node-text">(Construction, Pkg)</text>
+
+  <rect x="590" y="550" width="160" height="60" class="node-rect" />
+  <text x="670" y="580" class="node-text">Circular,</text>
+  <text x="670" y="598" class="node-text">Life-Aligned Economy</text>
+
+  <!-- Connections -->
+  <!-- Central to Natural Functions -->
+  <path d="M 400 120 C 350 170, 250 170, 200 200" class="flow-line" marker-end="url(#arrow)" />
+  <path d="M 400 120 C 350 270, 250 270, 200 300" class="flow-line" marker-end="url(#arrow)" />
+  <path d="M 400 120 C 350 370, 250 370, 200 400" class="flow-line" marker-end="url(#arrow)" />
+
+  <!-- Central to Regenerative Economy -->
+  <path d="M 600 120 C 650 170, 750 170, 800 200" class="flow-line" marker-end="url(#arrow)" />
+  <path d="M 600 120 C 650 270, 750 270, 800 300" class="flow-line" marker-end="url(#arrow)" />
+  <path d="M 600 120 C 650 370, 750 370, 800 400" class="flow-line" marker-end="url(#arrow)" />
+
+  <!-- Natural Functions to Future Potential (Conceptual Flow) -->
+  <path d="M 200 460 C 200 500, 300 520, 330 550" class="flow-line" marker-end="url(#arrow)" />
+  <path d="M 200 460 C 200 500, 450 520, 500 550" class="flow-line" marker-end="url(#arrow)" />
+  <path d="M 200 460 C 200 500, 600 520, 670 550" class="flow-line" marker-end="url(#arrow)" />
+
+  <!-- Regenerative Economy to Future Potential (Conceptual Flow) -->
+  <path d="M 800 460 C 800 500, 400 520, 330 550" class="flow-line" marker-end="url(#arrow)" />
+  <path d="M 800 460 C 800 500, 550 520, 500 550" class="flow-line" marker-end="url(#arrow)" />
+  <path d="M 800 460 C 800 500, 700 520, 670 550" class="flow-line" marker-end="url(#arrow)" />
+
+</svg>

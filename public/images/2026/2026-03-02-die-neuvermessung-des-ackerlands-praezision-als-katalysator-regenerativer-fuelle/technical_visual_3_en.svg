@@ -1,0 +1,145 @@
+<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" style="display: block; max-width: 800px; margin: 0 auto;">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+    .diagram-container {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #0F1A15; /* Primary background */
+    }
+
+    .node-text {
+      font-size: 18px;
+      fill: #C5B388; /* Secondary color for main nodes */
+      text-anchor: middle;
+      dominant-baseline: middle;
+      font-weight: 700;
+    }
+    .sub-node-text {
+      font-size: 16px;
+      fill: #2C3330; /* Accent color for sub-nodes */
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    .final-node-text {
+      font-size: 20px;
+      fill: #C5B388; /* Secondary color for final node */
+      font-weight: 700;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    .line {
+      stroke: #2C3330; /* Accent color for lines */
+      stroke-width: 2;
+      fill: none;
+    }
+    .arrow-head {
+      fill: #2C3330; /* Accent color for arrows */
+    }
+    .highlight-line {
+      stroke: #C5B388; /* Secondary color for highlight lines */
+      stroke-width: 3;
+      fill: none;
+    }
+    .highlight-arrow-head {
+      fill: #C5B388; /* Secondary color for highlight arrows */
+    }
+    .node-bg {
+      fill: #0F1A15; /* Primary color for node backgrounds */
+      stroke: #2C3330; /* Accent color for node borders */
+      stroke-width: 1;
+      rx: 8; /* Rounded corners */
+      ry: 8;
+    }
+    .highlight-node-bg {
+      fill: #0F1A15;
+      stroke: #C5B388;
+      stroke-width: 2;
+      rx: 10;
+      ry: 10;
+    }
+
+    /* Mobile text resizing */
+    @media (max-width: 600px) {
+      .node-text { font-size: 14px; }
+      .sub-node-text { font-size: 12px; }
+      .final-node-text { font-size: 16px; }
+    }
+
+    /* Dark/Light mode compatibility: The provided palette is inherently dark-themed. */
+    /* Explicit colors are used for all diagram elements to maintain the 'Organic Precision' aesthetic and high contrast. */
+    /* Using 'currentColor' for text would allow it to adapt to the host page's text color, but could break contrast with the dark diagram background. */
+    /* The background rect ensures the diagram itself has the primary dark color, ensuring consistent presentation. */
+  </style>
+
+  <rect width="100%" height="100%" fill="#0F1A15" class="diagram-container"/>
+
+  <!-- Define arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow-head" />
+    </marker>
+    <marker id="highlight-arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="highlight-arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Nodes and Connections -->
+
+  <!-- Mycelial Network Model (Central) -->
+  <rect x="350" y="70" width="300" height="60" class="highlight-node-bg" />
+  <text x="500" y="100" class="final-node-text">Mycelial Network Model</text>
+
+  <!-- Nature's Principles -->
+  <rect x="150" y="220" width="200" height="60" class="node-bg" />
+  <text x="250" y="250" class="node-text">Nutrient Exchange</text>
+
+  <rect x="400" y="220" width="200" height="60" class="node-bg" />
+  <text x="500" y="250" class="node-text">Inter-species</text>
+  <text x="500" y="270" class="node-text">Communication</text>
+
+  <rect x="650" y="220" width="200" height="60" class="node-bg" />
+  <text x="750" y="250" class="node-text">Soil Restoration</text>
+
+  <!-- Connections from Mycelial Network Model to Nature's Principles -->
+  <path d="M500,130 C450,170 300,190 250,220" class="highlight-line" marker-end="url(#highlight-arrowhead)" />
+  <path d="M500,130 V220" class="highlight-line" marker-end="url(#highlight-arrowhead)" />
+  <path d="M500,130 C550,170 700,190 750,220" class="highlight-line" marker-end="url(#highlight-arrowhead)" />
+
+  <!-- Regenerative Economy Translation -->
+  <rect x="100" y="370" width="200" height="60" class="node-bg" />
+  <text x="200" y="400" class="sub-node-text">Collaborative Resource</text>
+  <text x="200" y="420" class="sub-node-text">Management</text>
+
+  <rect x="400" y="370" width="200" height="60" class="node-bg" />
+  <text x="500" y="400" class="sub-node-text">Distributed Governance</text>
+
+  <rect x="700" y="370" width="200" height="60" class="node-bg" />
+  <text x="800" y="400" class="sub-node-text">Bio-inspired Logistics</text>
+
+  <!-- Connections from Nature's Principles to Regenerative Economy -->
+  <path d="M250,280 C225,310 175,340 200,370" class="line" marker-end="url(#arrowhead)" />
+  <path d="M500,280 V370" class="line" marker-end="url(#arrowhead)" />
+  <path d="M750,280 C775,310 825,340 800,370" class="line" marker-end="url(#arrowhead)" />
+
+  <!-- Research Highlights -->
+  <rect x="250" y="520" width="200" height="60" class="node-bg" />
+  <text x="350" y="550" class="sub-node-text">Carbon Sequestration</text>
+
+  <rect x="550" y="520" width="200" height="60" class="node-bg" />
+  <text x="650" y="540" class="sub-node-text">Biomaterial (Construction,</text>
+  <text x="650" y="560" class="sub-node-text">Packaging)</text>
+
+  <!-- Connections from Regenerative Economy to Research Highlights -->
+  <path d="M200,430 C250,470 300,490 350,520" class="line" marker-end="url(#arrowhead)" />
+  <path d="M500,430 V520" class="line" marker-end="url(#arrowhead)" />
+  <path d="M800,430 C750,470 700,490 650,520" class="line" marker-end="url(#arrowhead)" />
+
+  <!-- Circular, Life-Aligned Economy (Final) -->
+  <rect x="300" y="620" width="400" height="60" class="highlight-node-bg" />
+  <text x="500" y="650" class="final-node-text">Circular, Life-Aligned Economy</text>
+
+  <!-- Connections from Research Highlights to Final Node -->
+  <path d="M350,580 C400,600 450,610 500,620" class="highlight-line" marker-end="url(#highlight-arrowhead)" />
+  <path d="M650,580 C600,600 550,610 500,620" class="highlight-line" marker-end="url(#highlight-arrowhead)" />
+
+</svg>

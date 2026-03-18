@@ -1,0 +1,85 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
+  <defs>
+    <style>
+      .bg { fill: #0F1A15; }
+      .node-main { fill: #C5B388; stroke: #2C3330; stroke-width: 2; }
+      .node-sub { fill: #2C3330; stroke: #C5B388; stroke-width: 1; }
+      .text-main { fill: #2C3330; font-size: 14px; font-weight: bold; text-anchor: middle; dominant-baseline: middle; }
+      .text-sub { fill: #C5B388; font-size: 12px; text-anchor: middle; dominant-baseline: middle; }
+      .connection-line { fill: none; stroke: #C5B388; stroke-width: 2; }
+      .connection-line-sub { fill: none; stroke: #2C3330; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="600" class="bg"/>
+
+  <!-- Central Node: Myzeliale Netzwerke -->
+  <rect x="300" y="275" width="200" height="50" rx="15" ry="15" class="node-main"/>
+  <text x="400" y="300" class="text-main">Myzeliale Netzwerke</text>
+
+  <!-- Layer 1 Nodes -->
+  <rect x="100" y="75" width="200" height="50" rx="15" ry="15" class="node-main"/>
+  <text x="200" y="100" class="text-main">Biologische Modelle</text>
+
+  <rect x="500" y="75" width="200" height="50" rx="15" ry="15" class="node-main"/>
+  <text x="600" y="100" class="text-main">Wirtschaftliche Prinzipien</text>
+
+  <rect x="300" y="475" width="200" height="50" rx="15" ry="15" class="node-main"/>
+  <text x="400" y="500" class="text-main">Zukunftsanwendungen</text>
+
+  <!-- Connections from Central to Layer 1 -->
+  <path d="M400,300 Q300,200 200,100" class="connection-line"/>
+  <path d="M400,300 Q500,200 600,100" class="connection-line"/>
+  <path d="M400,300 Q350,400 400,500" class="connection-line"/>
+
+  <!-- Layer 2 Nodes and Connections -->
+
+  <!-- From Biologische Modelle -->
+  <rect x="35" y="175" width="180" height="40" rx="10" ry="10" class="node-sub"/>
+  <text x="125" y="195" class="text-sub">Nährstoffaustausch</text>
+  <path d="M200,100 Q150,150 125,195" class="connection-line-sub"/>
+
+  <rect x="135" y="225" width="180" height="40" rx="10" ry="10" class="node-sub"/>
+  <text x="225" y="245" class="text-sub">Kommunikation</text>
+  <path d="M200,100 Q210,170 225,245" class="connection-line-sub"/>
+
+  <rect x="35" y="275" width="180" height="40" rx="10" ry="10" class="node-sub"/>
+  <text x="125" y="295" class="text-sub">Bodenregeneration</text>
+  <path d="M200,100 Q150,200 125,295" class="connection-line-sub"/>
+
+  <!-- From Wirtschaftliche Prinzipien -->
+  <rect x="635" y="175" width="180" height="40" rx="10" ry="10" class="node-sub"/>
+  <text x="725" y="195" class="text-sub">Dezentral &amp; Resilient</text>
+  <path d="M600,100 Q675,150 725,195" class="connection-line-sub"/>
+
+  <rect x="535" y="225" width="180" height="40" rx="10" ry="10" class="node-sub"/>
+  <text x="625" y="245" class="text-sub">Ressourceneffizienz</text>
+  <path d="M600,100 Q610,170 625,245" class="connection-line-sub"/>
+
+  <rect x="635" y="275" width="180" height="40" rx="10" ry="10" class="node-sub"/>
+  <text x="725" y="285" class="text-sub">Kollaboratives</text>
+  <text x="725" y="305" class="text-sub">Management</text>
+  <path d="M600,100 Q675,200 725,295" class="connection-line-sub"/>
+
+  <rect x="535" y="325" width="180" height="40" rx="10" ry="10" class="node-sub"/>
+  <text x="625" y="345" class="text-sub">Verteilte Governance</text>
+  <path d="M600,100 Q610,275 625,345" class="connection-line-sub"/>
+
+  <rect x="635" y="375" width="180" height="40" rx="10" ry="10" class="node-sub"/>
+  <text x="725" y="395" class="text-sub">Bio-Logistik</text>
+  <path d="M600,100 Q675,300 725,395" class="connection-line-sub"/>
+
+  <!-- From Zukunftsanwendungen -->
+  <rect x="235" y="525" width="180" height="40" rx="10" ry="10" class="node-sub"/>
+  <text x="325" y="545" class="text-sub">Kohlenstoffbindung</text>
+  <path d="M400,500 Q300,520 325,545" class="connection-line-sub"/>
+
+  <rect x="400" y="525" width="180" height="40" rx="10" ry="10" class="node-sub"/>
+  <text x="490" y="545" class="text-sub">Biomaterialien</text>
+  <path d="M400,500 Q400,520 490,545" class="connection-line-sub"/>
+
+  <rect x="565" y="525" width="180" height="40" rx="10" ry="10" class="node-sub"/>
+  <text x="655" y="545" class="text-sub">Zirkuläre Ökonomie</text>
+  <path d="M400,500 Q500,520 655,545" class="connection-line-sub"/>
+
+</svg>

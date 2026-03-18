@@ -1,0 +1,229 @@
+<svg viewBox="0 0 1000 700" role="img" aria-labelledby="chartTitle chartDesc">
+  <title id="chartTitle">Myzelnetzwerke: Ein Modell für die regenerative Wirtschaft</title>
+  <desc id="chartDesc">Ein konzeptionelles Diagramm, das Myzelnetzwerke als biologisches Modell für dezentrale, widerstandsfähige und ressourceneffiziente Wirtschaftssysteme darstellt. Es zeigt ihre natürlichen Funktionen, die Prinzipien für eine regenerative Wirtschaft und aktuelle Forschungspotenziale.</desc>
+  <style>
+    /* Base styles for light mode */
+    :root {
+      --text-color: #0F1A15; /* Primary dark for text in light mode */
+      --bg-color: #F0F0F0; /* Light background */
+      --secondary-gold: #C5B388;
+      --accent-detail: #2C3330; /* For subtle details */
+      --line-color: var(--text-color); /* Lines match text for high contrast */
+      --node-fill: var(--bg-color);
+      --node-stroke: var(--text-color);
+      --central-node-stroke: var(--secondary-gold);
+      --central-node-text: var(--secondary-gold);
+    }
+
+    /* Dark mode styles */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-color: #F0F0F0; /* Light text in dark mode */
+        --bg-color: #0F1A15; /* Primary dark for background in dark mode */
+        --line-color: var(--text-color); /* Lines match text for high contrast */
+        --node-fill: var(--bg-color);
+        --node-stroke: var(--text-color);
+        --central-node-stroke: var(--secondary-gold);
+        --central-node-text: var(--secondary-gold);
+      }
+    }
+
+    /* SVG element styling */
+    svg {
+      display: block;
+      max-width: 800px;
+      height: auto;
+      margin: 0 auto;
+      background-color: var(--bg-color);
+    }
+
+    /* General text styles */
+    text {
+      fill: var(--text-color);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+
+    /* Specific node text styles */
+    .central-node text {
+      fill: var(--central-node-text);
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .main-node text {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .sub-node text {
+      font-size: 12px;
+    }
+
+    /* Node rectangle styles */
+    .node-rect {
+      fill: var(--node-fill);
+      stroke-width: 2;
+      rx: 8; /* Rounded corners for organic feel */
+    }
+
+    .central-node .node-rect {
+      stroke: var(--central-node-stroke);
+    }
+
+    .main-node .node-rect {
+      stroke: var(--node-stroke);
+    }
+
+    .sub-node .node-rect {
+      stroke: var(--node-stroke);
+      stroke-dasharray: 4 2; /* Dotted stroke for sub-nodes */
+    }
+
+    /* Connector line styles */
+    .connector-line {
+      stroke: var(--line-color);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 600px) {
+      text {
+        font-size: 10px;
+      }
+      .central-node text {
+        font-size: 16px;
+      }
+      .main-node text {
+        font-size: 12px;
+      }
+      .sub-node text {
+        font-size: 9px;
+      }
+      .node-rect {
+        rx: 5;
+      }
+    }
+  </style>
+
+  <!-- Central Node -->
+  <g class="central-node">
+    <rect x="400" y="320" width="200" height="60" class="node-rect" />
+    <text x="500" y="350">Mycelial Networks</text>
+  </g>
+
+  <!-- Main Nodes -->
+  <g class="main-node">
+    <rect x="160" y="125" width="180" height="50" class="node-rect" />
+    <text x="250" y="150">Biological Model</text>
+  </g>
+  <g class="main-node">
+    <rect x="660" y="125" width="180" height="50" class="node-rect" />
+    <text x="750" y="150">Natural Functions</text>
+  </g>
+  <g class="main-node">
+    <rect x="125" y="525" width="250" height="50" class="node-rect" />
+    <text x="250" y="550">Regenerative Economy Principles</text>
+  </g>
+  <g class="main-node">
+    <rect x="625" y="525" width="250" height="50" class="node-rect" />
+    <text x="750" y="550">Latest Research &amp; Potential</text>
+  </g>
+
+  <!-- Sub Nodes -->
+  <!-- Biological Model Sub-nodes -->
+  <g class="sub-node">
+    <rect x="90" y="45" width="120" height="40" class="node-rect" />
+    <text x="150" y="65">Decentralized</text>
+  </g>
+  <g class="sub-node">
+    <rect x="200" y="45" width="100" height="40" class="node-rect" />
+    <text x="250" y="65">Resilient</text>
+  </g>
+  <g class="sub-node">
+    <rect x="320" y="45" width="160" height="40" class="node-rect" />
+    <text x="400" y="65">Resource-efficient</text>
+  </g>
+
+  <!-- Natural Functions Sub-nodes -->
+  <g class="sub-node">
+    <rect x="575" y="45" width="150" height="40" class="node-rect" />
+    <text x="650" y="65">Nutrient Exchange</text>
+  </g>
+  <g class="sub-node">
+    <rect x="685" y="45" width="130" height="40" class="node-rect" />
+    <text x="750" y="65">Communication</text>
+  </g>
+  <g class="sub-node">
+    <rect x="820" y="45" width="140" height="40" class="node-rect" />
+    <text x="890" y="65">Soil Restoration</text>
+  </g>
+
+  <!-- Regenerative Economy Principles Sub-nodes -->
+  <g class="sub-node">
+    <rect x="25" y="610" width="250" height="40" class="node-rect" />
+    <text x="150" y="630">
+      <tspan x="150" dy="-0.6em">Collaborative Resource</tspan>
+      <tspan x="150" dy="1.2em">Management</tspan>
+    </text>
+  </g>
+  <g class="sub-node">
+    <rect x="160" y="610" width="180" height="40" class="node-rect" />
+    <text x="250" y="630">Distributed Governance</text>
+  </g>
+  <g class="sub-node">
+    <rect x="320" y="610" width="160" height="40" class="node-rect" />
+    <text x="400" y="630">Bio-inspired Logistics</text>
+  </g>
+
+  <!-- Latest Research & Potential Sub-nodes -->
+  <g class="sub-node">
+    <rect x="575" y="610" width="160" height="40" class="node-rect" />
+    <text x="655" y="630">Carbon Sequestration</text>
+  </g>
+  <g class="sub-node">
+    <rect x="625" y="610" width="250" height="40" class="node-rect" />
+    <text x="750" y="630">
+      <tspan x="750" dy="-0.6em">Biomaterial</tspan>
+      <tspan x="750" dy="1.2em">(Construction/Packaging)</tspan>
+    </text>
+  </g>
+  <g class="sub-node">
+    <rect x="800" y="610" width="200" height="40" class="node-rect" />
+    <text x="900" y="630">
+      <tspan x="900" dy="-0.6em">Circular, Life-aligned</tspan>
+      <tspan x="900" dy="1.2em">Economy</tspan>
+    </text>
+  </g>
+
+  <!-- Connections -->
+  <!-- Central to Main Nodes -->
+  <line x1="500" y1="320" x2="250" y2="175" class="connector-line" />
+  <line x1="500" y1="320" x2="750" y2="175" class="connector-line" />
+  <line x1="500" y1="380" x2="250" y2="525" class="connector-line" />
+  <line x1="500" y1="380" x2="750" y2="525" class="connector-line" />
+
+  <!-- Main to Sub Nodes -->
+  <!-- Biological Model -->
+  <line x1="250" y1="125" x2="150" y2="85" class="connector-line" />
+  <line x1="250" y1="125" x2="250" y2="85" class="connector-line" />
+  <line x1="250" y1="125" x2="400" y2="85" class="connector-line" />
+
+  <!-- Natural Functions -->
+  <line x1="750" y1="125" x2="650" y2="85" class="connector-line" />
+  <line x1="750" y1="125" x2="750" y2="85" class="connector-line" />
+  <line x1="750" y1="125" x2="890" y2="85" class="connector-line" />
+
+  <!-- Regenerative Economy Principles -->
+  <line x1="250" y1="575" x2="150" y2="610" class="connector-line" />
+  <line x1="250" y1="575" x2="250" y2="610" class="connector-line" />
+  <line x1="250" y1="575" x2="400" y2="610" class="connector-line" />
+
+  <!-- Latest Research & Potential -->
+  <line x1="750" y1="575" x2="655" y2="610" class="connector-line" />
+  <line x1="750" y1="575" x2="750" y2="610" class="connector-line" />
+  <line x1="750" y1="575" x2="900" y2="610" class="connector-line" />
+</svg>

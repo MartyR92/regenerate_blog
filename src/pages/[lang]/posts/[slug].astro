@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const dePosts = await getCollection('de');
+  const enPosts = await getCollection('en');
+  
+  const mapPaths = (posts: any[], lang: string) => posts.map(post => ({
+    params: { lang, slug: post.id },
+    props: { post },
+  }));
+
+  return [...mapPaths(dePosts, 'de'), ...mapPaths(enPosts, 'en')];
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={post.data.title}>
+  <article class="max-w-4xl mx-auto py-20 px-4">
+    <h1 class="font-garamond text-5xl md:text-7xl text-brass-primary mb-8">{post.data.title}</h1>
+    <div class="prose prose-invert prose-brass max-w-none">
+      <Content />
+    </div>
+  </article>
+</Layout>

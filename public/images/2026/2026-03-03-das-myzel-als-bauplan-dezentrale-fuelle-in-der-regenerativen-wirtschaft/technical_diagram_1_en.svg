@@ -1,0 +1,79 @@
+<svg width="800" height="650" viewBox="0 0 800 650" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .bg { fill: #0F1A15; }
+      .primary-text { font-family: 'JetBrains Mono', monospace; font-size: 18px; fill: #C5B388; font-weight: bold; }
+      .secondary-text { font-family: 'JetBrains Mono', monospace; font-size: 14px; fill: #C5B388; }
+      .line { stroke: #2C3330; stroke-width: 1.5; fill: none; }
+      .node-fill { fill: #0F1A15; stroke: #C5B388; stroke-width: 1; }
+      .arrowhead { fill: #2C3330; }
+    </style>
+    <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" class="arrowhead" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="650" class="bg"/>
+
+  <!-- Central Node: Mycelial Network Model -->
+  <rect x="275" y="50" width="250" height="40" rx="8" ry="8" class="node-fill"/>
+  <text x="400" y="75" text-anchor="middle" class="primary-text">Mycelial Network Model</text>
+
+  <!-- Natural Functions (Left Side) -->
+  <g id="natural-functions">
+    <rect x="100" y="150" width="180" height="30" rx="5" ry="5" class="node-fill"/>
+    <text x="190" y="170" text-anchor="middle" class="secondary-text">Nutrient Exchange</text>
+
+    <rect x="100" y="220" width="180" height="30" rx="5" ry="5" class="node-fill"/>
+    <text x="190" y="240" text-anchor="middle" class="secondary-text">Communication</text>
+
+    <rect x="100" y="290" width="180" height="30" rx="5" ry="5" class="node-fill"/>
+    <text x="190" y="310" text-anchor="middle" class="secondary-text">Soil Restoration</text>
+
+    <rect x="100" y="360" width="180" height="30" rx="5" ry="5" class="node-fill"/>
+    <text x="190" y="380" text-anchor="middle" class="secondary-text">Carbon Sequestration</text>
+
+    <rect x="100" y="430" width="180" height="30" rx="5" ry="5" class="node-fill"/>
+    <text x="190" y="450" text-anchor="middle" class="secondary-text">Biomaterial Potential</text>
+  </g>
+
+  <!-- Economic Principles (Right Side) -->
+  <g id="economic-principles">
+    <rect x="520" y="150" width="200" height="30" rx="5" ry="5" class="node-fill"/>
+    <text x="620" y="170" text-anchor="middle" class="secondary-text">Collaborative Resource Mgmt</text>
+
+    <rect x="520" y="220" width="200" height="30" rx="5" ry="5" class="node-fill"/>
+    <text x="620" y="240" text-anchor="middle" class="secondary-text">Distributed Governance</text>
+
+    <rect x="520" y="290" width="200" height="30" rx="5" ry="5" class="node-fill"/>
+    <text x="620" y="310" text-anchor="middle" class="secondary-text">Bio-inspired Logistics</text>
+
+    <rect x="520" y="380" width="200" height="50" rx="5" ry="5" class="node-fill"/>
+    <text x="620" y="395" text-anchor="middle" class="secondary-text">Circular, Life-aligned</text>
+    <text x="620" y="415" text-anchor="middle" class="secondary-text">Economy</text>
+  </g>
+
+  <!-- Connections from Central Node to Natural Functions -->
+  <path d="M400,90 C350,110 300,140 280,165" class="line" marker-end="url(#arrow)"/>
+  <path d="M400,90 C370,130 300,200 280,235" class="line" marker-end="url(#arrow)"/>
+  <path d="M400,90 C370,150 300,270 280,305" class="line" marker-end="url(#arrow)"/>
+  <path d="M400,90 C370,170 300,340 280,375" class="line" marker-end="url(#arrow)"/>
+  <path d="M400,90 C370,190 300,410 280,445" class="line" marker-end="url(#arrow)"/>
+
+  <!-- Connections from Natural Functions to Economic Principles -->
+  <path d="M280,165 C350,160 450,170 520,165" class="line" marker-end="url(#arrow)"/>
+  <path d="M280,235 C350,230 450,240 520,235" class="line" marker-end="url(#arrow)"/>
+  <path d="M280,305 C350,300 450,310 520,305" class="line" marker-end="url(#arrow)"/>
+  <path d="M280,375 C350,370 450,385 520,390" class="line" marker-end="url(#arrow)"/>
+  <path d="M280,445 C350,440 450,415 520,410" class="line" marker-end="url(#arrow)"/>
+
+  <!-- Additional "Regenerative Economy" label at the bottom -->
+  <rect x="275" y="550" width="250" height="40" rx="8" ry="8" class="node-fill"/>
+  <text x="400" y="575" text-anchor="middle" class="primary-text">Regenerative Economy</text>
+
+  <!-- Connections from Economic Principles to Regenerative Economy -->
+  <path d="M620,165 C580,250 500,450 400,550" class="line" marker-end="url(#arrow)"/>
+  <path d="M620,235 C580,300 500,460 400,550" class="line" marker-end="url(#arrow)"/>
+  <path d="M620,305 C580,350 500,470 400,550" class="line" marker-end="url(#arrow)"/>
+  <path d="M620,410 C580,450 500,490 400,550" class="line" marker-end="url(#arrow)"/>
+</svg>

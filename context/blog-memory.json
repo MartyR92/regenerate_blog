@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "last_updated": "2026-03-17",
-  "total_posts": 1,
+  "total_posts": 2,
   "posts": [
     {
       "title": "Harnessing System Dynamics for Resilient Nature\u2011Based Solutions",
@@ -17,6 +17,21 @@
         "resilient planning",
         "adaptive governance"
       ]
+    },
+    {
+      "title": "We-Based Resilience: Merging Adaptive Governance, Strategic Systems Thinking, and Bioregionalism",
+      "keywords": [
+        "bioregionalism",
+        "place-based resilience",
+        "ecosystem governance",
+        "regional stewardship",
+        "climate variability",
+        "indigenous knowledge",
+        "cross-jurisdictional coordination",
+        "environmental policy",
+        "adaptive capacity",
+        "social-ecological systems"
+      ]
     }
   ],
   "recurring_themes": [],
@@ -30,6 +45,16 @@
     "scenario analysis",
     "ecosystem services",
     "resilient planning",
-    "adaptive governance"
+    "adaptive governance",
+    "bioregionalism",
+    "place-based resilience",
+    "ecosystem governance",
+    "regional stewardship",
+    "climate variability",
+    "indigenous knowledge",
+    "cross-jurisdictional coordination",
+    "environmental policy",
+    "adaptive capacity",
+    "social-ecological systems"
   ]
 }
